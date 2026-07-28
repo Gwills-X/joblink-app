@@ -2,8 +2,10 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { importMigrationFile } from "@/lib/importSql";
+import ToastProvider from "@/components/ToastProvider";
+
 export const dynamic = "force-dynamic";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -15,31 +17,31 @@ const poppins = Poppins({
 // =========================================================================
 export const metadata = {
   title: {
-    default: "VibeCred — High-Performance Social Publishing Network",
-    template: "%s | VibeCred",
+    default: "JobLink — Modern Professional Career & Job Board Platform",
+    template: "%s | JobLink",
   },
   description:
-    "Engineering the next generation of modern micro-publishing and micro-interactions. Connect, build workflows, and share your digital future.",
+    "Connect top talent with world-class opportunities. Build your career profile, track job applications, and bridge the gap to your future.",
   keywords: [
     "Next.js",
     "MySQL",
-    "Firebase",
+    "Job Board",
+    "Career Portal",
     "Web Development",
-    "Micro-blogging",
-    "VibeCred Platform",
+    "JobLink Platform",
   ],
   authors: [{ name: "GW-TECK SOLUTIONS" }],
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://vibecred.vercel.app",
+    process.env.NEXT_PUBLIC_APP_URL || "https://joblink.vercel.app",
   ),
 
   // OpenGraph (Optimizes previews for Facebook, LinkedIn, Discord)
   openGraph: {
-    title: "VibeCred — High-Performance Social Publishing Network",
+    title: "JobLink — Modern Professional Career & Job Board Platform",
     description:
-      "Engineering the next generation of modern micro-publishing and micro-interactions.",
+      "Connect top talent with world-class opportunities and build your digital future.",
     url: "/",
-    siteName: "VibeCred",
+    siteName: "JobLink",
     locale: "en_US",
     type: "website",
   },
@@ -47,10 +49,10 @@ export const metadata = {
   // Twitter Cards (Optimizes rich media preview snippets on X/Twitter)
   twitter: {
     card: "summary_large_image",
-    title: "VibeCred — High-Performance Social Publishing Network",
+    title: "JobLink — Modern Professional Career & Job Board Platform",
     description:
-      "Engineering the next generation of modern micro-publishing and micro-interactions.",
-    creator: "@vibecred",
+      "Connect top talent with world-class opportunities and build your digital future.",
+    creator: "@joblink",
   },
 
   // Viewport/Robot indexing gates
@@ -61,23 +63,23 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // importMigrationFile();
   return (
     <html lang='en' className='h-full' suppressHydrationWarning>
       <body
-        className={`min-h-screen flex flex-col bg-slate-950 text-slate-100 ${poppins.variable} font-sans antialiased`}>
+        className={`min-h-screen flex flex-col bg-slate-950 text-slate-100 ${poppins.variable} font-sans antialiased selection:bg-emerald-500/20 selection:text-emerald-400`}>
         {/* Sticky Header Container */}
         <div className='sticky top-0 z-50'>
           <NavBar />
         </div>
 
         {/* Main Content Area */}
-        <main className='flex-grow w-full max-w-8xl mx-auto px-3 sm:px-2 lg:px-1 py-8'>
+        <main className='flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
           {children}
         </main>
 
         {/* Footer Container */}
         <Footer />
+        <ToastProvider />
       </body>
     </html>
   );

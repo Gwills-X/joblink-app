@@ -8,11 +8,17 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function register(state, formData) {
+  // Support both signatures: (state, formData) and (formData)
+  if (!formData && state && typeof state.get === "function") {
+    formData = state;
+    state = undefined;
+  }
+
   const validatedFields = RegisterFormScheme.safeParse({
-    email: formData.get("email"),
-    name: formData.get("name"),
-    password: formData.get("password"),
-    confirmPassword: formData.get("confirmPassword"),
+    email: formData?.get("email"),
+    name: formData?.get("name"),
+    password: formData?.get("password"),
+    confirmPassword: formData?.get("confirmPassword"),
   });
 
   if (!validatedFields.success) {
@@ -50,10 +56,11 @@ export async function register(state, formData) {
     await createSession(String(cleanUserId));
   } catch (error) {
     console.error("Registration Action Exception Error:", error);
+    const devMsg = process.env.NODE_ENV !== "production" ? error.message : "Something went wrong processing authentication registers.";
     return {
       success: false,
       errors: {
-        server: ["Something went wrong processing authentication registers."],
+        server: [devMsg],
       },
     };
   }
@@ -62,9 +69,15 @@ export async function register(state, formData) {
 }
 
 export async function login(state, formData) {
+  // Support both signatures: (state, formData) and (formData)
+  if (!formData && state && typeof state.get === "function") {
+    formData = state;
+    state = undefined;
+  }
+
   const validatedFields = LoginFormScheme.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
+    email: formData?.get("email"),
+    password: formData?.get("password"),
   });
 
   if (!validatedFields.success) {
@@ -111,9 +124,10 @@ export async function login(state, formData) {
     }
 
     console.error("Login Action Exception Error:", error);
+    const devMessage = process.env.NODE_ENV !== "production" ? error.message : "Authentication validation failure occurred.";
     return {
       success: false,
-      errors: { server: ["Authentication validation failure occurred."] },
+      errors: { server: [devMessage] },
     };
   }
 

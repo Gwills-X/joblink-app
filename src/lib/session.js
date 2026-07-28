@@ -48,4 +48,27 @@ export async function createSession(userId) {
     sameSite: "lax",
     path: "/",
   });
+
+  // Set a short-lived, non-httpOnly flash cookie so the client can show a welcome toast.
+  try {
+    const flash = encodeURIComponent(
+      JSON.stringify({
+        type: "success",
+        message: "Welcome back to JobLink!",
+      }),
+    );
+    const flashExpires = new Date(Date.now() + 5 * 1000); // 5 seconds
+    cookieStore.set("flash", flash, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      expires: flashExpires,
+      sameSite: "lax",
+      path: "/",
+    });
+  } catch (err) {
+    console.warn(
+      "Failed to set flash cookie for welcome toast:",
+      err?.message || err,
+    );
+  }
 }

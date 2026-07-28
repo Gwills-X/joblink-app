@@ -91,15 +91,38 @@ export default function PostCard({ post, currentUserId }) {
     : "";
 
   const handleLikeClick = async () => {
-    if (!currentUserId)
-      return alert(
-        "Authorize your identity matrix to react to pulses. Please log in.",
-      );
+    if (!currentUserId) {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(
+          new CustomEvent("toast", {
+            detail: { type: "error", message: "Please log in to react." },
+          }),
+        );
+      }
+      return;
+    }
     const targetLikedState = !optimisticLikeState.liked;
     startTransition(async () => {
       setOptimisticLikeState(targetLikedState);
       const res = await handleToggleLike(post.id);
-      if (!res?.success) alert("Transaction failed to sync.");
+      if (!res?.success) {
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(
+            new CustomEvent("toast", {
+              detail: { type: "error", message: "Transaction failed to sync." },
+            }),
+          );
+        }
+      } else {
+        if (typeof window !== "undefined") {
+          const msg = res.liked ? "Liked" : "Unliked";
+          window.dispatchEvent(
+            new CustomEvent("toast", {
+              detail: { type: "success", message: msg },
+            }),
+          );
+        }
+      }
     });
   };
 

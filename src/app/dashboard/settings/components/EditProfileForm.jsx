@@ -1,6 +1,7 @@
-"use client";
+use client";
 
-import { useState, useActionState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import useActionState from "@/lib/hooks/useActionState";
 import { updateProfileAction } from "@/actions/userActions";
 import { uploadMedia } from "@/services/storageService";
 
