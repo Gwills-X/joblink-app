@@ -1,8 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { Radio, ArrowRight, MessageSquare, Circle } from "lucide-react";
 
 export default function NexusHub() {
-  // Mock data representing your dynamic chat/connection channels
-  // In the future, this will be populated via your dataEngine
   const connections = [
     {
       id: 1,
@@ -31,65 +32,78 @@ export default function NexusHub() {
   ];
 
   return (
-    <div className='max-w-5xl mx-auto space-y-8 py-8 px-4'>
-      <div className='flex justify-between items-end'>
+    <div className='mx-auto max-w-4xl space-y-6 py-8 px-4'>
+      <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
         <div>
-          <h1 className='text-3xl font-black text-white tracking-tight'>
-            Nexus Hub (coming soon... Update on its way!)
+          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
+            Communication Streams
+          </span>
+          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
+            Nexus <span className='text-emerald-400'>Hub</span>
           </h1>
-          <p className='text-emerald-500 font-mono text-sm mt-1'>
-            Active data streams and peer connections
+          <p className='mt-1 text-xs text-slate-500'>
+            Active data streams and peer connections.
           </p>
         </div>
-        <button className='px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs rounded-lg hover:bg-emerald-500/20 transition-all'>
-          + New Stream
+        <button className='inline-flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-wider text-emerald-400 transition-all duration-150 hover:bg-emerald-500/20'>
+          <Radio className='h-3.5 w-3.5' />
+          New Stream
         </button>
       </div>
 
-      <div className='glass-card p-1 border-white/5 bg-slate-950/50 rounded-2xl'>
+      <div className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden'>
         {connections.length > 0 ? (
-          <div className='divide-y divide-white/5'>
+          <div className='divide-y divide-slate-800/50'>
             {connections.map((conn) => (
               <div
                 key={conn.id}
-                className='flex justify-between items-center p-5 hover:bg-white/5 transition-colors cursor-pointer group'>
-                <div className='flex items-center gap-4'>
-                  <div
-                    className={`w-2.5 h-2.5 rounded-full ${conn.status === "online" ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" : "bg-slate-700"}`}
+                className='group flex items-center justify-between gap-4 px-5 py-4 transition-colors duration-150 hover:bg-slate-800/30'>
+                <div className='flex items-center gap-3.5 min-w-0'>
+                  <Circle
+                    className={`h-2 w-2 shrink-0 fill-current ${
+                      conn.status === "online"
+                        ? "text-emerald-400"
+                        : "text-slate-600"
+                    }`}
                   />
-                  <div>
-                    <h3 className='font-bold text-slate-200 group-hover:text-white transition-colors'>
+                  <div className='min-w-0'>
+                    <h3 className='truncate text-sm font-medium text-slate-200 transition-colors duration-150 group-hover:text-slate-100'>
                       {conn.name}
                     </h3>
-                    <p className='text-xs text-slate-500 font-mono mt-0.5'>
+                    <p className='mt-0.5 truncate font-mono text-[11px] tracking-wide text-slate-600'>
                       {conn.lastMessage}
                     </p>
                   </div>
                 </div>
 
-                <div className='flex items-center gap-6'>
-                  <span className='text-[10px] text-slate-600 font-mono'>
+                <div className='flex shrink-0 items-center gap-4'>
+                  <span className='font-mono text-[10px] tracking-wide text-slate-600'>
                     {conn.time}
                   </span>
                   {conn.unread > 0 && (
-                    <span className='px-2 py-0.5 bg-emerald-500 text-slate-950 text-[10px] font-black rounded-full'>
+                    <span className='flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 font-mono text-[10px] font-bold text-[var(--color-slate)]'>
                       {conn.unread}
                     </span>
                   )}
                   <Link
                     href={`/nexus/${conn.id}`}
-                    className='text-[10px] font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-widest'>
+                    className='inline-flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-400 transition-colors duration-150 hover:text-emerald-300'>
                     Enter
+                    <ArrowRight className='h-3 w-3' />
                   </Link>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className='text-center py-20'>
-            <p className='text-slate-500 font-mono'>
+          <div className='flex flex-col items-center justify-center py-16 px-6'>
+            <MessageSquare className='h-5 w-5 text-slate-600' />
+            <p className='mt-3 font-mono text-xs text-slate-500'>
               No active communication streams.
             </p>
+            <div className='mt-4 font-mono text-[10px] tracking-wider text-slate-700 uppercase'>
+              Status: <span className='text-slate-600'>NO_STREAMS</span>
+            </div>
           </div>
         )}
       </div>

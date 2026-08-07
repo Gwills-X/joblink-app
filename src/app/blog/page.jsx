@@ -1,54 +1,58 @@
 import BackLink from "@/components/BackLink";
+import { BookOpen, Clock, ArrowRight } from "lucide-react";
 
 export default function BlogPage() {
   return (
-    <main className='max-w-3xl mx-auto py-16 px-6 sm:px-8 selection:bg-emerald-500/20 selection:text-emerald-400'>
+    <main className='mx-auto max-w-3xl py-12 px-4'>
       <BackLink />
 
-      <div className='mt-8 space-y-8'>
-        {/* Header Section */}
+      <div className='mt-6 space-y-8'>
         <div>
-          <span className='text-emerald-400 font-mono text-xs font-bold tracking-widest uppercase mb-3 block'>
+          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Insights & Updates
           </span>
-          <h1 className='text-4xl sm:text-5xl font-bold text-white tracking-tight'>
+          <h1 className='mt-2 text-3xl font-semibold tracking-tight text-slate-100'>
             JobLink <span className='text-emerald-400'>Community Blog</span>
           </h1>
-          <p className='text-sm text-slate-400 mt-2'>
+          <p className='mt-2 text-xs text-slate-500'>
             Expert perspectives on career advancement, software engineering, and
             modern talent acquisition.
           </p>
         </div>
 
-        {/* Blog Articles List */}
-        <div className='space-y-6'>
-          <article className='bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 shadow-xl space-y-4'>
-            <div className='flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-500'>
-              <span>July 2026</span>
-              <span className='text-emerald-400 font-medium'>
+        <div className='space-y-4'>
+          <article className='group rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all duration-150 hover:border-slate-700'>
+            <div className='flex flex-wrap items-center justify-between gap-2'>
+              <div className='flex items-center gap-2 text-xs text-slate-500'>
+                <BookOpen className='h-3 w-3' />
+                <span className='font-mono text-[11px] tracking-wide'>
+                  July 2026
+                </span>
+              </div>
+              <span className='font-mono text-[11px] font-medium text-emerald-400'>
                 By GW-TECK SOLUTIONS
               </span>
             </div>
 
-            <h2 className='text-2xl font-bold text-white tracking-tight'>
+            <h2 className='mt-4 text-lg font-semibold tracking-tight text-slate-200'>
               Navigating the Modern Tech Career Landscape
             </h2>
 
-            <p className='text-slate-400 text-sm sm:text-base leading-relaxed'>
+            <p className='mt-2 text-sm leading-relaxed text-slate-500'>
               Welcome to the official JobLink blog. In today&apos;s fast-paced
               digital economy, bridging the gap between top-tier technical skill
               sets and world-class opportunities requires more than just a
-              resume—it demands a professional identity. Stay tuned for career
+              resume — it demands a professional identity. Stay tuned for career
               advice, platform feature releases, and spotlights on leading
               innovators across the network.
             </p>
 
-            <div className='pt-4 border-t border-slate-800/80 flex items-center justify-between'>
-              <span className='inline-flex items-center px-3 py-1 rounded-md text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest'>
-                Featured Article
+            <div className='mt-5 flex items-center justify-between border-t border-slate-800 pt-4'>
+              <span className='inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-emerald-400'>
+                Featured
               </span>
-              <span className='text-xs text-slate-400 font-medium'>
-                3 min read
+              <span className='flex items-center gap-1 text-xs text-slate-500'>
+                <Clock className='h-3 w-3' />3 min read
               </span>
             </div>
           </article>

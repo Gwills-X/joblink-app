@@ -2,6 +2,15 @@
 
 import { useState, useCallback } from "react";
 
+const isRedirectError = (error) =>
+  Boolean(
+    error &&
+    (error.name === "Redirect" ||
+      error.constructor?.name === "Redirect" ||
+      error.type === "redirect" ||
+      error.code === "NEXT_REDIRECT"),
+  );
+
 /**
  * Lightweight compatibility hook for `useActionState` used across the app.
  * Returns [state, actionFn, isPending].
@@ -19,19 +28,7 @@ export default function useActionState(action, initialState = {}) {
         // Some server-action helpers expect (prevState, formData)
         // while direct server actions accept (formData). Inspect
         // the declared parameter count and forward appropriately.
-        let result;
-        try {
-          if (typeof action === "function" && action.length >= 2) {
-            result = await action(undefined, formData);
-          } else {
-            result = await action(formData);
-          }
-        } catch (innerErr) {
-          // If the first attempt fails, try the other signature as fallback
-          result = await action(formData).catch((e) => {
-            throw innerErr || e;
-          });
-        }
+        let result = await action(state, formData);
 
         if (result && typeof result === "object") {
           setState((s) => ({ ...s, ...result }));
@@ -71,6 +68,7 @@ export default function useActionState(action, initialState = {}) {
         }
         return result;
       } catch (err) {
+        if (isRedirectError(err)) throw err;
         console.error("useActionState action error:", err);
         const serverErr = { errors: { server: [err?.message || String(err)] } };
         setState((s) => ({ ...s, ...serverErr }));

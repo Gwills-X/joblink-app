@@ -1,4 +1,4 @@
-"use strict";
+"use server";
 
 import getAuthUser from "@/lib/getAuthUser";
 import { revalidatePath } from "next/cache";

@@ -1,11 +1,12 @@
 "use client";
+
 import { useState } from "react";
 import { updatePasswordAction } from "@/actions/auth";
+import { Lock, Loader2 } from "lucide-react";
 
 export default function SecurityPage({ userId }) {
   const [status, setStatus] = useState({ message: "", type: "" });
 
-  console.log("SecurityPage: Rendering with userId:", userId);
   async function handleSubmit(formData) {
     const current = formData.get("currentPassword");
     const newPass = formData.get("newPassword");
@@ -16,7 +17,7 @@ export default function SecurityPage({ userId }) {
       return;
     }
 
-    const result = await updatePasswordAction(userId, current, newPass);
+    const result = await updatePasswordAction(current, newPass);
 
     if (result.error) {
       setStatus({ message: result.error, type: "error" });
@@ -26,51 +27,67 @@ export default function SecurityPage({ userId }) {
   }
 
   return (
-    <form action={handleSubmit} className='space-y-6'>
-      <h2 className='text-lg font-bold text-white'>Security & Access</h2>
+    <form action={handleSubmit} className='space-y-5'>
+      <div>
+        <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
+          Authentication
+        </span>
+        <h2 className='mt-1 text-lg font-semibold tracking-tight text-slate-100'>
+          Security & Access
+        </h2>
+      </div>
 
-      {/* Notification Area */}
       {status.message && (
         <div
-          className={`p-4 rounded-lg text-sm ${status.type === "error" ? "bg-red-500/10 text-red-400" : "bg-emerald-500/10 text-emerald-400"}`}>
+          className={`rounded-lg border px-4 py-3 text-xs ${
+            status.type === "error"
+              ? "border-rose-500/20 bg-rose-500/10 text-rose-400"
+              : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+          }`}>
           {status.message}
         </div>
       )}
 
-      <div className='space-y-4'>
-        <div className='p-4 bg-slate-950/50 rounded-lg border border-white/5'>
-          <label className='text-[10px] uppercase font-bold text-slate-500'>
+      <div className='space-y-3'>
+        <div>
+          <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
             Current Password
           </label>
-          <input
-            name='currentPassword'
-            type='password'
-            required
-            className='w-full bg-transparent text-sm mt-1 text-white outline-none'
-          />
+          <div className='relative'>
+            <Lock className='absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-600' />
+            <input
+              name='currentPassword'
+              type='password'
+              required
+              placeholder='Enter current password'
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+            />
+          </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-4'>
-          <div className='p-4 bg-slate-950/50 rounded-lg border border-white/5'>
-            <label className='text-[10px] uppercase font-bold text-slate-500'>
+        <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+          <div>
+            <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
               New Password
             </label>
             <input
               name='newPassword'
               type='password'
               required
-              className='w-full bg-transparent text-sm mt-1 text-white outline-none'
+              placeholder='New password'
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
             />
           </div>
-          <div className='p-4 bg-slate-950/50 rounded-lg border border-white/5'>
-            <label className='text-[10px] uppercase font-bold text-slate-500'>
+          <div>
+            <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
               Confirm Password
             </label>
             <input
               name='confirmPassword'
               type='password'
               required
-              className='w-full bg-transparent text-sm mt-1 text-white outline-none'
+              placeholder='Confirm password'
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
             />
           </div>
         </div>
@@ -78,7 +95,7 @@ export default function SecurityPage({ userId }) {
 
       <button
         type='submit'
-        className='bg-emerald-500 hover:bg-emerald-600 text-slate-950 px-6 py-2 rounded-lg text-sm font-bold transition-all'>
+        className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
         Update Credentials
       </button>
     </form>

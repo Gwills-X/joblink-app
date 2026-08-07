@@ -1,24 +1,27 @@
 "use client";
 
 import { useState, useRef } from "react";
-import useActionState from "@/lib/hooks/useActionState";
+import { useActionState } from "react";
 // Import your storage services and actions
 import { uploadMedia } from "@/services/storageService";
 import { deleteMediaAction } from "@/actions/storageActions";
 
 export default function BlogPostForm({ handler }) {
   // Initialize state action for form submission tracking
-  const [state, formAction, isPending] = useActionState(handler, {
-    title: "",
-    content: "",
-    errors: {},
-  });
+const initialState = {
+  title: "",
+  content: "",
+  errors: {},
+};
+
+const [state, formAction, isPending] = useActionState(handler, initialState);
 
   // State elements to capture Cloudinary upload metadata
   const [mediaUrl, setMediaUrl] = useState(null);
   const [publicId, setPublicId] = useState(null); // 🌟 State to hold the publicId
   const [fileType, setFileType] = useState("none");
   const [format, setFormat] = useState(null);
+  const [category, setCategory] = useState("General");
   const [uploading, setUploading] = useState(false);
 
   // Refs to manage DOM elements and asset tracking
@@ -95,6 +98,19 @@ export default function BlogPostForm({ handler }) {
       mediaUrl: formData.get("mediaUrl"),
       fileType: formData.get("fileType"),
       format: formData.get("format"),
+    });
+
+    formData.set("category", category || "General");
+    formData.set("type", "POST");
+
+    console.log("Transmitting complete payload state metadata package:", {
+      title: formData.get("title"),
+      publicId: formData.get("publicId"), // 🌟 Log verification
+      mediaUrl: formData.get("mediaUrl"),
+      fileType: formData.get("fileType"),
+      format: formData.get("format"),
+      category: formData.get("category"),
+      type: formData.get("type"),
     });
 
     await formAction(formData);
@@ -188,12 +204,34 @@ export default function BlogPostForm({ handler }) {
           className='w-full rounded-lg bg-slate-950 border border-slate-800 p-2.5 text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm resize-none disabled:opacity-50'
           placeholder='Write your post content here...'></textarea>
       </div>
+      <div className='flex flex-col space-y-1.5 px-6'>
+        <label
+          htmlFor='category'
+          className='text-sm font-medium text-slate-300'>
+          Post Category
+        </label>
+        <select
+          id='category'
+          name='category'
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          disabled={isPending}
+          className='w-full rounded-lg bg-slate-950 border border-slate-800 p-2.5 text-slate-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-sm'>
+          <option value='General'>General</option>
+          <option value='Announcement'>Announcement</option>
+          <option value='Awareness'>Awareness</option>
+          <option value='Job Update'>Job Update</option>
+          <option value='Resource Share'>Resource Share</option>
+        </select>
+      </div>
       {/* --- HIDDEN INJECTIONS FOR THE DATA PIPELINE BACKEND SYNC --- */}
       <input type='hidden' name='mediaUrl' value={mediaUrl || ""} />
-      <input type='hidden' name='publicId' value={publicId || ""} />{" "}
+      <input type='hidden' name='publicId' value={publicId || ""} />
       {/* 🌟 Added hidden input */}
       <input type='hidden' name='fileType' value={fileType || "none"} />
       <input type='hidden' name='format' value={format || ""} />
+      <input type='hidden' name='category' value={category || "General"} />
+      <input type='hidden' name='type' value='POST' />
       {/* File Upload Configuration Layer */}
       <div className='space-y-2 px-6'>
         <label className='text-sm font-medium text-slate-300'>

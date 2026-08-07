@@ -9,7 +9,7 @@ export const authEngine = {
     return await mysqlUserRepo.findMysqlUserByEmail(email);
   },
 
-  registerUser: async ({ name, email, hashedPassword }) => {
+  registerUser: async ({ name, email, hashedPassword, role = "user" }) => {
     // 🚀 Generate the single UUID right here upfront!
     const generatedUserId = crypto.randomUUID();
 
@@ -19,6 +19,7 @@ export const authEngine = {
         name,
         email,
         hashedPassword,
+        role,
       });
       try {
         await firebaseUserRepo.insertFirebaseUser(generatedUserId, {
@@ -48,6 +49,7 @@ export const authEngine = {
       name,
       email,
       hashedPassword,
+      role,
     });
     return generatedUserId;
   },

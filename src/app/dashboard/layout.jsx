@@ -23,28 +23,20 @@ export default async function DashboardLayout({ children }) {
   }
 
   return (
-    <div className='flex flex-col lg:flex-row min-h-[calc(100vh-5rem)] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 gap-8'>
-      {/* Sidebar container - visible on desktop */}
-      <aside className='hidden lg:flex lg:flex-col w-64 flex-shrink-0 sticky top-24 h-fit gap-4'>
-        <WorkspaceSwitcher
-          hasSeekerProfile={hasSeekerProfile}
-          hasEmployerProfile={hasEmployerProfile}
-        />
-        <DashboardNav />
-      </aside>
-
-      {/* Main Content Area */}
-      <main className='flex-1 min-w-0 space-y-6'>
-        {/* Mobile Nav & Switcher - visible only on small screens */}
-        <div className='lg:hidden space-y-4'>
+    <div className='flex flex-col gap-6 lg:flex-row lg:gap-8'>
+      {/* Sidebar — desktop sticky, mobile stacked */}
+      <aside className='shrink-0 lg:w-64 lg:sticky lg:top-24 lg:self-start'>
+        <div className='space-y-3'>
           <WorkspaceSwitcher
             hasSeekerProfile={hasSeekerProfile}
             hasEmployerProfile={hasEmployerProfile}
           />
           <DashboardNav />
         </div>
-        {children}
-      </main>
+      </aside>
+
+      {/* Main Content */}
+      <main className='min-w-0 flex-1'>{children}</main>
     </div>
   );
 }

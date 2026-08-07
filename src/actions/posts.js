@@ -12,12 +12,23 @@ import { dataEngine } from "@/services/dataEngine";
 export async function createPosts(prevState, formData) {
   const user = await getAuthUser();
   if (!user) return redirect("/login");
+  console.log("prevState:", prevState);
+  console.log("formData:", formData);
 
+  if (prevState instanceof FormData) {
+    console.log("❌ FormData is arriving as prevState");
+  }
+
+  if (formData instanceof FormData) {
+    console.log("✅ FormData is arriving correctly");
+  }
   // Extract fields
   const parentId = formData.get("parent_id") || null;
   const content = formData.get("content");
   const title = parentId ? null : formData.get("title") || null;
   const mediaUrl = formData.get("mediaUrl") || null;
+  const category = formData.get("category") || "General";
+  const postType = formData.get("type") || "POST";
   const fileType = formData.get("fileType") || "none"; // Get from form
   const format = formData.get("format") || null; // Get from form
   const publicId = formData.get("publicId") || null; // Get from form
@@ -54,6 +65,8 @@ export async function createPosts(prevState, formData) {
         title: title,
         content: content,
         parentId: parentId,
+        category,
+        type: postType,
       },
       { mediaUrl, fileType, format, publicId },
     );

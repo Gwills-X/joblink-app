@@ -1,22 +1,27 @@
-// app/jobs/[id]/page.jsx
-
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import getAuthUser from "@/lib/getAuthUser";
-import { submitJobApplicationAction } from "@/actions/seekerActions";
-import { seekerEngine } from "@/engines/seekerEngine";
+import { seekerEngine } from "@/services/seekerEngine";
+import JobApplicationForm from "./JobApplicationForm";
 
 export default async function JobDetailViewPage({ params }) {
   const authUser = await getAuthUser();
-  const resolvedParams = await params;
-  const jobId = resolvedParams?.id;
+
+  // Await params as required in Next.js App Router
+  // const resolvedParams = await params;
+  // const jobId = resolvedParams?.jobId;
+  const { jobId } = await params;
 
   let job = null;
   try {
-    // Strictly fetching details through the engine layer — zero direct database queries!
     job = await seekerEngine.getJobListingById(jobId);
-    if (!job) return redirect("/jobs");
+    if (!job) {
+      redirect("/jobs");
+    }
   } catch (error) {
+    if (error.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
     console.error("Job Detail Engine Fetch Error:", error);
     return redirect("/jobs");
   }
@@ -53,8 +58,11 @@ export default async function JobDetailViewPage({ params }) {
               {job.title}
             </h1>
             <p className='text-sm font-mono text-slate-400'>
-              🏢 {job.company_name} • 📍 {job.location || "Remote"} • Posted{" "}
-              {new Date(job.created_at).toLocaleDateString()}
+              🏢 {job.company_name || "Independent listing"} • 📍{" "}
+              {job.location || "Remote"} • Posted{" "}
+              {job.created_at
+                ? new Date(job.created_at).toLocaleDateString()
+                : "Recently"}
             </p>
           </div>
 
@@ -78,57 +86,8 @@ export default async function JobDetailViewPage({ params }) {
         </div>
       </div>
 
-      {/* Application / Pitch Submission Form Section */}
-      <div className='bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-3xl p-8 shadow-xl space-y-6'>
-        <div>
-          <h2 className='text-xl font-bold text-white tracking-tight'>
-            Submit Your{" "}
-            <span className='text-emerald-400'>Application / Pitch</span>
-          </h2>
-          <p className='text-xs text-slate-400 mt-1 font-mono'>
-            Provide a clear technical breakdown or cover letter outlining your
-            qualification for this role.
-          </p>
-        </div>
-
-        {!authUser ? (
-          <div className='bg-slate-950 border border-slate-800 rounded-2xl p-8 text-center space-y-4'>
-            <p className='text-sm text-slate-300'>
-              You must be logged into your account to submit an application or
-              collaboration pitch.
-            </p>
-            <Link
-              href='/login'
-              className='inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-2.5 rounded-xl text-xs transition-all shadow-md shadow-emerald-500/10'>
-              Sign In to Apply &rarr;
-            </Link>
-          </div>
-        ) : (
-          <form action={submitJobApplicationAction} className='space-y-6'>
-            <input type='hidden' name='job_id' value={job.id} />
-
-            <div className='space-y-2'>
-              <label className='text-xs font-mono text-slate-300 block'>
-                Cover Letter / Technical Pitch
-              </label>
-              <textarea
-                name='cover_letter'
-                rows='6'
-                required
-                placeholder='Highlight your relevant stack experience, past projects, or why you want to collaborate...'
-                className='w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-emerald-500 font-sans leading-relaxed'></textarea>
-            </div>
-
-            <div className='flex justify-end'>
-              <button
-                type='submit'
-                className='bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-2xl text-xs transition-all shadow-lg shadow-emerald-500/10'>
-                Submit Application &rarr;
-              </button>
-            </div>
-          </form>
-        )}
-      </div>
+      {/* Application Form Client Component */}
+      <JobApplicationForm job={job} authUser={authUser} />
     </div>
   );
 }

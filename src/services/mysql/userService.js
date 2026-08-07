@@ -12,10 +12,16 @@ export async function findMysqlUserByEmail(email) {
 /**
  * Inserts a new user record into MySQL and returns their auto-incremented ID
  */
-export async function insertMysqlUser({ id, name, email, hashedPassword }) {
+export async function insertMysqlUser({
+  id,
+  name,
+  email,
+  hashedPassword,
+  role = "user",
+}) {
   const sql =
-    "INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)";
-  await query(sql, [id, name, email, hashedPassword]);
+    "INSERT INTO users (id, name, email, password, role) VALUES (?, ?, ?, ?, ?)";
+  await query(sql, [id, name, email, hashedPassword, role]);
   return id;
 }
 

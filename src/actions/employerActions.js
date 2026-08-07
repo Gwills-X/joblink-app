@@ -1,6 +1,6 @@
 // actions/employerActions.js
 
-"use strict";
+"use server";
 
 import getAuthUser from "@/lib/getAuthUser";
 import { revalidatePath } from "next/cache";
@@ -159,6 +159,6 @@ export async function reviewApplicationAction(formData) {
     };
   }
 
-  revalidatePath(`/dashboard/employer/jobs/${jobId}/applicants`);
-  redirect(`/dashboard/employer/jobs/${jobId}/applicants`);
+  revalidatePath(`/dashboard/employer/job/${jobId}/applicants`);
+  redirect(`/dashboard/employer/job/${jobId}/applicants`);
 }

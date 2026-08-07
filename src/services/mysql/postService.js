@@ -15,10 +15,12 @@ export async function insertMysqlPost({
   media_url = null, // 🌟 Added media_url support
   file_type = "none", // Add this
   format = null, // Add this
+  category = "General",
+  type = "POST",
 }) {
   const sql = `
-    INSERT INTO posts (id, authorId, author, title, content, parent_id, media_url, file_type, format, public_id) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO posts (id, authorId, author, title, content, parent_id, media_url, file_type, format, public_id, category, type) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
   await query(sql, [
     id,
@@ -31,6 +33,8 @@ export async function insertMysqlPost({
     file_type,
     format,
     public_id,
+    category,
+    type,
   ]);
   return { success: true, insertId: id };
 }
@@ -75,13 +79,14 @@ export async function fetchMysqlTimeline(currentUserId) {
         p.id, p.title, p.content, p.authorId, p.author AS authorName, 
         p.created_at AS createdAt, p.media_url AS mediaUrl, p.public_id AS publicId,
         p.file_type AS fileType, p.format AS format,
+        p.category AS category, p.type AS type,
         COUNT(DISTINCT l.user_id, l.post_id) AS likesCount,
         SUM(CASE WHEN l.user_id = ? THEN 1 ELSE 0 END) AS hasLiked,
         (SELECT COUNT(*) FROM posts c WHERE c.parent_id = p.id) AS commentsCount
       FROM posts p
       LEFT JOIN likes l ON p.id = l.post_id
       WHERE p.parent_id IS NULL
-      GROUP BY p.id, p.title, p.content, p.authorId, p.author, p.created_at, p.media_url, p.file_type, p.format, p.public_id
+      GROUP BY p.id, p.title, p.content, p.authorId, p.author, p.created_at, p.media_url, p.file_type, p.format, p.public_id, p.category, p.type
       ORDER BY p.created_at DESC
     `;
     const rows = await query(sql, [currentUserId]);
@@ -93,6 +98,8 @@ export async function fetchMysqlTimeline(currentUserId) {
       fileType: row.fileType || "none",
       format: row.format,
       publicId: row.publicId,
+      category: row.category || "General",
+      type: row.type || "POST",
       // --------------------------
       authorName: row.authorName || "VibeCred Professional",
       createdAt: row.createdAt

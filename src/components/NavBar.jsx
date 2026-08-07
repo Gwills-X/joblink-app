@@ -70,7 +70,10 @@ const NavBar = async () => {
             <NavLinks label='Dashboard' href='/dashboard' />
           </li>
           <li className='hover:text-white'>
-            <NavLinks label='Applications' href='/dashboard/applications' />
+            <NavLinks
+              label='Applications'
+              href='/dashboard/seeker/applications'
+            />
           </li>
           <li className='hover:text-white'>
             <NavLinks label='Post Opportunity' href='/posts/create' />
@@ -123,6 +126,12 @@ const NavBar = async () => {
                 <span className='hover:text-white transition-colors'>
                   Home Feed
                 </span>
+              }
+            />
+            <NavLinks
+              href='/jobs'
+              label={
+                <span className='hover:text-white transition-colors'>Jobs</span>
               }
             />
             <NavLinks

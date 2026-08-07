@@ -45,7 +45,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href='/dashboard/applications'
+                  href='/dashboard/seeker/applications'
                   className='hover:text-emerald-400 transition-colors inline-block py-0.5'>
                   Applications Manager
                 </Link>

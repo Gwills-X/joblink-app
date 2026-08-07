@@ -3,6 +3,12 @@ import { cookies } from "next/headers";
 import { decrypt } from "./session";
 import { query } from "./db"; // 🚀 Import your query manager
 
+export async function getAuthUserPassword(userId) {
+  const rows = await query("SELECT password FROM users WHERE id = ?", [userId]);
+  if (!rows || rows.length === 0) return null;
+  return rows[0].password;
+}
+
 export default async function getAuthUser() {
   try {
     const cookieStore = await cookies();
@@ -30,12 +36,12 @@ export default async function getAuthUser() {
       userId: String(dbUsers[0].id),
       name: dbUsers[0].name,
       email: dbUsers[0].email,
+      role: dbUsers[0].role || "guest",
       location: dbUsers[0].location,
       github_handle: dbUsers[0].github_handle,
       website_url: dbUsers[0].website_url,
       profile_pic_url: dbUsers[0].profile_pic_url,
       bio: dbUsers[0].bio,
-      password: dbUsers[0].password, // Include hashed password for server-side validation
       iat: userPayload.iat,
       exp: userPayload.exp,
     };

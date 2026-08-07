@@ -2,7 +2,21 @@ import PostCard from "@/components/PostCard";
 import getAuthUser from "@/lib/getAuthUser";
 import { dataEngine } from "@/services/dataEngine";
 import Link from "next/link";
-
+import {
+  Briefcase,
+  TrendingUp,
+  Users,
+  Radio,
+  ArrowRight,
+  Plus,
+  LogIn,
+  UserPlus,
+  FolderOpen,
+  Activity,
+  MapPin,
+  Settings,
+} from "lucide-react";
+import Footer from "@/components/Footer";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
@@ -12,200 +26,252 @@ export default async function Home() {
   const posts = postsCollection ? postsCollection.slice(0, 12) : [];
 
   return (
-    <div className='space-y-10 selection:bg-emerald-500/20 selection:text-emerald-400 pb-16'>
-      {/* 1. PROFESSIONAL SUB-NAVIGATION & STATUS BAR */}
-      <div className='bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 rounded-2xl px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl'>
-        <div className='flex items-center space-x-3'>
-          <span className='flex h-2.5 w-2.5 relative'>
-            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75'></span>
-            <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500'></span>
-          </span>
-          <span className='text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold'>
-            JobLink Professional Workspace
-          </span>
-        </div>
-
-        {/* Quick Nav Workspace Tabs */}
-        <div className='flex items-center gap-1.5 bg-slate-950/60 p-1 rounded-xl border border-slate-800/60'>
-          <Link
-            href='/'
-            className='px-4 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm transition-all'>
-            Feed
-          </Link>
-          <Link
-            href='/dashboard/applications'
-            className='px-4 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all'>
-            Applications
-          </Link>
-          <Link
-            href='/dashboard/settings'
-            className='px-4 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all'>
-            Settings
-          </Link>
-        </div>
-      </div>
-
-      {/* 2. HERO / WELCOME BANNER (Spectacular SaaS Feel) */}
-      <section className='relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800/80 p-8 md:p-12 shadow-2xl'>
-        {/* Background Ambient Glow FX */}
-        <div className='absolute top-0 right-0 -mt-16 -mr-16 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none'></div>
-        <div className='absolute bottom-0 left-1/3 -mb-16 w-64 h-64 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none'></div>
-
-        <div className='relative z-10 max-w-3xl space-y-6'>
-          <div className='inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest shadow-inner'>
-            <span className='w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse'></span>
-            Talent & Opportunity Portal
+    <div>
+      <div className='space-y-8 pb-16'>
+        {/* ─── STATUS BAR ─── */}
+        <div className='flex items-center justify-between border-b border-[var(--color-border)] pb-3'>
+          <div className='flex items-center gap-2.5'>
+            <span className='relative flex h-2 w-2'>
+              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60' />
+              <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-500' />
+            </span>
+            <span className='font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+              JobLink Workspace
+            </span>
           </div>
 
-          <h1 className='text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]'>
-            Connect with top companies &{" "}
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300'>
-              accelerate your career.
-            </span>
-          </h1>
-
-          <p className='text-base sm:text-lg text-slate-400 leading-relaxed font-normal max-w-2xl'>
-            Manage your professional presence, track job applications
-            seamlessly, and collaborate with high-caliber peers across the
-            network.
-          </p>
-
-          <div className='flex flex-wrap items-center gap-3.5 pt-2'>
-            {user ? (
+          <div className='flex items-center gap-1'>
+            {[
+              { label: "Feed", href: "/", active: true },
+              { label: "Jobs", href: "/jobs", active: false },
+              {
+                label: "Applications",
+                href: "/dashboard/seeker/applications",
+                active: false,
+              },
+              { label: "Settings", href: "/dashboard/settings", active: false },
+            ].map((tab) => (
               <Link
-                href='/posts/create'
-                className='bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs font-mono uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2'>
-                <span>+ Create Post / Opportunity</span>
+                key={tab.href}
+                href={tab.href}
+                className={`rounded-md px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider transition-all duration-150 ${
+                  tab.active
+                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/50"
+                }`}>
+                {tab.label}
               </Link>
-            ) : (
-              <>
-                <Link
-                  href='/login'
-                  className='bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs font-mono uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20'>
-                  Sign In
-                </Link>
-                <Link
-                  href='/register'
-                  className='bg-slate-800/80 hover:bg-slate-800 text-slate-200 font-bold px-6 py-3 rounded-xl text-xs font-mono uppercase tracking-wider border border-slate-700/80 transition-all shadow-sm'>
-                  Create Account
-                </Link>
-              </>
-            )}
+            ))}
           </div>
         </div>
-      </section>
 
-      {/* 3. MAIN CONTENT GRID */}
-      <section className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
-        {/* Main Feed Column (8 cols) */}
-        <div className='lg:col-span-8 space-y-6'>
-          <div className='flex items-center justify-between border-b border-slate-800/80 pb-3.5'>
-            <h2 className='text-xs font-bold uppercase tracking-widest text-slate-300 font-mono flex items-center gap-2.5'>
-              <span className='w-2 h-2 rounded-full bg-emerald-500'></span>
-              Live Activity Stream
-            </h2>
-            <span className='text-[11px] text-slate-400 font-mono bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-800'>
-              {posts.length} updates loaded
-            </span>
-          </div>
-
-          {posts.length > 0 ? (
-            <div className='space-y-4'>
-              {posts.map((post) => (
-                <PostCard
-                  post={post}
-                  key={post.id}
-                  currentUserId={currentUserId}
-                />
-              ))}
+        {/* ─── HERO ─── */}
+        <section className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10'>
+          <div className='max-w-2xl space-y-5'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1'>
+              <span className='h-1.5 w-1.5 rounded-full bg-emerald-400' />
+              <span className='font-mono text-[10px] font-medium uppercase tracking-widest text-emerald-400'>
+                Talent & Opportunity Portal
+              </span>
             </div>
-          ) : (
-            <div className='min-h-[260px] flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-dashed border-slate-800 bg-slate-900/20 space-y-3'>
-              <div className='w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 text-lg'>
-                📂
+
+            <h1 className='text-3xl font-semibold tracking-tight text-slate-100 md:text-4xl'>
+              Connect with top companies and{" "}
+              <span className='text-emerald-400'>accelerate your career.</span>
+            </h1>
+
+            <p className='text-sm leading-relaxed text-slate-400 max-w-lg'>
+              Curated engineering roles, streamlined applications, and direct
+              employer engagement — built for modern technical talent.
+            </p>
+
+            <div className='flex flex-wrap items-center gap-3 pt-1'>
+              <Link
+                href='/jobs'
+                className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
+                Browse Jobs
+                <ArrowRight className='h-3.5 w-3.5' />
+              </Link>
+
+              {user ? (
+                <Link
+                  href='/posts/create'
+                  className='inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800/50 hover:text-slate-100 active:scale-[0.98]'>
+                  <Plus className='h-3.5 w-3.5' />
+                  Create Post
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href='/login'
+                    className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
+                    <LogIn className='h-3.5 w-3.5' />
+                    Sign In
+                  </Link>
+                  <Link
+                    href='/register'
+                    className='inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800/50 hover:text-slate-100 active:scale-[0.98]'>
+                    <UserPlus className='h-3.5 w-3.5' />
+                    Create Account
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── FEATURE CARDS ─── */}
+        <section className='grid gap-3 md:grid-cols-3'>
+          {[
+            {
+              icon: Briefcase,
+              title: "Career-Focused Matches",
+              desc: "Discover roles aligned with your stack, experience level, and growth trajectory.",
+            },
+            {
+              icon: TrendingUp,
+              title: "Application Visibility",
+              desc: "Track every submission through the pipeline with real-time status updates.",
+            },
+            {
+              icon: Users,
+              title: "Employer Connections",
+              desc: "Engage directly with hiring teams through transparent, structured conversations.",
+            },
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className='group rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-all duration-150 hover:border-slate-700 hover:bg-[var(--color-surface-soft)]'>
+              <div className='flex h-9 w-9 items-center justify-center rounded-md border border-slate-800 bg-slate-900 text-emerald-400'>
+                <feature.icon className='h-4 w-4' />
               </div>
-              <div>
-                <h3 className='text-sm font-semibold text-slate-300'>
-                  No active updates found
+              <h3 className='mt-4 text-sm font-medium text-slate-200'>
+                {feature.title}
+              </h3>
+              <p className='mt-1.5 text-xs leading-relaxed text-slate-500'>
+                {feature.desc}
+              </p>
+            </div>
+          ))}
+        </section>
+
+        {/* ─── MAIN GRID ─── */}
+        <section className='grid grid-cols-1 lg:grid-cols-12 gap-6 items-start'>
+          {/* Feed */}
+          <div className='lg:col-span-8 space-y-4'>
+            <div className='flex items-center justify-between border-b border-[var(--color-border)] pb-2.5'>
+              <div className='flex items-center gap-2.5'>
+                <Activity className='h-3.5 w-3.5 text-emerald-400' />
+                <h2 className='font-mono text-[11px] font-medium uppercase tracking-widest text-slate-400'>
+                  Live Activity Stream
+                </h2>
+              </div>
+              <span className='font-mono text-[10px] tracking-wide text-slate-600'>
+                {posts.length} record{posts.length !== 1 ? "s" : ""}
+              </span>
+            </div>
+
+            {posts.length > 0 ? (
+              <div className='space-y-3'>
+                {posts.map((post) => (
+                  <PostCard
+                    post={post}
+                    key={post.id}
+                    currentUserId={currentUserId}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-800 py-16 px-6'>
+                <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-[var(--color-slate)]'>
+                  <FolderOpen className='h-4 w-4 text-slate-600' />
+                </div>
+                <h3 className='mt-4 text-sm font-medium text-slate-300'>
+                  No active updates
                 </h3>
-                <p className='text-xs text-slate-500 mt-1 max-w-sm'>
+                <p className='mt-1 max-w-xs text-center text-xs leading-relaxed text-slate-500'>
                   Be the first to share a project or career opportunity with the
                   network.
                 </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Sidebar Column (4 cols) */}
-        <aside className='lg:col-span-4 space-y-6 lg:sticky lg:top-24'>
-          {/* User Profile Card (If Logged In) */}
-          {user && (
-            <div className='p-6 rounded-2xl bg-slate-900/60 backdrop-blur-xl border border-slate-800 space-y-4 shadow-xl'>
-              <div className='flex items-center gap-3.5'>
-                <div className='w-14 h-14 rounded-2xl bg-slate-950 flex items-center justify-center overflow-hidden border border-emerald-500/30 flex-shrink-0 shadow-md'>
-                  {user.profile_pic_url ? (
-                    <img
-                      src={user.profile_pic_url}
-                      className='w-full h-full object-cover'
-                      alt={user.name}
-                    />
-                  ) : (
-                    <span className='font-extrabold text-emerald-400 font-mono text-base'>
-                      {user.name ? user.name.slice(0, 2).toUpperCase() : "JL"}
-                    </span>
-                  )}
-                </div>
-
-                <div className='min-w-0 flex-1'>
-                  <h3 className='font-bold text-white text-sm truncate'>
-                    {user.name}
-                  </h3>
-                  <p className='text-xs text-emerald-400 font-mono truncate mt-0.5'>
-                    {user.location || "Remote Developer"}
-                  </p>
+                <div className='mt-5 font-mono text-[10px] tracking-wider text-slate-700 uppercase'>
+                  Status: <span className='text-slate-600'>EMPTY_SET</span>
                 </div>
               </div>
+            )}
+          </div>
 
-              <p className='text-xs text-slate-400 leading-relaxed line-clamp-2 bg-slate-950/40 p-3 rounded-xl border border-slate-800/50'>
-                {user.bio || "No professional bio configured yet."}
-              </p>
+          {/* Sidebar */}
+          <aside className='lg:col-span-4 space-y-4 lg:sticky lg:top-24'>
+            {user && (
+              <div className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5'>
+                <div className='flex items-center gap-3'>
+                  <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-700 bg-[var(--color-slate)] overflow-hidden'>
+                    {user.profile_pic_url ? (
+                      <img
+                        src={user.profile_pic_url}
+                        className='h-full w-full object-cover'
+                        alt={user.name}
+                      />
+                    ) : (
+                      <span className='font-mono text-sm font-semibold text-emerald-400'>
+                        {user.name ? user.name.slice(0, 2).toUpperCase() : "JL"}
+                      </span>
+                    )}
+                  </div>
+                  <div className='min-w-0'>
+                    <h3 className='truncate text-sm font-medium text-slate-200'>
+                      {user.name}
+                    </h3>
+                    <div className='mt-0.5 flex items-center gap-1 text-slate-500'>
+                      <MapPin className='h-3 w-3' />
+                      <span className='font-mono text-[11px] tracking-wide'>
+                        {user.location || "Remote"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-              <div className='pt-2 border-t border-slate-800/80 flex gap-2'>
+                <p className='mt-3 text-xs leading-relaxed text-slate-500 line-clamp-2'>
+                  {user.bio || "No professional bio configured yet."}
+                </p>
+
                 <Link
                   href='/dashboard/settings'
-                  className='w-full py-2.5 text-center text-xs font-semibold font-mono uppercase tracking-wider bg-slate-800/80 hover:bg-slate-800 text-slate-200 rounded-xl transition-all border border-slate-700/80 shadow-sm'>
-                  Edit Profile Settings
+                  className='mt-4 flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800/40 py-2 text-xs font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800 hover:text-slate-100'>
+                  <Settings className='h-3.5 w-3.5' />
+                  Edit Profile
                 </Link>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Quick Metrics / Stats Widget */}
-          <div className='p-6 rounded-2xl bg-slate-900/60 backdrop-blur-xl border border-slate-800 space-y-4 shadow-xl'>
-            <h3 className='text-xs font-bold tracking-widest uppercase text-slate-400 font-mono flex items-center gap-2'>
-              <span className='w-1.5 h-1.5 rounded-full bg-emerald-400'></span>
-              Workspace Overview
-            </h3>
-
-            <div className='space-y-2.5 font-mono text-xs text-slate-400'>
-              <div className='p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/60 flex justify-between items-center shadow-inner'>
-                <span className='text-slate-400'>Account Status</span>
-                <span className='text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20'>
-                  ACTIVE
-                </span>
+            {/* Metrics */}
+            <div className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 space-y-3'>
+              <div className='flex items-center gap-2'>
+                <Radio className='h-3.5 w-3.5 text-emerald-400' />
+                <h3 className='font-mono text-[11px] font-medium uppercase tracking-widest text-slate-400'>
+                  Workspace Overview
+                </h3>
               </div>
 
-              <div className='p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/60 flex justify-between items-center shadow-inner'>
-                <span className='text-slate-400'>Profile Visibility</span>
-                <span className='text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20'>
-                  PUBLIC
-                </span>
+              <div className='space-y-2'>
+                <div className='flex items-center justify-between rounded-md border border-slate-800 bg-[var(--color-slate)] px-3 py-2'>
+                  <span className='text-xs text-slate-500'>Account</span>
+                  <span className='font-mono text-[10px] font-medium uppercase tracking-wider text-emerald-400'>
+                    Active
+                  </span>
+                </div>
+                <div className='flex items-center justify-between rounded-md border border-slate-800 bg-[var(--color-slate)] px-3 py-2'>
+                  <span className='text-xs text-slate-500'>Visibility</span>
+                  <span className='font-mono text-[10px] font-medium uppercase tracking-wider text-emerald-400'>
+                    Public
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        </aside>
-      </section>
+          </aside>
+        </section>
+      </div>
+      <Footer />
     </div>
   );
 }

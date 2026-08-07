@@ -1,12 +1,11 @@
 import getAuthUser from "@/lib/getAuthUser";
 import SecurityPage from "./SecurityPage";
 
-export default async function page() {
+export default async function SecurityWrapper() {
   const user = await getAuthUser();
-  console.log("EditProfilePage: Retrieved user:", user);
   if (!user) return <p>Unauthorized</p>;
   return (
-    <div className='max-w-5xl mx-auto py-10 '>
+    <div className='mx-auto max-w-lg'>
       <SecurityPage userId={user.userId} />
     </div>
   );

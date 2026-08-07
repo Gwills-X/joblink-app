@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import * as mysqlRepo from "./mysql/employerService";
+import * as mysqlCompanyRepo from "./mysql/companyService";
 
 const DRIVER_TOKEN = process.env.DATABASE_PROVIDER || "MYSQL";
 
@@ -27,6 +28,13 @@ export const employerEngine = {
 
   getCompanyProfile: async (userId) => {
     return await mysqlRepo.fetchCompanyProfile(userId);
+  },
+
+  saveCompanyProfile: async (userId, profileData) => {
+    return await mysqlCompanyRepo.insertOrUpdateMysqlCompany(
+      userId,
+      profileData,
+    );
   },
 
   updateJobListing: async (postId, userId, updateData) => {

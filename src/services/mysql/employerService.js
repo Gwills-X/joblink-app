@@ -91,7 +91,8 @@ export async function fetchMysqlJobApplicants(jobId) {
   try {
     const sql = `
       SELECT ja.*, 
-      u.name as seeker_name, 
+      u.name as candidate_name, 
+      u.email as candidate_email,
       u.headline as seeker_title, 
       u.website_url as portfolio_url, 
       u.interest_field as skills,
@@ -99,7 +100,7 @@ export async function fetchMysqlJobApplicants(jobId) {
       FROM job_applications ja
       JOIN users u ON ja.applicant_id = u.id
       WHERE ja.job_id = ?
-      ORDER BY ja.created_at DESC
+      ORDER BY ja.applied_at DESC
     `;
     const rows = await query(sql, [jobId]);
     return rows || [];

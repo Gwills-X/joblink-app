@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { seekerEngine } from "@/engines/seekerEngine";
+import { seekerEngine } from "@/services/seekerEngine";
 
 export default async function PublicJobsMarketplacePage({ searchParams }) {
   const params = await searchParams;
@@ -63,6 +63,15 @@ export default async function PublicJobsMarketplacePage({ searchParams }) {
             }`}>
             Collaborations
           </Link>
+          <Link
+            href='/jobs?type=PROJECT'
+            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              typeFilter === "PROJECT"
+                ? "bg-emerald-500 text-slate-950 shadow-md"
+                : "text-slate-400 hover:text-white"
+            }`}>
+            Projects
+          </Link>
         </div>
       </div>
 
@@ -111,7 +120,8 @@ export default async function PublicJobsMarketplacePage({ searchParams }) {
                     {item.title}
                   </h2>
                   <p className='text-xs font-mono text-slate-400 mt-1'>
-                    🏢 {item.company_name} • 📍 {item.location || "Remote"}
+                    🏢 {item.company_name || "Independent listing"} • 📍{" "}
+                    {item.location || "Remote"}
                   </p>
                 </div>
 

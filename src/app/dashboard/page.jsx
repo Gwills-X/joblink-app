@@ -3,6 +3,7 @@ import getAuthUser from "@/lib/getAuthUser";
 import { dataEngine } from "@/services/dataEngine";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Plus, FileText, Heart, MessageCircle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -17,76 +18,101 @@ export default async function Dashboard() {
     (post) => String(user.userId || user.id) === String(post.authorId),
   );
   const hasPosts = filteredPosts.length > 0;
+  const totalLikes = filteredPosts.reduce(
+    (sum, post) => sum + Number(post.likesCount || 0),
+    0,
+  );
+  const totalComments = filteredPosts.reduce(
+    (sum, post) => sum + Number(post.commentsCount || 0),
+    0,
+  );
 
   return (
-    <div className='space-y-8'>
-      {/* HEADER SECTION */}
-      <div className='p-6 md:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800/80 shadow-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 relative overflow-hidden'>
-        <div className='absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none'></div>
-
-        <div className='space-y-1 relative z-10'>
-          <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest mb-2'>
+    <div className='space-y-6'>
+      {/* Header */}
+      <div className='flex flex-col gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:flex-row sm:items-center sm:justify-between'>
+        <div>
+          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Universal Workspace
-          </div>
-          <h1 className='text-3xl font-extrabold text-white tracking-tight'>
+          </span>
+          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
             {user.name}
           </h1>
-          <p className='text-xs font-mono text-slate-400'>
-            Profile Status:{" "}
-            <span className='text-emerald-400 font-bold'>
-              Active & Verified
-            </span>
+          <p className='mt-1 max-w-md text-xs leading-relaxed text-slate-500'>
+            Manage published updates and keep your opportunities front and
+            center.
           </p>
         </div>
 
-        <Link
-          href='/posts/create'
-          className='relative z-10 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-6 py-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 text-center'>
-          + Create New Post
-        </Link>
-      </div>
-
-      {/* PUBLISHED ARTIFACTS CONTAINER */}
-      <div className='p-6 md:p-8 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-slate-800/80 shadow-xl space-y-6'>
-        {hasPosts ? (
-          <div className='space-y-6'>
-            <div className='flex justify-between items-center border-b border-slate-800 pb-4'>
-              <h2 className='text-xs font-mono uppercase tracking-widest font-bold text-slate-300 flex items-center gap-2'>
-                <span className='w-2 h-2 rounded-full bg-emerald-500'></span>
-                Published Artifacts ({filteredPosts.length})
-              </h2>
+        <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-4 rounded-lg border border-slate-800 bg-slate-950 px-4 py-2'>
+            <div className='flex items-center gap-1.5'>
+              <Heart className='h-3.5 w-3.5 text-slate-600' />
+              <span className='font-mono text-[11px] font-medium text-slate-400'>
+                {totalLikes}
+              </span>
             </div>
-
-            <div className='grid gap-6 md:grid-cols-2'>
-              {filteredPosts.map((post) => (
-                <div
-                  key={post.id}
-                  className='bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all p-2 shadow-md'>
-                  <PostCard
-                    post={post}
-                    currentUserId={String(user.userId || user.id)}
-                  />
-                </div>
-              ))}
+            <div className='h-3 w-px bg-slate-800' />
+            <div className='flex items-center gap-1.5'>
+              <MessageCircle className='h-3.5 w-3.5 text-slate-600' />
+              <span className='font-mono text-[11px] font-medium text-slate-400'>
+                {totalComments}
+              </span>
             </div>
           </div>
+          <Link
+            href='/posts/create'
+            className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
+            <Plus className='h-3.5 w-3.5' />
+            New Post
+          </Link>
+        </div>
+      </div>
+
+      {/* Posts */}
+      <div className='space-y-4'>
+        <div className='flex items-center justify-between border-b border-slate-800 pb-2.5'>
+          <span className='font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
+            Published Artifacts
+          </span>
+          <span className='font-mono text-[10px] tracking-wide text-slate-600'>
+            {filteredPosts.length} record{filteredPosts.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+
+        {hasPosts ? (
+          <div className='grid gap-3 md:grid-cols-2'>
+            {filteredPosts.map((post) => (
+              <div
+                key={post.id}
+                className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 transition-all duration-150 hover:border-slate-700'>
+                <PostCard
+                  post={post}
+                  currentUserId={String(user.userId || user.id)}
+                />
+              </div>
+            ))}
+          </div>
         ) : (
-          <div className='text-center py-20 space-y-4'>
-            <div className='mx-auto w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 text-lg shadow-inner font-mono font-bold'>
-              0
+          <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-800 py-16 px-6'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-[var(--color-slate)]'>
+              <FileText className='h-4 w-4 text-slate-600' />
             </div>
-            <div>
-              <h3 className='text-sm font-bold text-white'>Matrix Vacant</h3>
-              <p className='text-xs text-slate-500 mt-1 max-w-sm mx-auto'>
-                No authored content or job opportunities detected in your
-                professional sector yet.
-              </p>
-            </div>
+            <h3 className='mt-4 text-sm font-medium text-slate-300'>
+              No posts yet
+            </h3>
+            <p className='mt-1 text-xs text-slate-500'>
+              No authored content detected in your professional sector.
+            </p>
             <Link
               href='/posts/create'
-              className='inline-block text-xs font-mono font-bold text-slate-950 bg-emerald-500 hover:bg-emerald-400 px-5 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-500/20 uppercase tracking-wider'>
-              + Author Your First Pulse
+              className='mt-4 inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-4 py-2 text-xs font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800/50 hover:text-slate-100'>
+              <Plus className='h-3.5 w-3.5' />
+              Author First Post
             </Link>
+            <div className='mt-4 font-mono text-[10px] tracking-wider text-slate-700 uppercase'>
+              Status: <span className='text-slate-600'>EMPTY_SET</span>
+            </div>
           </div>
         )}
       </div>

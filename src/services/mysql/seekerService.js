@@ -1,12 +1,19 @@
 import { query } from "@/lib/db";
 
 /**
- * Inserts a new job or collaboration application into MySQL
+ * Inserts a new job or collaboration application into MySQL with extended candidate details
  */
 export async function insertMysqlApplication({
   id,
   job_id,
   applicant_id,
+  full_name,
+  email,
+  phone,
+  github_repo,
+  portfolio_link,
+  cv_url,
+  bio,
   cover_letter,
 }) {
   const jobRows = await query(
@@ -27,13 +34,25 @@ export async function insertMysqlApplication({
   }
 
   const sql = `
-    INSERT INTO job_applications (id, job_id, applicant_id, cover_letter, status) 
-    VALUES (?, ?, ?, ?, 'PENDING')
+    INSERT INTO job_applications 
+    (id, job_id, applicant_id, full_name, email, phone, github_repo, portfolio_link, cv_url, bio, cover_letter, status) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING')
   `;
-  await query(sql, [id, job_id, applicant_id, cover_letter]);
+  await query(sql, [
+    id,
+    job_id,
+    applicant_id,
+    full_name || null,
+    email || null,
+    phone || null,
+    github_repo || null,
+    portfolio_link || null,
+    cv_url || null,
+    bio || null,
+    cover_letter || null,
+  ]);
   return { success: true, insertId: id };
 }
-
 /**
  * Fetches applications submitted by a user, pulling profile data directly from the users table
  */
@@ -48,7 +67,7 @@ export async function fetchMysqlSeekerApplications(userId) {
       c.logo_url
       FROM job_applications ja
       JOIN jobs j ON ja.job_id = j.id
-      JOIN companies c ON j.company_id = c.id
+      LEFT JOIN companies c ON j.company_id = c.id
       WHERE ja.applicant_id = ?
       ORDER BY ja.applied_at DESC
     `;
@@ -95,7 +114,7 @@ export async function fetchMysqlMarketplaceListings(typeFilter, searchKeyword) {
     let sql = `
       SELECT j.*, c.name as company_name, c.logo_url 
       FROM jobs j
-      JOIN companies c ON j.company_id = c.id
+      LEFT JOIN companies c ON j.company_id = c.id
       WHERE j.status = 'OPEN'
     `;
     const queryParams = [];
@@ -140,6 +159,26 @@ export async function updateMysqlSeekerPreferences(userId, preferences) {
     return result;
   } catch (error) {
     console.error("❌ MySQL Seeker Preferences Update Fault:", error.message);
+    throw error;
+  }
+}
+
+/**
+ * Fetches a single job listing by ID with company info
+ */
+export async function fetchMysqlJobListingById(jobId) {
+  try {
+    const sql = `
+      SELECT j.*, c.name as company_name, c.logo_url 
+      FROM jobs j
+      LEFT JOIN companies c ON j.company_id = c.id
+      WHERE j.id = ?
+      LIMIT 1
+    `;
+    const rows = await query(sql, [jobId]);
+    return rows && rows.length > 0 ? rows[0] : null;
+  } catch (error) {
+    console.error("❌ MySQL Single Job Fetch Fault:", error.message);
     throw error;
   }
 }

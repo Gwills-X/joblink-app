@@ -57,6 +57,8 @@ export const dataEngine = {
         public_id: mediaData.publicId,
         file_type: mediaData.fileType, // Send this to MySQL
         format: mediaData.format, // Send this to MySQL
+        category: unifiedPayload.category || "General",
+        type: unifiedPayload.type || "POST",
       };
 
       await mysqlRepo.insertMysqlPost(mysqlPayload);

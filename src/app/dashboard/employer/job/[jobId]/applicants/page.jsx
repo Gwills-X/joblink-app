@@ -1,10 +1,9 @@
-// app/dashboard/employer/jobs/[jobId]/applicants/page.jsx
-
 import getAuthUser from "@/lib/getAuthUser";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { reviewApplicationAction } from "@/actions/employerActions";
-import { employerEngine } from "@/engines/employerEngine";
+import { employerEngine } from "@/services/employerEngine";
+import { ArrowLeft, Mail, FileText } from "lucide-react";
 
 export default async function EmployerApplicantReviewPage({ params }) {
   const authUser = await getAuthUser();
@@ -18,10 +17,8 @@ export default async function EmployerApplicantReviewPage({ params }) {
   let applications = [];
 
   try {
-    // Strictly fetching view context via the engine layer — zero direct database queries!
     job = await employerEngine.getJobById(jobId, userId);
     if (!job) return redirect("/dashboard/employer");
-
     applications = await employerEngine.getJobApplicants(jobId);
   } catch (error) {
     console.error("Applicant Screen Engine Fetch Error:", error);
@@ -29,97 +26,117 @@ export default async function EmployerApplicantReviewPage({ params }) {
   }
 
   return (
-    <div className='max-w-5xl mx-auto py-12 px-6 space-y-8'>
+    <div className='mx-auto max-w-5xl space-y-6 py-8 px-4'>
       <div>
         <Link
           href='/dashboard/employer'
-          className='text-xs font-mono text-emerald-400 hover:underline mb-2 block'>
-          &larr; Back to Employer Dashboard
+          className='inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-emerald-400 transition-colors duration-150 hover:text-emerald-300'>
+          <ArrowLeft className='h-3 w-3' />
+          Back to Dashboard
         </Link>
-        <h1 className='text-3xl font-bold text-white tracking-tight'>
+        <h1 className='mt-3 text-xl font-semibold tracking-tight text-slate-100'>
           Applicant Review:{" "}
           <span className='text-emerald-400'>{job?.title}</span>
         </h1>
-        <p className='text-sm text-slate-400 mt-1'>
-          Evaluate candidate submissions, update statuses, and provide
-          constructive feedback.
+        <p className='mt-1 text-xs text-slate-500'>
+          Evaluate submissions, update statuses, and provide feedback.
         </p>
       </div>
 
-      <div className='space-y-6'>
+      <div className='space-y-4'>
         {applications.length === 0 ? (
-          <div className='bg-slate-900/60 border border-slate-800 rounded-2xl p-12 text-center space-y-3'>
-            <p className='text-slate-400 text-sm'>
-              No candidates have applied to this position yet.
+          <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-800 py-16 px-6'>
+            <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-[var(--color-slate)]'>
+              <FileText className='h-4 w-4 text-slate-600' />
+            </div>
+            <h3 className='mt-4 text-sm font-medium text-slate-300'>
+              No applicants yet
+            </h3>
+            <p className='mt-1 text-xs text-slate-500'>
+              No candidates have applied to this position.
             </p>
+            <div className='mt-5 font-mono text-[10px] tracking-wider text-slate-700 uppercase'>
+              Status: <span className='text-slate-600'>NO_RECORDS</span>
+            </div>
           </div>
         ) : (
           applications.map((app) => (
             <div
               key={app.id}
-              className='bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6'>
-              <div className='flex justify-between items-center'>
+              className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 space-y-5 transition-all duration-150 hover:border-slate-700'>
+              <div className='flex items-start justify-between gap-4'>
                 <div>
-                  <h2 className='text-lg font-bold text-white'>
+                  <h2 className='text-sm font-semibold text-slate-200'>
                     {app.candidate_name || "Candidate"}
                   </h2>
-                  <p className='text-xs font-mono text-slate-400'>
-                    📧 {app.candidate_email}
-                  </p>
+                  <div className='mt-1 flex items-center gap-1.5 text-xs text-slate-500'>
+                    <Mail className='h-3 w-3' />
+                    <span className='font-mono text-[11px] tracking-wide'>
+                      {app.candidate_email}
+                    </span>
+                  </div>
                 </div>
                 <span
-                  className={`text-xs font-mono px-2.5 py-1 rounded-md border ${
+                  className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${
                     app.status === "PENDING"
-                      ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                      ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
                       : app.status === "ACCEPTED"
-                        ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                        : "bg-rose-500/10 text-rose-400 border-rose-500/20"
+                        ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                        : "border-rose-500/20 bg-rose-500/10 text-rose-400"
                   }`}>
+                  <span
+                    className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${
+                      app.status === "PENDING"
+                        ? "bg-amber-400"
+                        : app.status === "ACCEPTED"
+                          ? "bg-emerald-400"
+                          : "bg-rose-400"
+                    }`}
+                  />
                   {app.status}
                 </span>
               </div>
 
               <div className='space-y-2'>
-                <span className='text-xs font-mono text-slate-400 uppercase tracking-wider block'>
-                  Cover Letter / Pitch:
+                <span className='block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
+                  Cover Letter
                 </span>
-                <div className='bg-slate-950/80 border border-slate-800/80 p-4 rounded-xl text-sm text-slate-300'>
+                <div className='rounded-md border border-slate-800 bg-slate-950 p-4 text-xs leading-relaxed text-slate-400'>
                   {app.cover_letter}
                 </div>
               </div>
 
-              {/* Server Action Form Execution */}
               <form
                 action={reviewApplicationAction}
-                className='pt-4 border-t border-slate-800/80 space-y-4'>
+                className='space-y-4 border-t border-slate-800 pt-4'>
                 <input type='hidden' name='application_id' value={app.id} />
                 <input type='hidden' name='job_id' value={jobId} />
 
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                  <div className='space-y-1.5'>
-                    <label className='text-xs font-mono text-slate-300 block'>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <div>
+                    <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
                       Update Status
                     </label>
                     <select
                       name='status'
                       defaultValue={app.status}
-                      className='w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono'>
+                      className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'>
                       <option value='PENDING'>PENDING</option>
                       <option value='ACCEPTED'>ACCEPTED</option>
                       <option value='REJECTED'>REJECTED</option>
                     </select>
                   </div>
 
-                  <div className='space-y-1.5'>
-                    <label className='text-xs font-mono text-slate-300 block'>
-                      Feedback / Rejection Reason
+                  <div>
+                    <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
+                      Feedback
                     </label>
                     <input
                       type='text'
                       name='employer_feedback'
                       defaultValue={app.employer_feedback || ""}
-                      placeholder='Optional notes or feedback for candidate...'
-                      className='w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-emerald-500'
+                      placeholder='Optional notes for candidate...'
+                      className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
                     />
                   </div>
                 </div>
@@ -127,8 +144,8 @@ export default async function EmployerApplicantReviewPage({ params }) {
                 <div className='flex justify-end'>
                   <button
                     type='submit'
-                    className='bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-xl text-xs transition-all'>
-                    Save Review Decision
+                    className='rounded-lg bg-emerald-500 px-4 py-2 text-xs font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
+                    Save Decision
                   </button>
                 </div>
               </form>

@@ -1,8 +1,17 @@
 import { socialEngine } from "@/services/socialEngine";
 import FollowButton from "@/components/FollowButton";
 import Link from "next/link";
-import { ArrowLeft, MessageSquare, Heart } from "lucide-react";
+import { notFound } from "next/navigation";
 import getAuthUser from "@/lib/getAuthUser";
+import {
+  ArrowLeft,
+  MessageSquare,
+  Heart,
+  Users,
+  MapPin,
+  Calendar,
+  UserCircle,
+} from "lucide-react";
 
 export default async function UserProfilePage({ params }) {
   const { userId } = await params;
@@ -15,85 +24,121 @@ export default async function UserProfilePage({ params }) {
 
   const posts = await socialEngine.getUserPosts(userId);
   const stats = await socialEngine.getFollowStats(userId);
-
-  // FIX: Check the status from the database before rendering
   const isFollowing = await socialEngine.checkIfFollowing(
     authUser.userId,
     userId,
   );
 
   return (
-    <div className='max-w-3xl mx-auto py-12 px-4'>
-      {/* Back Button */}
+    <div className='mx-auto max-w-3xl space-y-6 py-8 px-4'>
       <Link
         href='/dashboard/network'
-        className='text-slate-500 hover:text-white flex items-center gap-2 mb-8 text-xs font-mono uppercase'>
-        <ArrowLeft size={16} /> Back to Network
+        className='inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-slate-500 transition-colors duration-150 hover:text-emerald-400'>
+        <ArrowLeft className='h-3.5 w-3.5' />
+        Back to Network
       </Link>
 
-      {/* Header Section */}
-      <div className='bg-slate-900/50 p-8 rounded-3xl border border-slate-800 mb-8'>
-        <div className='flex items-center gap-6 max-lg:flex-col'>
-          <div className='flex justify-start items-center gap-1.5 max-lg:justify-between max-lg:w-full'>
-            <img
-              src={user.profile_pic_url || "/user.png"}
-              className='w-24 h-24 rounded-full border-4 border-slate-800'
-            />
-            <div className='flex-1'>
-              <h1 className='text-3xl font-black max-lg:text-2xl'>
-                {user.name}
-              </h1>
-              <p className='text-slate-400 mt-2'>{user.bio}</p>
-            </div>
+      {/* Profile Card */}
+      <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6'>
+        <div className='flex flex-col gap-5 sm:flex-row sm:items-start'>
+          <div className='flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-[var(--color-slate)]'>
+            {user.profile_pic_url ? (
+              <img
+                src={user.profile_pic_url}
+                alt={user.name}
+                className='h-full w-full object-cover'
+              />
+            ) : (
+              <UserCircle className='h-8 w-8 text-slate-600' />
+            )}
           </div>
-          <FollowButton
-            currentUserId={authUser?.userId}
-            targetId={userId}
-            isInitiallyFollowing={isFollowing}
-          />
-        </div>
 
-        {/* Stats Bar */}
-        <div className='flex gap-8 mt-8 border-t border-slate-800 pt-6'>
-          <div>
-            <div className='text-xl font-black text-emerald-400'>
-              {stats.followers}
+          <div className='min-w-0 flex-1'>
+            <div className='flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between'>
+              <div>
+                <h1 className='text-lg font-semibold tracking-tight text-slate-100'>
+                  {user.name}
+                </h1>
+                <p className='mt-1 text-xs leading-relaxed text-slate-500'>
+                  {user.bio}
+                </p>
+                <div className='mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600'>
+                  {user.location && (
+                    <span className='flex items-center gap-1'>
+                      <MapPin className='h-3 w-3' />
+                      {user.location}
+                    </span>
+                  )}
+                  <span className='flex items-center gap-1 font-mono text-[11px]'>
+                    <Calendar className='h-3 w-3' />
+                    Joined {new Date(user.created_at).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+
+              <FollowButton
+                currentUserId={authUser?.userId}
+                targetId={userId}
+                isInitiallyFollowing={isFollowing}
+              />
             </div>
-            <div className='text-[10px] text-slate-500 uppercase'>
-              Followers
-            </div>
-          </div>
-          <div>
-            <div className='text-xl font-black text-emerald-400'>
-              {stats.following}
-            </div>
-            <div className='text-[10px] text-slate-500 uppercase'>
-              Following
+
+            {/* Stats */}
+            <div className='mt-5 flex gap-6 border-t border-slate-800 pt-4'>
+              <div className='flex items-center gap-2'>
+                <Users className='h-3.5 w-3.5 text-slate-600' />
+                <span className='font-mono text-sm font-semibold text-slate-300'>
+                  {stats.followers}
+                </span>
+                <span className='font-mono text-[10px] uppercase tracking-wider text-slate-600'>
+                  Followers
+                </span>
+              </div>
+              <div className='flex items-center gap-2'>
+                <Users className='h-3.5 w-3.5 text-slate-600' />
+                <span className='font-mono text-sm font-semibold text-slate-300'>
+                  {stats.following}
+                </span>
+                <span className='font-mono text-[10px] uppercase tracking-wider text-slate-600'>
+                  Following
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Posts Section */}
-      <h2 className='font-black text-xl mb-6'>Recent Posts</h2>
+      {/* Posts */}
       <div className='space-y-4'>
-        {posts.map((post) => (
-          <Link
-            href={`/posts/${post.id}`}
-            key={post.id}
-            className='block p-6 bg-slate-900/30 border border-slate-800 rounded-2xl hover:border-emerald-500/30 transition-all'>
-            <p className='text-slate-300 line-clamp-3 mb-4'>{post.content}</p>
-            <div className='flex gap-6 text-slate-500'>
-              <button className='flex items-center gap-1 hover:text-rose-500 transition-colors'>
-                <Heart size={16} /> <span className='text-xs'>Like</span>
-              </button>
-              <button className='flex items-center gap-1 hover:text-emerald-500 transition-colors'>
-                <MessageSquare size={16} />{" "}
-                <span className='text-xs'>Comment</span>
-              </button>
-            </div>
-          </Link>
-        ))}
+        <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
+          Recent Posts
+        </span>
+        <div className='space-y-3'>
+          {posts.map((post) => (
+            <Link
+              href={`/posts/${post.id}`}
+              key={post.id}
+              className='group block rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-all duration-150 hover:border-slate-700'>
+              <p className='line-clamp-3 text-sm leading-relaxed text-slate-400 transition-colors duration-150 group-hover:text-slate-300'>
+                {post.content}
+              </p>
+              <div className='mt-4 flex items-center gap-4 border-t border-slate-800 pt-3'>
+                <span className='flex items-center gap-1.5 text-xs text-slate-600'>
+                  <Heart className='h-3.5 w-3.5' />
+                  <span className='font-mono text-[11px]'>
+                    {post.likesCount || 0}
+                  </span>
+                </span>
+                <span className='flex items-center gap-1.5 text-xs text-slate-600'>
+                  <MessageSquare className='h-3.5 w-3.5' />
+                  <span className='font-mono text-[11px]'>
+                    {post.commentsCount || 0}
+                  </span>
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

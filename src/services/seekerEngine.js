@@ -44,4 +44,8 @@ export const seekerEngine = {
   updateSeekerPreferences: async (userId, preferences) => {
     return await seekerRepo.updateMysqlSeekerPreferences(userId, preferences);
   },
+
+  getJobListingById: async (jobId) => {
+    return await seekerRepo.fetchMysqlJobListingById(jobId);
+  },
 };

@@ -1,6 +1,7 @@
 import "server-only";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { query } from "./db";
 
 const secretKey = process.env.SESSION_SECRET;
 
@@ -17,7 +18,7 @@ export async function encrypt(payload) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("30m") // Standard internal JWT exp registry tracker
+    .setExpirationTime("7d") // Session token expiration for persistent login
     .sign(encodedKey);
 }
 
@@ -35,10 +36,25 @@ export async function decrypt(session) {
 
 export async function createSession(userId) {
   // 7 Days calculation matched cleanly to cookie expiration requirements
-  const sevenDaysInMs = 30 * 60 * 1000;
+  const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
   const expiresAt = new Date(Date.now() + sevenDaysInMs); // Normalize userId to a string to keep database primary key formats matching smoothly
 
-  const session = await encrypt({ userId: String(userId) });
+  let role = "guest";
+  try {
+    const rows = await query("SELECT role FROM users WHERE id = ? LIMIT 1", [
+      String(userId),
+    ]);
+    if (rows && rows.length > 0 && rows[0].role) {
+      role = rows[0].role;
+    }
+  } catch (err) {
+    console.warn(
+      "Failed to resolve user role for session creation:",
+      err.message,
+    );
+  }
+
+  const session = await encrypt({ userId: String(userId), role });
   const cookieStore = await cookies();
 
   cookieStore.set("session", session, {

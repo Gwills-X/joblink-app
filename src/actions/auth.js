@@ -6,6 +6,7 @@ import { authEngine } from "@/services/authEngine"; // 🚀 Import our new Auth 
 import { createSession } from "@/lib/session";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import getAuthUser from "@/lib/getAuthUser";
 
 export async function register(state, formData) {
   // Support both signatures: (state, formData) and (formData)
@@ -13,10 +14,12 @@ export async function register(state, formData) {
     formData = state;
     state = undefined;
   }
+  const name = formData?.get("name");
+  const email = formData?.get("email");
 
   const validatedFields = RegisterFormScheme.safeParse({
-    email: formData?.get("email"),
-    name: formData?.get("name"),
+    email,
+    name,
     password: formData?.get("password"),
     confirmPassword: formData?.get("confirmPassword"),
   });
@@ -24,11 +27,13 @@ export async function register(state, formData) {
   if (!validatedFields.success) {
     return {
       success: false,
+      email,
+      name,
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
-  const { email, name, password } = validatedFields.data;
+  const password = validatedFields.data.password;
 
   try {
     // 1. Verify existence via authEngine
@@ -50,13 +55,17 @@ export async function register(state, formData) {
       name,
       email,
       hashedPassword,
+      role: "user",
     });
 
     // 4. Set the tracking cookie session
     await createSession(String(cleanUserId));
   } catch (error) {
     console.error("Registration Action Exception Error:", error);
-    const devMsg = process.env.NODE_ENV !== "production" ? error.message : "Something went wrong processing authentication registers.";
+    const devMsg =
+      process.env.NODE_ENV !== "production"
+        ? error.message
+        : "Something went wrong processing authentication registers.";
     return {
       success: false,
       errors: {
@@ -124,7 +133,10 @@ export async function login(state, formData) {
     }
 
     console.error("Login Action Exception Error:", error);
-    const devMessage = process.env.NODE_ENV !== "production" ? error.message : "Authentication validation failure occurred.";
+    const devMessage =
+      process.env.NODE_ENV !== "production"
+        ? error.message
+        : "Authentication validation failure occurred.";
     return {
       success: false,
       errors: { server: [devMessage] },
@@ -152,18 +164,16 @@ export async function refreshSessionAction() {
   }
 }
 
-export async function updatePasswordAction(
-  userId,
-  currentPassword,
-  newPassword,
-) {
+export async function updatePasswordAction(currentPassword, newPassword) {
   try {
-    const userPassword = await authEngine.getUserPassword(userId); // Ensure user exists
-    // 2. Validate current password
+    const user = await getAuthUser();
+    if (!user) throw new Error("Unauthorized");
+
+    const userPassword = await authEngine.getUserPassword(String(user.userId));
     const isMatch = await bcrypt.compare(currentPassword, userPassword);
     if (!isMatch) throw new Error("Current password does not match.");
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await authEngine.updatePassword(userId, hashedPassword);
+    await authEngine.updatePassword(String(user.userId), hashedPassword);
     return { success: "Password updated successfully!" };
   } catch (error) {
     return { error: error.message };

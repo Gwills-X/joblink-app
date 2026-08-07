@@ -12,7 +12,8 @@ export const RegisterFormScheme = z
       .string()
       .min(6, { message: "Password must be at least 6 characters long" })
       .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/, {
-        message: "Password must contain at least one letter and one number",
+        message:
+          "Password must contain at least one letter and one number and no symbols",
       }),
     confirmPassword: z
       .string()

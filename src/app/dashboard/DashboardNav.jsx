@@ -1,22 +1,38 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  LayoutGrid,
+  FileText,
+  Briefcase,
+  BarChart3,
+  Users,
+  Settings,
+} from "lucide-react";
 
 export default function DashboardNav() {
   const pathname = usePathname();
+
   const tabs = [
-    { name: "My Posts", href: "/dashboard" },
-    { name: "Candidate Hub", href: "/dashboard/seeker/applications" },
-    { name: "Employer Hub", href: "/dashboard/employer" },
-    { name: "Analytics", href: "/dashboard/analytics" },
-    { name: "Network", href: "/dashboard/network" },
-    { name: "Settings", href: "/dashboard/settings" },
+    { name: "My Posts", href: "/dashboard", icon: LayoutGrid },
+    {
+      name: "Candidate Hub",
+      href: "/dashboard/seeker/applications",
+      icon: FileText,
+    },
+    { name: "Employer Hub", href: "/dashboard/employer", icon: Briefcase },
+    { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
+    { name: "Network", href: "/dashboard/network", icon: Users },
+    { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
   return (
-    <nav className='flex flex-row lg:flex-col gap-1.5 p-2 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl w-full lg:w-64 shadow-xl overflow-x-auto lg:overflow-visible'>
-      <div className='hidden lg:block px-4 py-2 text-[10px] font-mono uppercase tracking-widest text-slate-500 font-bold'>
-        Workspace Menu
+    <nav className='flex flex-row gap-1 overflow-x-auto rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 lg:w-64 lg:flex-col lg:overflow-visible'>
+      <div className='hidden px-3 py-2 lg:block'>
+        <span className='font-mono text-[10px] font-medium uppercase tracking-widest text-slate-600'>
+          Workspace
+        </span>
       </div>
       {tabs.map((tab) => {
         const isActive =
@@ -26,14 +42,15 @@ export default function DashboardNav() {
           <Link
             key={tab.name}
             href={tab.href}
-            className={`relative flex items-center px-4 py-3 text-xs font-mono font-bold uppercase tracking-wider rounded-xl transition-all duration-300 whitespace-nowrap ${
+            className={`relative flex items-center gap-2.5 whitespace-nowrap rounded-md px-3 py-2 text-xs font-medium transition-all duration-150 ${
               isActive
-                ? "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 shadow-sm"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent"
+                ? "bg-emerald-500/10 text-emerald-400"
+                : "text-slate-500 hover:bg-slate-800/50 hover:text-slate-300"
             }`}>
-            {tab.name}
+            <tab.icon className='h-3.5 w-3.5 shrink-0' />
+            <span className='hidden lg:inline'>{tab.name}</span>
             {isActive && (
-              <span className='absolute lg:left-0 lg:top-3 lg:bottom-3 lg:w-1 lg:h-auto lg:rounded-r-full bottom-1 left-4 right-4 h-0.5 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/50' />
+              <span className='absolute right-2 top-1/2 hidden h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-emerald-400 lg:inline' />
             )}
           </Link>
         );

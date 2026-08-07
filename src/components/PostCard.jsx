@@ -31,7 +31,7 @@ export default function PostCard({ post, currentUserId }) {
       return (
         <div
           onClick={() => setIsFullScreen(true)}
-          className='relative w-full max-w-[240px] aspect-video cursor-pointer group rounded-xl overflow-hidden border border-slate-700 bg-black shadow-lg hover:ring-2 hover:ring-emerald-500/50 transition-all'>
+          className='relative w-full max-w-60 aspect-video cursor-pointer group rounded-xl overflow-hidden border border-slate-700 bg-black shadow-lg hover:ring-2 hover:ring-emerald-500/50 transition-all'>
           {/* Video preview with muted/no-controls for the thumbnail */}
           <video src={post.mediaUrl} className='w-full h-full object-cover' />
 
@@ -127,33 +127,38 @@ export default function PostCard({ post, currentUserId }) {
   };
 
   return (
-    <article className=' flex flex-col justify-between rounded-2xl bg-slate-900/40 backdrop-blur-md border-2 border-slate-900 p-4 shadow-xl hover:border-slate-800/80 transition-all group selection:bg-emerald-500/10 selection:text-emerald-400'>
-      <div className='space-y-3'>
-        <div className='flex items-center justify-between text-xs text-slate-500 font-medium font-mono'>
-          <span>By @{post.authorName || "anonymous"}</span>
-          {cardDate && <span>{cardDate}</span>}
+    <article className='card-primary flex flex-col justify-between rounded-3xl p-5 shadow-2xl transition-transform duration-200 hover:-translate-y-1 group selection:bg-emerald-500/10 selection:text-emerald-400'>
+      <div className='space-y-4'>
+        <div className='flex items-start justify-between gap-4 text-xs font-mono text-slate-400'>
+          <div className='space-y-1'>
+            <span className='block text-slate-400'>
+              By @{post.authorName || "anonymous"}
+            </span>
+            {cardDate && <span className='text-slate-500'>{cardDate}</span>}
+          </div>
+          <span className='status-pill bg-slate-950/80 text-emerald-300 border border-emerald-500/15'>
+            {post.category || "Update"}
+          </span>
         </div>
 
-        <h3 className='text-lg font-bold text-slate-100 group-hover:text-emerald-400 transition-colors line-clamp-2 tracking-tight'>
+        <h3 className='text-xl font-semibold text-white group-hover:text-emerald-400 transition-colors tracking-tight line-clamp-2'>
           {post.title}
         </h3>
 
-        {/* Media Thumbnail Section */}
         {renderMedia(post)}
 
-        <p className='text-sm text-slate-400 line-clamp-4 leading-relaxed'>
+        <p className='text-sm text-slate-300 leading-relaxed line-clamp-3'>
           {post.content}
         </p>
       </div>
 
-      {/* --- FOOTER CONTROLS --- */}
-      <div className='pt-4 mt-5 border-t border-slate-900/60 flex flex-col justify-between gap-4'>
-        <div className='flex items-center justify-between gap-4 text-xs font-mono font-bold select-none'>
+      <div className='mt-5 pt-5 border-t border-slate-800/70 space-y-4'>
+        <div className='flex flex-wrap items-center gap-3'>
           <button
             onClick={handleLikeClick}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all ${optimisticLikeState.liked ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" : "bg-slate-950/40 border-slate-900/60 text-slate-500 hover:text-slate-300"}`}>
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold transition-all ${optimisticLikeState.liked ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30" : "bg-slate-950/70 text-slate-300 border border-slate-800/70 hover:bg-slate-900"}`}>
             <svg
-              className={`w-4 h-4 ${optimisticLikeState.liked ? "fill-emerald-400 stroke-none" : "fill-none stroke-current"}`}
+              className={`w-4 h-4 ${optimisticLikeState.liked ? "fill-emerald-400" : "fill-none stroke-current"}`}
               viewBox='0 0 24 24'
               strokeWidth='2'>
               <path
@@ -164,50 +169,36 @@ export default function PostCard({ post, currentUserId }) {
             </svg>
             <span>{optimisticLikeState.count}</span>
           </button>
+
           <Link
             href={`/posts/show/${post.id}`}
-            className='flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-950/40 border border-slate-900/60 text-slate-500 hover:text-slate-300 transition-all'>
-            <svg
-              className='w-4 h-4'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='2'
-              stroke='currentColor'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
-              />
-            </svg>
-            <span>{post.commentsCount || 0}</span>
+            className='inline-flex items-center gap-2 rounded-full bg-slate-950/80 border border-slate-800/70 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-900 transition-all'>
+            <span>{post.commentsCount || 0} comments</span>
           </Link>
         </div>
 
-        <div className='flex items-center gap-4 justify-between shrink-0'>
+        <div className='flex items-center justify-between gap-4'>
           <Link
             href={`/posts/show/${post.id}`}
-            className='text-xs font-extrabold uppercase tracking-wider text-emerald-400 hover:text-emerald-300 transition-colors'>
-            Read Pulse &rarr;
+            className='text-xs font-semibold uppercase tracking-widest text-emerald-300 hover:text-emerald-200 transition-colors'>
+            View details →
           </Link>
           {path === "/dashboard" && mounted && (
-            <div className='inline-flex items-center pl-4 border-l border-slate-800/80'>
+            <div className='flex items-center gap-3'>
               {isEditable ? (
                 <Link
                   href={`/posts/edit/${post.id}`}
-                  className='text-xs font-mono font-bold uppercase tracking-wider text-amber-500 hover:text-amber-400 transition-colors'>
+                  className='text-xs font-semibold uppercase tracking-widest text-amber-400 hover:text-amber-300 transition-colors'>
                   Edit
                 </Link>
               ) : (
-                <span className='text-xs text-slate-600 cursor-not-allowed italic font-mono select-none'>
+                <span className='text-xs text-slate-500 italic uppercase tracking-widest'>
                   Locked
                 </span>
               )}
               <button
-                onClick={() => {
-                  setShowDeleteModal(true);
-                  console.log(post);
-                }}
-                className='text-xs font-mono font-bold uppercase tracking-wider text-red-500 hover:text-red-400 transition-colors ml-4 cursor-pointer'>
+                onClick={() => setShowDeleteModal(true)}
+                className='text-xs font-semibold uppercase tracking-widest text-rose-400 hover:text-rose-300 transition-colors'>
                 Delete
               </button>
             </div>
@@ -217,12 +208,12 @@ export default function PostCard({ post, currentUserId }) {
 
       {isFullScreen && (
         <div
-          className='fixed inset-0 z-[100] flex items-center justify-center bg-black/98 backdrop-blur-xl p-0'
+          className='fixed inset-0 z-100 flex items-center justify-center bg-black/98 backdrop-blur-xl p-0'
           onClick={() => setIsFullScreen(false)}>
           {/* Close button - Top Right */}
           <button
             onClick={() => setIsFullScreen(false)}
-            className='absolute top-6 right-6 z-[101] text-white/70 hover:text-white p-2 bg-white/10 rounded-full'>
+            className='absolute top-6 right-6 z-101 text-white/70 hover:text-white p-2 bg-white/10 rounded-full'>
             ✕
           </button>
 

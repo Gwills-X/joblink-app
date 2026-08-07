@@ -1,27 +1,26 @@
 import BackLink from "@/components/BackLink";
+import { Target, Cpu, Globe } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <main className='max-w-3xl mx-auto py-16 px-6 sm:px-8 selection:bg-emerald-500/20 selection:text-emerald-400'>
+    <main className='mx-auto max-w-3xl py-12 px-4'>
       <BackLink />
 
-      <div className='mt-8 space-y-8'>
-        {/* Header Section */}
+      <div className='mt-6 space-y-8'>
         <div>
-          <span className='text-emerald-400 font-mono text-xs font-bold tracking-widest uppercase mb-3 block'>
+          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Our Mission
           </span>
-          <h1 className='text-4xl sm:text-5xl font-bold text-white tracking-tight'>
+          <h1 className='mt-2 text-3xl font-semibold tracking-tight text-slate-100'>
             About <span className='text-emerald-400'>JobLink</span>
           </h1>
         </div>
 
-        {/* Content Card */}
-        <div className='bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-8 sm:p-10 shadow-xl space-y-6 text-slate-400 leading-relaxed text-sm sm:text-base'>
+        <div className='space-y-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 text-sm leading-relaxed text-slate-400'>
           <p>
-            JobLink is a modern professional career platform engineered to
-            bridge the gap between top-tier talent and world-class opportunities
-            across the tech industry and beyond.
+            JobLink is a professional career platform engineered to bridge the
+            gap between top-tier technical talent and world-class opportunities
+            across the global tech industry.
           </p>
           <p>
             Our goal is to provide a secure, structured environment where
@@ -31,14 +30,30 @@ export default function AboutPage() {
             presence strengthens our collective talent network.
           </p>
 
-          {/* Footer / Credits */}
-          <div className='pt-6 mt-6 border-t border-slate-800/80'>
-            <p className='text-xs font-mono text-slate-500 uppercase tracking-wider mb-2'>
+          <div className='grid gap-3 pt-4 sm:grid-cols-3'>
+            {[
+              { icon: Target, label: "Purpose-Driven" },
+              { icon: Cpu, label: "Tech-First" },
+              { icon: Globe, label: "Global Reach" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className='flex items-center gap-2.5 rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5'>
+                <item.icon className='h-3.5 w-3.5 text-emerald-400' />
+                <span className='font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className='border-t border-slate-800 pt-5'>
+            <span className='block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-600'>
               Platform Architecture
-            </p>
-            <p className='text-slate-300 font-medium'>
+            </span>
+            <p className='mt-2 text-sm text-slate-300'>
               Independently designed, engineered, and managed by{" "}
-              <span className='text-emerald-400 font-bold'>
+              <span className='font-semibold text-emerald-400'>
                 GW-TECK SOLUTIONS
               </span>
               .
