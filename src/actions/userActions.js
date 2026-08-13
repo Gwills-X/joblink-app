@@ -10,6 +10,8 @@ export async function updateProfileAction(prevState, formData) {
   if (!user) return { errors: { server: ["Unauthorized"] } };
 
   const currentPassword = formData.get("currentPassword");
+  console.log("Current Password:", currentPassword); // Debugging line
+  console.log("User Password Hash:", user); // Debugging line
 
   // Verify password using 'bcrypt'
   const isValid = await compare(currentPassword, user.password);

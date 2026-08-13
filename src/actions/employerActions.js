@@ -13,32 +13,111 @@ import { employerEngine } from "@/services/employerEngine";
  */
 export async function createJobAction(prevState, formData) {
   const user = await getAuthUser();
-  if (!user) return redirect("/login");
 
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const company_id = formData.get("company_id") || null; // Optional company selection
-  const employment_type = formData.get("employment_type") || "FULL_TIME";
-  const listing_type = formData.get("listing_type") || "JOB";
-  const location = formData.get("location") || null;
-  const salary = formData.get("salary") || null;
-  const deadline = formData.get("deadline") || null;
-  const max_applicants = Number(formData.get("max_applicants") || 50);
+  if (!user) {
+    return redirect("/login");
+  }
 
-  // Validation adjusted: company_id is no longer strictly required for personal/collaboration posts
-  if (!title || !description) {
+  if (!formData) {
     return {
       success: false,
       errors: {
-        server: ["Job title and description are required."],
+        server: ["No form data was received."],
       },
     };
   }
 
+  const title = String(formData.get("title") || "").trim();
+  const description = String(formData.get("description") || "").trim();
+
+  const company_id = String(formData.get("company_id") || "").trim() || null;
+
+  const employment_type = String(
+    formData.get("employment_type") || "FULL_TIME",
+  ).trim();
+
+  const listing_type = String(formData.get("listing_type") || "JOB").trim();
+
+  const location = String(formData.get("location") || "").trim() || null;
+  const salary = String(formData.get("salary") || "").trim() || null;
+
+  const deadline = String(formData.get("deadline") || "").trim() || null;
+
+  const max_applicants = Number(formData.get("max_applicants") || 50);
+
+  // -----------------------------------------
+  // BASIC VALIDATION
+  // -----------------------------------------
+
+  if (!title || !description) {
+    return {
+      success: false,
+      errors: {
+        server: ["Title and description are required."],
+      },
+    };
+  }
+
+  // -----------------------------------------
+  // LISTING TYPE VALIDATION
+  // -----------------------------------------
+
+  const allowedTypes = ["JOB", "COLLABORATION", "PROJECT", "PARTNERSHIP"];
+
+  if (!allowedTypes.includes(listing_type)) {
+    return {
+      success: false,
+      errors: {
+        server: ["Invalid listing category selected."],
+      },
+    };
+  }
+
+  // -----------------------------------------
+  // COMPANY / INDEPENDENT RULES
+  // -----------------------------------------
+
+  // Independent users can create:
+  // JOB
+  // COLLABORATION
+  // PROJECT
+  //
+  // Company users can create:
+  // JOB
+  // PROJECT
+  // PARTNERSHIP
+
+  if (!company_id && listing_type === "PARTNERSHIP") {
+    return {
+      success: false,
+      errors: {
+        server: [
+          "Partnership listings must be created on behalf of a company.",
+        ],
+      },
+    };
+  }
+
+  if (company_id && listing_type === "COLLABORATION") {
+    return {
+      success: false,
+      errors: {
+        server: [
+          "Collaboration listings are for independent/community posts. Use Partnership for company opportunities.",
+        ],
+      },
+    };
+  }
+
+  // -----------------------------------------
+  // COMPANY OWNERSHIP VALIDATION
+  // -----------------------------------------
+
+  const employerId = String(user.userId || user.id);
+
   try {
-    const employerId = String(user.userId || user.id);
     const jobPayload = {
-      company_id: company_id !== "" ? company_id : null,
+      company_id,
       title,
       description,
       employment_type,
@@ -49,21 +128,23 @@ export async function createJobAction(prevState, formData) {
       max_applicants,
     };
 
-    // Aligned to engine signature: createJobListing(employerId, jobData)
     await employerEngine.createJobListing(employerId, jobPayload);
   } catch (error) {
     console.error("Employer Database Processing Error:", error);
+
     return {
       success: false,
-      errors: { server: ["Something went wrong creating the listing."] },
+      errors: {
+        server: [error.message || "Something went wrong creating the listing."],
+      },
     };
   }
 
   revalidatePath("/dashboard/employer");
   revalidatePath("/jobs");
+
   redirect("/dashboard/employer");
 }
-
 /**
  * Server Action to handle modifying job listings.
  */

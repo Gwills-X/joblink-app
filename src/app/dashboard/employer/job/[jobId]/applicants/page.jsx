@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { reviewApplicationAction } from "@/actions/employerActions";
 import { employerEngine } from "@/services/employerEngine";
-import { ArrowLeft, Mail, FileText } from "lucide-react";
+import { ArrowLeft, Mail, FileText, ExternalLink } from "lucide-react";
 
 export default async function EmployerApplicantReviewPage({ params }) {
   const authUser = await getAuthUser();
@@ -63,92 +63,48 @@ export default async function EmployerApplicantReviewPage({ params }) {
           applications.map((app) => (
             <div
               key={app.id}
-              className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-5 space-y-5 transition-all duration-150 hover:border-slate-700'>
-              <div className='flex items-start justify-between gap-4'>
+              className='rounded-xl border border-slate-800 bg-slate-900/60 p-6 space-y-4 transition-all duration-150 hover:border-slate-700'>
+              <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-4'>
                 <div>
-                  <h2 className='text-sm font-semibold text-slate-200'>
+                  <h2 className='text-sm font-semibold text-slate-100'>
                     {app.candidate_name || "Candidate"}
                   </h2>
-                  <div className='mt-1 flex items-center gap-1.5 text-xs text-slate-500'>
-                    <Mail className='h-3 w-3' />
+                  <div className='mt-1 flex items-center gap-1.5 text-xs text-slate-400'>
+                    <Mail className='h-3 w-3 text-emerald-400' />
                     <span className='font-mono text-[11px] tracking-wide'>
                       {app.candidate_email}
                     </span>
                   </div>
                 </div>
-                <span
-                  className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${
-                    app.status === "PENDING"
-                      ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
-                      : app.status === "ACCEPTED"
-                        ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                        : "border-rose-500/20 bg-rose-500/10 text-rose-400"
-                  }`}>
+
+                <div className='flex items-center gap-3'>
                   <span
-                    className={`mr-1.5 inline-block h-1.5 w-1.5 rounded-full ${
+                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${
                       app.status === "PENDING"
-                        ? "bg-amber-400"
+                        ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
                         : app.status === "ACCEPTED"
-                          ? "bg-emerald-400"
-                          : "bg-rose-400"
-                    }`}
-                  />
-                  {app.status}
-                </span>
-              </div>
+                          ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                          : "border-rose-500/20 bg-rose-500/10 text-rose-400"
+                    }`}>
+                    {app.status}
+                  </span>
 
-              <div className='space-y-2'>
-                <span className='block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
-                  Cover Letter
-                </span>
-                <div className='rounded-md border border-slate-800 bg-slate-950 p-4 text-xs leading-relaxed text-slate-400'>
-                  {app.cover_letter}
+                  <Link
+                    href={`/dashboard/employer/applications/${app.id}`}
+                    className='inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-3 py-1.5 rounded-lg text-xs transition-all'>
+                    View Full Details & Chat{" "}
+                    <ExternalLink className='h-3 w-3' />
+                  </Link>
                 </div>
               </div>
 
-              <form
-                action={reviewApplicationAction}
-                className='space-y-4 border-t border-slate-800 pt-4'>
-                <input type='hidden' name='application_id' value={app.id} />
-                <input type='hidden' name='job_id' value={jobId} />
-
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <div>
-                    <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
-                      Update Status
-                    </label>
-                    <select
-                      name='status'
-                      defaultValue={app.status}
-                      className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'>
-                      <option value='PENDING'>PENDING</option>
-                      <option value='ACCEPTED'>ACCEPTED</option>
-                      <option value='REJECTED'>REJECTED</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
-                      Feedback
-                    </label>
-                    <input
-                      type='text'
-                      name='employer_feedback'
-                      defaultValue={app.employer_feedback || ""}
-                      placeholder='Optional notes for candidate...'
-                      className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-                    />
-                  </div>
-                </div>
-
-                <div className='flex justify-end'>
-                  <button
-                    type='submit'
-                    className='rounded-lg bg-emerald-500 px-4 py-2 text-xs font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
-                    Save Decision
-                  </button>
-                </div>
-              </form>
+              {/* Snippet preview */}
+              <div className='rounded-lg border border-slate-800 bg-slate-950 p-3 text-xs text-slate-400 line-clamp-2'>
+                <span className='font-mono text-[10px] text-slate-500 uppercase block mb-1'>
+                  Cover Letter Preview:
+                </span>
+                {app.cover_letter}
+              </div>
             </div>
           ))
         )}

@@ -5,8 +5,13 @@ import * as mysqlCompanyRepo from "./mysql/companyService";
 const DRIVER_TOKEN = process.env.DATABASE_PROVIDER || "MYSQL";
 
 export const employerEngine = {
+  // ==========================================
+  // JOBS
+  // ==========================================
+
   createJobListing: async (employerId, jobData) => {
     const generatedJobId = crypto.randomUUID();
+
     const unifiedPayload = {
       ...jobData,
       id: generatedJobId,
@@ -26,23 +31,20 @@ export const employerEngine = {
     return await mysqlRepo.fetchMysqlEmployerJobs(userId);
   },
 
-  getCompanyProfile: async (userId) => {
-    return await mysqlRepo.fetchCompanyProfile(userId);
-  },
-
-  saveCompanyProfile: async (userId, profileData) => {
-    return await mysqlCompanyRepo.insertOrUpdateMysqlCompany(
-      userId,
-      profileData,
-    );
-  },
-
   updateJobListing: async (postId, userId, updateData) => {
     return await mysqlRepo.modifyMysqlJob(postId, userId, updateData);
   },
 
   deleteJobListing: async (postId, userId) => {
     return await mysqlRepo.removeMysqlJob(postId, userId);
+  },
+
+  getJobById: async (jobId, employerId) => {
+    return await mysqlRepo.fetchMysqlJobById(jobId, employerId);
+  },
+
+  getJobApplicants: async (jobId) => {
+    return await mysqlRepo.fetchMysqlJobApplicants(jobId);
   },
 
   reviewApplication: async (
@@ -59,13 +61,38 @@ export const employerEngine = {
     );
   },
 
-  getJobById: async (jobId, employerId) => {
-    return await mysqlRepo.fetchMysqlJobById(jobId, employerId);
+  // ==========================================
+  // COMPANIES
+  // ==========================================
+
+  createCompany: async (ownerId, companyData) => {
+    return await mysqlCompanyRepo.createMysqlCompany(ownerId, companyData);
   },
 
-  getJobApplicants: async (jobId) => {
-    return await mysqlRepo.fetchMysqlJobApplicants(jobId);
+  updateCompany: async (companyId, ownerId, companyData) => {
+    return await mysqlCompanyRepo.updateMysqlCompany(
+      companyId,
+      ownerId,
+      companyData,
+    );
   },
+
+  getCompanyProfile: async (userId) => {
+    return await mysqlCompanyRepo.fetchMysqlCompanyByOwner(userId);
+  },
+
+  getCompanies: async (ownerId) => {
+    return await mysqlCompanyRepo.fetchMysqlCompaniesByOwner(ownerId);
+  },
+
+  getCompanyById: async (companyId, ownerId) => {
+    return await mysqlCompanyRepo.fetchMysqlCompanyById(companyId, ownerId);
+  },
+
+  deleteCompany: async (companyId, ownerId) => {
+    return await mysqlCompanyRepo.deleteMysqlCompany(companyId, ownerId);
+  },
+
   hasCompanyProfile: async (userId) => {
     return await mysqlRepo.checkCompanyProfileExists(userId);
   },

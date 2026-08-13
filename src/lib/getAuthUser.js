@@ -36,6 +36,7 @@ export default async function getAuthUser() {
       userId: String(dbUsers[0].id),
       name: dbUsers[0].name,
       email: dbUsers[0].email,
+      password: dbUsers[0].password,
       role: dbUsers[0].role || "guest",
       location: dbUsers[0].location,
       github_handle: dbUsers[0].github_handle,

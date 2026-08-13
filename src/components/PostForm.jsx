@@ -8,13 +8,13 @@ import { deleteMediaAction } from "@/actions/storageActions";
 
 export default function BlogPostForm({ handler }) {
   // Initialize state action for form submission tracking
-const initialState = {
-  title: "",
-  content: "",
-  errors: {},
-};
+  const initialState = {
+    title: "",
+    content: "",
+    errors: {},
+  };
 
-const [state, formAction, isPending] = useActionState(handler, initialState);
+  const [state, formAction, isPending] = useActionState(handler, initialState);
 
   // State elements to capture Cloudinary upload metadata
   const [mediaUrl, setMediaUrl] = useState(null);
@@ -54,14 +54,6 @@ const [state, formAction, isPending] = useActionState(handler, initialState);
 
       setUploading(false);
       publicIdRef.current = uploadedPublicId; // Track in Ref for reliable deletion
-
-      // 🌟 Explicit console log to verify capture
-      console.log("File uploaded successfully. Metadata captured:", {
-        url,
-        publicId: uploadedPublicId,
-        uploadedType,
-        uploadedFormat,
-      });
     } catch (error) {
       console.error("Error uploading file to Cloudinary pipeline:", error);
       setUploading(false);
@@ -92,26 +84,8 @@ const [state, formAction, isPending] = useActionState(handler, initialState);
     formData.set("fileType", fileType || "none");
     formData.set("format", format || "");
 
-    console.log("Transmitting complete payload state metadata package:", {
-      title: formData.get("title"),
-      publicId: formData.get("publicId"), // 🌟 Log verification
-      mediaUrl: formData.get("mediaUrl"),
-      fileType: formData.get("fileType"),
-      format: formData.get("format"),
-    });
-
     formData.set("category", category || "General");
     formData.set("type", "POST");
-
-    console.log("Transmitting complete payload state metadata package:", {
-      title: formData.get("title"),
-      publicId: formData.get("publicId"), // 🌟 Log verification
-      mediaUrl: formData.get("mediaUrl"),
-      fileType: formData.get("fileType"),
-      format: formData.get("format"),
-      category: formData.get("category"),
-      type: formData.get("type"),
-    });
 
     await formAction(formData);
   };

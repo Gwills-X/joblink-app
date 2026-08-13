@@ -1,123 +1,81 @@
 import getAuthUser from "@/lib/getAuthUser";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { saveCompanyProfileAction } from "@/actions/companyActions";
+import { Plus, ArrowLeft } from "lucide-react";
+
 import { employerEngine } from "@/services/employerEngine";
+import CompanyCard from "../components/CompanyCard";
 
 export const dynamic = "force-dynamic";
 
-export default async function EmployerCompanyProfilePage() {
+export default async function EmployerCompaniesPage() {
   const authUser = await getAuthUser();
-  if (!authUser) redirect("/login");
+
+  if (!authUser) {
+    redirect("/login");
+  }
 
   const ownerId = String(authUser.userId || authUser.id);
-  const companyProfile = await employerEngine.getCompanyProfile(ownerId);
+
+  let companies = [];
+
+  try {
+    companies = await employerEngine.getCompanies(ownerId);
+  } catch (error) {
+    console.error("Companies Fetch Error:", error);
+  }
 
   return (
-    <div className='mx-auto max-w-3xl py-8 px-4'>
-      <div className='flex flex-col gap-4 border-b border-slate-800 pb-5 sm:flex-row sm:items-center sm:justify-between'>
+    <div className='mx-auto max-w-6xl px-4 py-8'>
+      <div className='mb-6 flex flex-col gap-4 border-b border-slate-800 pb-5 sm:flex-row sm:items-center sm:justify-between'>
         <div>
-          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
-            Employer Onboarding
-          </span>
-          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
-            {companyProfile ? "Edit Company Profile" : "Create Company Profile"}
+          <Link
+            href='/dashboard/employer'
+            className='mb-3 inline-flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300'>
+            <ArrowLeft className='h-3.5 w-3.5' />
+            Employer Dashboard
+          </Link>
+
+          <h1 className='text-xl font-semibold text-slate-100'>
+            My <span className='text-emerald-400'>Companies</span>
           </h1>
+
           <p className='mt-1 text-xs text-slate-500'>
-            Add your company details so you can post jobs and be visible to
-            candidates.
+            Manage all companies connected to your employer account.
           </p>
         </div>
 
         <Link
-          href='/dashboard/employer'
-          className='inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-4 py-2 text-xs font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800/50 hover:text-slate-100'>
-          Back to Employer Dashboard
+          href='/dashboard/employer/company/new'
+          className='inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-xs font-medium text-slate-950 hover:bg-emerald-400'>
+          <Plus className='h-3.5 w-3.5' />
+          Add Company
         </Link>
       </div>
 
-      <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8'>
-        <form action={saveCompanyProfileAction} className='space-y-6'>
-          <div>
-            <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-              Company Name <span className='text-rose-400'>*</span>
-            </label>
-            <input
-              name='name'
-              defaultValue={companyProfile?.name || ""}
-              required
-              placeholder='Acme Talent Labs'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-            />
-          </div>
+      {companies.length === 0 ? (
+        <div className='rounded-xl border border-dashed border-slate-800 px-6 py-16 text-center'>
+          <h2 className='text-sm font-medium text-slate-300'>
+            No companies yet
+          </h2>
 
-          <div>
-            <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-              Tagline
-            </label>
-            <input
-              name='tagline'
-              defaultValue={companyProfile?.tagline || ""}
-              placeholder='Hiring the next generation of product builders'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-            />
-          </div>
+          <p className='mt-1 text-xs text-slate-500'>
+            Create your first company profile.
+          </p>
 
-          <div>
-            <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-              Description
-            </label>
-            <textarea
-              name='description'
-              defaultValue={companyProfile?.description || ""}
-              rows={5}
-              placeholder='Describe your company, your mission, and the type of talent you want to hire.'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-            />
-          </div>
-
-          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-            <div>
-              <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-                Website URL
-              </label>
-              <input
-                type='url'
-                name='website_url'
-                defaultValue={companyProfile?.website_url || ""}
-                placeholder='https://example.com'
-                className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-              />
-            </div>
-
-            <div>
-              <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-                Logo URL
-              </label>
-              <input
-                type='url'
-                name='logo_url'
-                defaultValue={companyProfile?.logo_url || ""}
-                placeholder='https://example.com/logo.png'
-                className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
-              />
-            </div>
-          </div>
-
-          <div className='flex items-center justify-end gap-3 border-t border-slate-800 pt-5'>
-            <Link
-              href='/dashboard/employer'
-              className='rounded-lg px-4 py-2 text-xs font-medium text-slate-400 transition-colors duration-150 hover:text-slate-200'>
-              Cancel
-            </Link>
-            <button
-              type='submit'
-              className='rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
-              Save Company Profile
-            </button>
-          </div>
-        </form>
-      </div>
+          <Link
+            href='/dashboard/employer/company/new'
+            className='mt-5 inline-flex rounded-lg bg-emerald-500 px-4 py-2 text-xs font-medium text-slate-950 hover:bg-emerald-400'>
+            Create Company
+          </Link>
+        </div>
+      ) : (
+        <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
+          {companies.map((company) => (
+            <CompanyCard key={company.id} company={company} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

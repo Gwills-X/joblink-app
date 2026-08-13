@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import useActionState from "@/lib/hooks/useActionState";
 import { createJobAction } from "@/actions/employerActions";
 
@@ -14,24 +15,46 @@ export default function CreateJobForm({ companies = [] }) {
     initialState,
   );
 
+  const [companyId, setCompanyId] = useState("");
+  const [listingType, setListingType] = useState("JOB");
+
+  const isCompanyPost = Boolean(companyId);
+
+  // ---------------------------------------------------------
+  // Keep listing type valid when company selection changes
+  // ---------------------------------------------------------
+
+  useEffect(() => {
+    if (isCompanyPost && listingType === "COLLABORATION") {
+      setListingType("JOB");
+    }
+
+    if (!isCompanyPost && listingType === "PARTNERSHIP") {
+      setListingType("JOB");
+    }
+  }, [isCompanyPost, listingType]);
+
   return (
-    <div className='mx-auto max-w-3xl rounded-xl border border-(--color-border) bg-(--color-surface) p-6 sm:p-8'>
-      <div className='mb-6 border-b border-slate-800 pb-4'>
-        <h2 className='text-lg font-semibold tracking-tight text-slate-100'>
+    <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8'>
+      <div className='mb-6'>
+        <h2 className='text-lg font-semibold text-slate-100'>
           Post a New Listing
         </h2>
-        <p className='mt-1 text-xs text-slate-500'>
-          Publish an independent job, freelance gig, or collaborative project.
+
+        <p className='mt-1 text-sm text-slate-500'>
+          Create a job, project, collaboration, or partnership opportunity.
         </p>
       </div>
 
       {state?.errors?.server && (
         <div className='mb-5 rounded-lg border border-rose-500/20 bg-rose-500/10 p-3 text-xs text-rose-400'>
-          {state.errors.server}
+          {state.errors.server[0]}
         </div>
       )}
 
       <form action={formAction} className='space-y-5'>
+        {/* COMPANY */}
+
         <div>
           <label
             htmlFor='company_id'
@@ -39,38 +62,59 @@ export default function CreateJobForm({ companies = [] }) {
             Associated Company{" "}
             <span className='text-slate-600 normal-case'>(Optional)</span>
           </label>
+
           <select
             id='company_id'
             name='company_id'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'>
+            value={companyId}
+            onChange={(e) => setCompanyId(e.target.value)}
+            disabled={isPending}
+            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'>
             <option value=''>Personal / Independent Post</option>
-            {companies.map((company) => (
-              <option key={company.id} value={company.id}>
+
+            {companies.map((company, index) => (
+              <option key={company.id || index} value={company.id}>
                 {company.name}
               </option>
             ))}
           </select>
+
           <p className='mt-1.5 text-xs text-slate-600'>
-            Leave unselected to publish directly as an independent or community
-            collaboration post.
+            {isCompanyPost
+              ? "This listing will be published on behalf of the selected company."
+              : "This listing will be published as your independent post."}
           </p>
         </div>
+
+        {/* TITLE */}
 
         <div>
           <label
             htmlFor='title'
             className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
-            Job / Project Title <span className='text-rose-400'>*</span>
+            Listing Title <span className='text-rose-400'>*</span>
           </label>
+
           <input
             type='text'
             id='title'
             name='title'
             required
-            placeholder='e.g. Senior Full-Stack Developer'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+            disabled={isPending}
+            placeholder={
+              listingType === "JOB"
+                ? "e.g. Senior Full-Stack Developer"
+                : listingType === "PROJECT"
+                  ? "e.g. E-commerce Website Development"
+                  : listingType === "COLLABORATION"
+                    ? "e.g. Looking for a UI/UX Designer to Collaborate"
+                    : "e.g. Partnership Opportunity for Digital Product"
+            }
+            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
           />
         </div>
+
+        {/* EMPLOYMENT + LISTING TYPE */}
 
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <div>
@@ -79,11 +123,13 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Employment Type
             </label>
+
             <select
               id='employment_type'
               name='employment_type'
               defaultValue='FULL_TIME'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'>
+              disabled={isPending}
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'>
               <option value='FULL_TIME'>Full Time</option>
               <option value='PART_TIME'>Part Time</option>
               <option value='CONTRACT'>Contract</option>
@@ -98,16 +144,36 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Listing Category
             </label>
+
             <select
               id='listing_type'
               name='listing_type'
-              defaultValue='JOB'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'>
+              value={listingType}
+              onChange={(e) => setListingType(e.target.value)}
+              disabled={isPending}
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'>
               <option value='JOB'>Job Opening</option>
-              <option value='PROJECT'>Collaboration Project</option>
+
+              <option value='PROJECT'>Project</option>
+
+              {!isCompanyPost && (
+                <option value='COLLABORATION'>Collaboration</option>
+              )}
+
+              {isCompanyPost && (
+                <option value='PARTNERSHIP'>Partnership</option>
+              )}
             </select>
+
+            <p className='mt-1.5 text-xs text-slate-600'>
+              {isCompanyPost
+                ? "Companies can create jobs, projects, and partnerships."
+                : "Independent posts can be jobs, projects, or collaborations."}
+            </p>
           </div>
         </div>
+
+        {/* LOCATION + SALARY */}
 
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <div>
@@ -116,12 +182,14 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Location
             </label>
+
             <input
               type='text'
               id='location'
               name='location'
+              disabled={isPending}
               placeholder='e.g. Remote, Lagos, Nigeria'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
             />
           </div>
 
@@ -131,15 +199,19 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Compensation Range
             </label>
+
             <input
               type='text'
               id='salary'
               name='salary'
-              placeholder='e.g. $80k - $100k'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              disabled={isPending}
+              placeholder='e.g. ₦300,000 - ₦500,000'
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
             />
           </div>
         </div>
+
+        {/* DEADLINE + MAX APPLICANTS */}
 
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <div>
@@ -148,11 +220,13 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Application Deadline
             </label>
+
             <input
               type='date'
               id='deadline'
               name='deadline'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              disabled={isPending}
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
             />
           </div>
 
@@ -162,16 +236,20 @@ export default function CreateJobForm({ companies = [] }) {
               className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
               Max Applicants
             </label>
+
             <input
               type='number'
               id='max_applicants'
               name='max_applicants'
               defaultValue={50}
               min={1}
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              disabled={isPending}
+              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
             />
           </div>
         </div>
+
+        {/* DESCRIPTION */}
 
         <div>
           <label
@@ -179,15 +257,27 @@ export default function CreateJobForm({ companies = [] }) {
             className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
             Description & Requirements <span className='text-rose-400'>*</span>
           </label>
+
           <textarea
             id='description'
             name='description'
             required
             rows={6}
-            placeholder='Provide a thorough overview of the role, responsibilities, tech stack, and qualifications...'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+            disabled={isPending}
+            placeholder={
+              listingType === "JOB"
+                ? "Describe the role, responsibilities, qualifications, and requirements..."
+                : listingType === "PROJECT"
+                  ? "Describe the project, what needs to be done, required skills, and expected outcome..."
+                  : listingType === "COLLABORATION"
+                    ? "Describe what you are working on, what skills you need, and how you would like to collaborate..."
+                    : "Describe the partnership opportunity, what your company brings, what you are looking for, and how both parties can work together..."
+            }
+            className='block w-full resize-y rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
           />
         </div>
+
+        {/* SUBMIT */}
 
         <div className='flex items-center justify-end gap-3 border-t border-slate-800 pt-5'>
           <button

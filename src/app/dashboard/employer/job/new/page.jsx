@@ -15,8 +15,12 @@ export default async function EmployerNewJobPage() {
 
   try {
     const companyProfile = await employerEngine.getCompanyProfile(userId);
+    console.log("Employer New Job Company Profile:", companyProfile);
     if (companyProfile) {
-      companies = [{ id: companyProfile.id, name: companyProfile.name }];
+      companies = Array.isArray(companyProfile)
+        ? companyProfile
+        : [companyProfile];
+      console.log("Employer New Job Companies:", companies);
     }
   } catch (error) {
     console.error("Employer New Job Company Fetch Error:", error);

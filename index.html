@@ -1,0 +1,4038 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="MKH Data Plug - Your complete digital solutions platform for data bundles, airtime top-ups, result checking, cable subscriptions, and bill payments. Fast, reliable services with 24/7 support." />
+
+    <title>MKH Data Plug - Complete Digital Solutions for Modern Nigeria</title>
+
+    <meta
+      name="keywords"
+      content="MKH Data Plug, data bundles, airtime top-up, result checker, cable subscription, electricity bills, Nigeria, digital services, WAEC, NECO, NABTEB, DSTV, GOTV" />
+
+    <meta name="author" content="MKH Data Plug" />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="MKH Data Plug - Complete Digital Solutions for Modern Nigeria" />
+    <meta
+      property="og:description"
+      content="Experience fast, secure, and reliable digital services with MKH Data Plug. Data bundles, airtime, result checking, cable TV, and bill payments with 24/7 support." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mkhdataplug.com" />
+    <meta
+      property="og:image"
+      content="https://mkhdataplug.com/assets/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="MKH Data Plug - Complete Digital Solutions for Modern Nigeria" />
+    <meta
+      name="twitter:description"
+      content="Fast, reliable digital platform for data bundles, airtime, result checking, and bill payments in Nigeria." />
+    <meta
+      name="twitter:image"
+      content="https://mkhdataplug.com/assets/twitter-image.jpg" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#31C0D2" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="./app.js" defer></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2563EB",
+              secondary: "#7C3AED",
+              accent: "#10B981",
+              dark: "#1E293B",
+              light: "#F8FAFC",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="icon" href="./assets/logo.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      body {
+        scroll-behavior: smooth;
+        font-family: "Inter", sans-serif;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #2563eb 0%,
+          #7c3aed 50%,
+          #10b981 100%
+        );
+      }
+
+      .section-padding {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+
+      .card-shadow {
+        box-shadow:
+          0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% {
+          transform: translate(0, 0px);
+        }
+        50% {
+          transform: translate(0, 15px);
+        }
+        100% {
+          transform: translate(0, -0px);
+        }
+      }
+
+      .sticky-nav {
+        transition: all 0.3s ease;
+      }
+
+      .sticky-nav.scrolled {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .animate-float {
+        animation: float 5s ease-in-out infinite;
+      }
+      .footer-link {
+        @apply text-slate-600 hover:text-emerald-600 transition flex items-center gap-2 group;
+      }
+      .footer-link::before {
+        content: "→";
+        @apply opacity-0 text-emerald-500 text-xs transition-all translate-x-[-6px] group-hover:opacity-100 group-hover:translate-x-0;
+      }
+      .footer-bottom-link {
+        @apply hover:text-emerald-600 transition;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes float-delayed {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      @keyframes float-slow {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      .animate-float-delayed {
+        animation: float-delayed 4s ease-in-out infinite;
+      }
+      .animate-float-slow {
+        animation: float-slow 5s ease-in-out infinite;
+      }
+      @keyframes shine {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(12deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(12deg);
+        }
+      }
+
+      @keyframes gradient {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .animate-shine {
+        animation: shine 2s ease-in-out infinite;
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-gradient {
+        background-size: 200% auto;
+        animation: gradient 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <header
+      id="mainHeader"
+      class="sticky top-0 z-50 w-full backdrop-blur-xl bg-gradient-to-r from-[#070b2a]/90 via-[#0b113a]/90 to-[#070b2a]/90 dark:from-black/90 dark:to-black/90 border-b border-white/10 shadow-lg">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex items-center justify-between h-16 md:h-20">
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-2 md:gap-3 group">
+            <div class="relative">
+              <img
+                src="assets/logo.png"
+                class="h-8 w-16 md:h-10 md:w-20 rounded-lg md:rounded-xl transition-transform group-hover:scale-105"
+                alt="MKH Data Plug Logo" />
+              <div
+                class="absolute inset-0 rounded-lg md:rounded-xl bg-gradient-to-br from-[rgb(240,194,67)]/20 to-transparent"></div>
+            </div>
+            <span
+              class="text-white font-bold text-lg md:text-xl tracking-tight">
+              <span class="text-[rgb(240,194,67)]">MKH</span> DATA PLUG
+            </span>
+          </a>
+
+          <!-- Desktop Nav -->
+          <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+            <li>
+              <a
+                href="#home"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#about"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#services"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                Solutions
+              </a>
+            </li>
+            <li>
+              <a
+                href="#why-choose-us"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                Benefits
+              </a>
+            </li>
+            <li>
+              <a
+                href="#testimonials"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                Reviews
+              </a>
+            </li>
+            <li>
+              <a
+                href="#faq"
+                class="text-white/90 hover:text-[rgb(240,194,67)] transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[rgb(240,194,67)] after:transition-all after:duration-300 hover:after:w-full">
+                Support
+              </a>
+            </li>
+          </ul>
+
+          <!-- Right Section -->
+          <div class="flex items-center gap-2 md:gap-4">
+            <!-- Theme Toggle -->
+            <button
+              id="themeToggle"
+              class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-300 hover:rotate-12 active:scale-95 flex items-center justify-center"
+              aria-label="Toggle theme">
+              <span id="sunIcon" class="text-base md:text-lg">☀️</span>
+              <span id="moonIcon" class="hidden text-base md:text-lg">🌙</span>
+            </button>
+
+            <!-- CTA Button -->
+            <a
+              href="https://app.mkhdataplug.com/register"
+              class="hidden md:inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-gradient-to-r from-[rgb(240,194,67)] to-[rgb(240,194,67)]/90 text-black font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[rgb(240,194,67)]/20 active:scale-95">
+              <span>Get Started</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button
+              id="menuToggle"
+              class="lg:hidden text-white w-10 h-10 rounded-lg hover:bg-white/10 transition-colors duration-200 flex items-center justify-center"
+              aria-label="Toggle menu">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  id="menuIcon"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"></path>
+                <path
+                  id="closeIcon"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="lg:hidden fixed inset-x-0 top-16 mt-0.5 bg-gradient-to-b from-[#0b113a]/95 to-[#070b2a]/95 dark:from-black/95 dark:to-black/95 backdrop-blur-xl border-b border-white/10 shadow-2xl transform transition-all duration-300 ease-out origin-top scale-y-0 opacity-0">
+          <div class="container mx-auto px-4 py-6">
+            <ul class="flex flex-col space-y-4">
+              <li>
+                <a
+                  href="#home"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>Home</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>About</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>Solutions</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#why-choose-us"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>Benefits</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>Reviews</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  class="flex items-center justify-between text-white/90 hover:text-[rgb(240,194,67)] py-3 px-4 rounded-lg hover:bg-white/5 transition-all duration-200 group">
+                  <span>Support</span>
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </li>
+              <li class="pt-4 border-t border-white/10">
+                <a
+                  href="https://app.mkhdataplug.com/register"
+                  class="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[rgb(240,194,67)] to-[rgb(240,194,67)]/90 text-black font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
+                  Get Started
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HERO SECTION (PREMIUM FIN-TECH DESIGN) -->
+    <section
+      id="home"
+      class="relative min-h-screen pt-20 md:pt-32 pb-16 md:pb-24 overflow-hidden bg-gradient-to-br from-[#070b2a] via-[#0b113a] to-[#050822] text-white">
+      <!-- Animated Gradient Orbs -->
+      <div class="absolute inset-0 overflow-hidden">
+        <!-- Primary Glow -->
+        <div
+          class="absolute -top-40 -left-20 w-[800px] h-[800px] md:w-[1200px] md:h-[1200px] bg-gradient-to-r from-indigo-500/30 via-purple-500/20 to-transparent rounded-full blur-[120px] animate-pulse"
+          style="animation-duration: 4s"></div>
+
+        <!-- Gold Accent Glow -->
+        <div
+          class="absolute -bottom-40 -right-20 w-[600px] h-[600px] md:w-[900px] md:h-[900px] bg-gradient-to-r from-transparent via-[rgb(240,194,67)]/10 to-[rgb(240,194,67)]/5 rounded-full blur-[100px]"></div>
+
+        <!-- Moving Particles -->
+        <div class="absolute inset-0 opacity-20">
+          <div
+            class="absolute top-1/4 left-1/4 w-2 h-2 bg-[rgb(240,194,67)] rounded-full animate-bounce"></div>
+          <div
+            class="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-ping"
+            style="animation-duration: 3s"></div>
+          <div
+            class="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce"
+            style="animation-duration: 2s"></div>
+        </div>
+      </div>
+
+      <!-- Grid Pattern -->
+      <div
+        class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] bg-[size:80px_80px]"></div>
+
+      <!-- Geometric Shapes -->
+      <div
+        class="absolute top-1/4 right-10 w-40 h-40 border border-white/5 rounded-full"></div>
+      <div
+        class="absolute bottom-1/4 left-10 w-60 h-60 border border-white/5 rounded-lg rotate-45"></div>
+
+      <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div
+            class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+            <!-- Left Column - Text Content -->
+            <div class="lg:w-1/2 text-center lg:text-left">
+              <!-- Trust Badge -->
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-gradient-to-r from-white/10 to-white/5 border border-white/10 backdrop-blur-xl mb-6 md:mb-8 group hover:border-white/20 transition-all duration-300">
+                <div class="relative flex items-center gap-2">
+                  <div class="flex -space-x-2">
+                    <div
+                      class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                    <div
+                      class="w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-teal-500"></div>
+                    <div
+                      class="w-6 h-6 rounded-full bg-gradient-to-r from-[rgb(240,194,67)] to-yellow-500"></div>
+                  </div>
+                  <span class="text-sm md:text-base font-medium text-white/90">
+                    Trusted by 10,000+ Businesses
+                  </span>
+                </div>
+              </div>
+
+              <!-- Headline -->
+              <h1
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <span class="block">
+                  <span class="relative">
+                    Data Solutions
+                    <div
+                      class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[rgb(240,194,67)]/50 to-transparent"></div>
+                  </span>
+                </span>
+                <span class="block mt-2 md:mt-4">
+                  <span
+                    class="bg-gradient-to-r from-[rgb(240,194,67)] via-yellow-300 to-[rgb(240,194,67)] bg-clip-text text-transparent animate-gradient">
+                    Redefined
+                  </span>
+                </span>
+              </h1>
+
+              <!-- Subtext -->
+              <p
+                class="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl">
+                Premium data connectivity, instant digital services, and
+                seamless transactions — engineered for businesses that demand
+                reliability and scale.
+              </p>
+
+              <!-- CTA Buttons -->
+              <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://app.mkhdataplug.com/register"
+                  class="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-[rgb(240,194,67)] to-yellow-400 text-black font-semibold hover:shadow-2xl hover:shadow-[rgb(240,194,67)]/30 transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden">
+                  <div
+                    class="relative z-10 flex items-center justify-center gap-2">
+                    <span>Start Today</span>
+                    <svg
+                      class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-[rgb(240,194,67)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+
+                <a
+                  href="https://app.mkhdataplug.com"
+                  class="group px-8 py-4 rounded-xl border-2 border-white/20 text-white font-semibold hover:border-white/40 hover:bg-white/5 transition-all duration-300 hover:scale-105 active:scale-95">
+                  <div class="flex items-center justify-center gap-2">
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <span>Access Dashboard</span>
+                  </div>
+                </a>
+              </div>
+
+              <!-- App Download Buttons -->
+              <div class="mt-10 md:mt-14">
+                <p class="text-white/60 mb-4 text-sm font-medium tracking-wide">
+                  Download our mobile app
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <!-- iOS App Store Button -->
+                  <a
+                    id="appstoreBtn"
+                    href="#"
+                    class="group relative bg-gradient-to-br from-gray-900 to-black border border-white/10 hover:border-white/20 rounded-xl px-5 py-4 hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden">
+                    <div class="relative z-10 flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                        <svg
+                          class="w-6 h-6"
+                          fill="currentColor"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M14.94 5.19A4.38 4.38 0 0 0 16 2a4.44 4.44 0 0 0-3 1.52 4.17 4.17 0 0 0-1 3.09 3.69 3.69 0 0 0 2.94-1.42zm2.52 7.44a4.51 4.51 0 0 1 2.16-3.81 4.66 4.66 0 0 0-3.66-2c-1.56-.16-3 .91-3.83.91s-2-.89-3.3-.87a4.92 4.92 0 0 0-4.14 2.53C2.93 12.45 4.24 17 6 19.47c.8 1.21 1.8 2.58 3.12 2.53s1.75-.76 3.28-.76 2 .76 3.3.73 2.22-1.24 3.06-2.45a11 11 0 0 0 1.38-2.85 4.41 4.41 0 0 1-2.68-4.04z" />
+                        </svg>
+                      </div>
+                      <div class="text-left">
+                        <div class="text-xs opacity-80">Download on the</div>
+                        <div class="text-base font-semibold">App Store</div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  </a>
+
+                  <!-- Android Google Play Button -->
+                  <a
+                    id="playstoreBtn"
+                    href="#"
+                    class="group relative bg-gradient-to-br from-[#4285F4] via-[#34A853] to-[#FBBC05] hover:from-[#3367D6] hover:via-[#2E8B57] hover:to-[#F4B400] rounded-xl px-5 py-4 hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden">
+                    <div class="relative z-10 flex items-center gap-3">
+                      <div
+                        class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm">
+                        <svg
+                          class="w-6 h-6"
+                          fill="currentColor"
+                          viewBox="0 0 24 24">
+                          <path
+                            d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34-.27.59-.69.59-1.16 0-.47-.25-.89-.59-1.16L17.28 9.1l-2.27 2.27 2.27 2.27 2.81-2.23M6.05 2.66l10.76 6.44-2.27 2.27-8.49-8.49z" />
+                        </svg>
+                      </div>
+                      <div class="text-left">
+                        <div class="text-xs opacity-90">Get it on</div>
+                        <div class="text-base font-semibold">Google Play</div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column - Visual Element -->
+            <div class="lg:w-1/2 relative">
+              <!-- Hero Visual Container -->
+              <div class="relative">
+                <!-- Main Card Visual -->
+                <div class="relative mx-auto max-w-lg">
+                  <!-- Glassmorphism Dashboard Preview -->
+                  <div
+                    class="relative rounded-2xl p-6 md:p-8 bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden">
+                    <!-- Shine Effect -->
+                    <div
+                      class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] animate-shine"></div>
+
+                    <!-- Dashboard Content -->
+                    <div class="relative">
+                      <!-- Header -->
+                      <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="w-8 h-8 rounded-lg bg-gradient-to-r from-[rgb(240,194,67)] to-yellow-400"></div>
+                          <div>
+                            <div
+                              class="w-20 h-2 bg-white/30 rounded-full"></div>
+                            <div
+                              class="w-16 h-2 bg-white/20 rounded-full mt-1"></div>
+                          </div>
+                        </div>
+                        <div class="w-6 h-6 rounded-full bg-white/20"></div>
+                      </div>
+
+                      <!-- Stats Grid -->
+                      <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div
+                          class="bg-white/5 rounded-xl p-4 border border-white/5">
+                          <div
+                            class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-2">
+                            <div class="w-6 h-6 bg-blue-400 rounded-full"></div>
+                          </div>
+                          <div
+                            class="w-16 h-2 bg-white/30 rounded-full mb-2"></div>
+                          <div class="w-12 h-2 bg-white/20 rounded-full"></div>
+                        </div>
+                        <div
+                          class="bg-white/5 rounded-xl p-4 border border-white/5">
+                          <div
+                            class="w-12 h-12 rounded-lg bg-gradient-to-r from-green-500/20 to-teal-500/20 flex items-center justify-center mb-2">
+                            <div
+                              class="w-6 h-6 bg-green-400 rounded-full"></div>
+                          </div>
+                          <div
+                            class="w-20 h-2 bg-white/30 rounded-full mb-2"></div>
+                          <div class="w-10 h-2 bg-white/20 rounded-full"></div>
+                        </div>
+                      </div>
+
+                      <!-- Chart -->
+                      <div
+                        class="bg-white/5 rounded-xl p-4 border border-white/5">
+                        <div class="flex items-center justify-between mb-4">
+                          <div class="w-24 h-2 bg-white/30 rounded-full"></div>
+                          <div
+                            class="w-8 h-6 rounded-lg bg-gradient-to-r from-[rgb(240,194,67)]/20 to-yellow-400/20 flex items-center justify-center">
+                            <div
+                              class="w-4 h-1 bg-[rgb(240,194,67)] rounded-full"></div>
+                          </div>
+                        </div>
+                        <div class="h-32 flex items-end gap-1">
+                          <div
+                            class="flex-1 bg-gradient-to-t from-blue-500/30 to-blue-500/10 rounded-t"></div>
+                          <div
+                            class="flex-1 bg-gradient-to-t from-purple-500/30 to-purple-500/10 rounded-t"></div>
+                          <div
+                            class="flex-1 bg-gradient-to-t from-[rgb(240,194,67)]/30 to-[rgb(240,194,67)]/10 rounded-t"></div>
+                          <div
+                            class="flex-1 bg-gradient-to-t from-green-500/30 to-green-500/10 rounded-t"></div>
+                          <div
+                            class="flex-1 bg-gradient-to-t from-blue-500/30 to-blue-500/10 rounded-t"></div>
+                          <div
+                            class="flex-1 bg-gradient-to-t from-purple-500/30 to-purple-500/10 rounded-t"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Elements -->
+                  <div
+                    class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-[rgb(240,194,67)]/20 to-yellow-400/10 border border-white/10 backdrop-blur-xl rotate-12 animate-float"></div>
+                  <div
+                    class="absolute -bottom-6 -left-6 w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/10 border border-white/10 backdrop-blur-xl -rotate-6 animate-float"
+                    style="animation-delay: 1s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-sm text-white/50">Scroll</span>
+          <div
+            class="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
+            <div
+              class="w-1 h-3 bg-white/50 rounded-full mt-2 animate-bounce"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION - DIGITAL SERVICES PROVIDER -->
+    <section
+      id="about"
+      class="py-32 bg-gradient-to-b from-white to-amber-50/30 dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 z-0">
+        <!-- Service Icons Pattern -->
+        <div
+          class="absolute top-10 left-10 opacity-5 dark:opacity-[0.02] text-amber-400 dark:text-amber-500">
+          <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M2 12l10-9 10 9v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8z" />
+          </svg>
+        </div>
+        <div
+          class="absolute top-32 right-20 opacity-5 dark:opacity-[0.02] text-amber-400 dark:text-amber-500">
+          <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <div
+          class="absolute bottom-20 left-1/4 opacity-5 dark:opacity-[0.02] text-amber-400 dark:text-amber-500">
+          <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" />
+          </svg>
+        </div>
+
+        <!-- Gradient Orbs -->
+        <div
+          class="absolute -top-20 -right-20 w-64 h-64 bg-amber-400/10 dark:bg-amber-500/5 rounded-full blur-3xl"></div>
+        <div
+          class="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-500/10 dark:bg-amber-500/3 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-20">
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              YOUR TRUSTED DIGITAL SERVICES PARTNER
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            One Platform,
+            <span class="text-amber-500 dark:text-amber-400"
+              >Endless Possibilities</span
+            >
+          </h2>
+
+          <p
+            class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            From instant airtime top-up to exam result checking, cable
+            subscriptions, and utility bills payment — MKH Data Plug simplifies
+            your digital life with reliability and speed.
+          </p>
+        </div>
+
+        <!-- Main Content - Services Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+          <!-- Left Side - Services Visualization -->
+          <div class="relative">
+            <!-- Main Card -->
+            <div
+              class="relative bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl p-8 transform hover:scale-[1.02] transition-all duration-500">
+              <!-- Card Header -->
+              <div class="flex items-center gap-4 mb-8">
+                <div
+                  class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+                  Our Services Ecosystem
+                </h3>
+              </div>
+
+              <!-- Services Grid -->
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Data Bundles -->
+                <div
+                  class="group p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50 border border-amber-100 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center">
+                      <svg
+                        class="w-5 h-5 text-amber-500 dark:text-amber-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                    </div>
+                    <span class="font-semibold text-gray-800 dark:text-gray-200"
+                      >Data Bundles</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Airtime -->
+                <div
+                  class="group p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50 border border-amber-100 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center">
+                      <svg
+                        class="w-5 h-5 text-amber-500 dark:text-amber-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <span class="font-semibold text-gray-800 dark:text-gray-200"
+                      >Airtime Top-up</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Result Checker -->
+                <div
+                  class="group p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50 border border-amber-100 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center">
+                      <svg
+                        class="w-5 h-5 text-amber-500 dark:text-amber-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <span class="font-semibold text-gray-800 dark:text-gray-200"
+                      >WAEC/NECO Results</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Cable TV -->
+                <div
+                  class="group p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50 border border-amber-100 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center">
+                      <svg
+                        class="w-5 h-5 text-amber-500 dark:text-amber-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <span class="font-semibold text-gray-800 dark:text-gray-200"
+                      >DSTV/GOTV</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats Bar -->
+              <div
+                class="mt-8 p-4 rounded-xl bg-gradient-to-r from-amber-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 border border-amber-100 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    Transactions Processed Today
+                  </div>
+                  <div
+                    class="text-lg font-bold text-amber-600 dark:text-amber-400">
+                    15,482
+                  </div>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-3">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-3/4"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Stat Card -->
+            <div
+              class="absolute -right-6 -bottom-6 bg-gradient-to-br from-white to-amber-50 dark:from-gray-900 dark:to-gray-800 border border-amber-200 dark:border-amber-800/50 rounded-2xl shadow-xl p-6 w-56 transform hover:scale-105 transition-all duration-300">
+              <div class="text-center">
+                <div
+                  class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                  98.7%
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 font-medium">
+                  Success Rate
+                </div>
+                <div class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                  Instant Delivery Guaranteed
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side - About Content -->
+          <div class="space-y-8">
+            <!-- About Card -->
+            <div
+              class="p-8 rounded-3xl bg-gradient-to-br from-amber-50/50 to-white/50 dark:from-gray-900/50 dark:to-gray-800/50 border border-amber-100 dark:border-gray-800">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Who We Are
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+                MKH Data Plug is Nigeria's leading digital services platform,
+                providing instant access to essential services that keep you
+                connected and powered. From students checking exam results to
+                families enjoying uninterrupted entertainment, we're here to
+                simplify your digital life.
+              </p>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                With over 10,000 satisfied customers and counting, we've built
+                our reputation on reliability, speed, and exceptional customer
+                service — delivering what you need, when you need it.
+              </p>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                class="p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Instant Delivery
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Services activated within seconds of payment
+                </p>
+              </div>
+
+              <div
+                class="p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Secure Payments
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Bank-grade security for all transactions
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Breakdown -->
+        <div class="mb-24">
+          <h3
+            class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
+            Our Core Services
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Data Services -->
+            <div
+              class="group p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center mb-6">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Data Bundles
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                All networks covered with instant activation and best prices
+                guaranteed.
+              </p>
+              <div
+                class="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                MTN • GLO • AIRTEL • 9MOBILE
+              </div>
+            </div>
+
+            <!-- Airtime Services -->
+            <div
+              class="group p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center mb-6">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Airtime Top-up
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Recharge any Nigerian number instantly, available 24/7 with
+                bonus offers.
+              </p>
+              <div
+                class="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                INSTANT • NATIONWIDE • BONUSES
+              </div>
+            </div>
+
+            <!-- Exam Results -->
+            <div
+              class="group p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center mb-6">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Exam Results
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Check WAEC, NECO, NABTEB results instantly with official
+                verification.
+              </p>
+              <div
+                class="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                WAEC • NECO • NABTEB
+              </div>
+            </div>
+
+            <!-- Utilities -->
+            <div
+              class="group p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 flex items-center justify-center mb-6">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                Utilities & TV
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Pay electricity bills, subscribe to DSTV, GOTV, and more in
+                seconds.
+              </p>
+              <div
+                class="text-sm text-amber-600 dark:text-amber-400 font-medium">
+                ELECTRICITY • DSTV • GOTV • STARTIMES
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="relative group">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-amber-400 to-amber-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
+
+          <div
+            class="relative bg-gradient-to-r from-white to-amber-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl border border-amber-200 dark:border-amber-800/30 p-12">
+            <div class="text-center">
+              <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Ready to Simplify Your Digital Life?
+              </h3>
+              <p
+                class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Join thousands of Nigerians who trust MKH Data Plug for instant,
+                reliable digital services. No hidden fees, no delays — just
+                straightforward service.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="https://app.mkhdataplug.com/register"
+                  class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-semibold rounded-xl hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                  </svg>
+                  <span>Create Free Account</span>
+                </a>
+                <a
+                  href="https://app.mkhdataplug.com"
+                  class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  <span>Go to Dashboard</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION - DIGITAL SERVICES MARKETPLACE -->
+    <section
+      id="services"
+      class="py-32 bg-gradient-to-b from-amber-50/20 to-white dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 z-0">
+        <!-- Grid Pattern -->
+        <div
+          class="absolute inset-0 opacity-5 dark:opacity-[0.03]"
+          style="
+            background-image: radial-gradient(
+              circle at 2px 2px,
+              currentColor 1.5px,
+              transparent 0
+            );
+            background-size: 30px 30px;
+          "></div>
+
+        <!-- Animated Orbs -->
+        <div
+          class="absolute top-1/4 left-1/4 w-48 h-48 bg-amber-400/5 dark:bg-amber-500/3 rounded-full blur-3xl animate-pulse"></div>
+        <div
+          class="absolute bottom-1/3 right-1/3 w-64 h-64 bg-amber-500/5 dark:bg-amber-500/2 rounded-full blur-3xl"></div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-20 right-20">
+          <div
+            class="w-3 h-3 bg-amber-400/30 dark:bg-amber-500/20 rounded-full animate-bounce"
+            style="animation-delay: 0.2s"></div>
+        </div>
+        <div class="absolute bottom-40 left-32">
+          <div
+            class="w-2 h-2 bg-amber-400/20 dark:bg-amber-500/15 rounded-full animate-bounce"
+            style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-20">
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              COMPREHENSIVE DIGITAL SOLUTIONS
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            Everything You Need,
+            <span class="text-amber-500 dark:text-amber-400">In One Place</span>
+          </h2>
+
+          <p
+            class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            From staying connected to managing daily essentials, our platform
+            brings all your digital services together with unmatched convenience
+            and reliability.
+          </p>
+        </div>
+
+        <!-- Services Categories -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          <!-- Left Column - Telecom Services -->
+          <div class="space-y-8">
+            <!-- Category Header -->
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+                  Telecom Services
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">
+                  Stay connected with instant access
+                </p>
+              </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Data Bundles -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Data Bundles
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  High-speed internet for all networks
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >MTN</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >GLO</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >AIRTEL</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >9MOBILE</span
+                  >
+                </div>
+              </div>
+
+              <!-- Airtime -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Airtime Top-up
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Instant recharge for calls & SMS
+                </p>
+                <div
+                  class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  24/7 • Bonus Offers • All Networks
+                </div>
+              </div>
+
+              <!-- SME Data -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Business Data
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Corporate plans for businesses
+                </p>
+                <div
+                  class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  Volume Discounts • Custom Plans • API Access
+                </div>
+              </div>
+
+              <!-- International Airtime -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Int'l Top-up
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Recharge family abroad instantly
+                </p>
+                <div
+                  class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  Global Coverage • Best Rates • Instant
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column - Education & Entertainment -->
+          <div class="space-y-8">
+            <!-- Category Header -->
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-500/10 dark:from-amber-400/10 dark:to-amber-500/5 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M12 14l9-5-9-5-9 5 9 5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+                  Education & Entertainment
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400">
+                  Essential services for daily life
+                </p>
+              </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Exam Results -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Exam Results
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Official result checking service
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >WAEC</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >NECO</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >NABTEB</span
+                  >
+                </div>
+              </div>
+
+              <!-- Cable TV -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Cable TV
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Entertainment subscriptions
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >DSTV</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >GOTV</span
+                  >
+                  <span
+                    class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
+                    >STARTIMES</span
+                  >
+                </div>
+              </div>
+
+              <!-- Electricity Bills -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Electricity Bills
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Prepaid & postpaid electricity
+                </p>
+                <div
+                  class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  Instant Tokens • All Discos • SMS Alert
+                </div>
+              </div>
+
+              <!-- Education PINs -->
+              <div
+                class="group p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-xl transition-all duration-300">
+                <div
+                  class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-4">
+                  <svg
+                    class="w-6 h-6 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">
+                  Education PINs
+                </h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Exam registration & scratch cards
+                </p>
+                <div
+                  class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  WAEC • NECO • JAMB • NABTEB
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Comparison -->
+        <div class="mb-24">
+          <h3
+            class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
+            Why Choose Our Services
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Speed Card -->
+            <div
+              class="text-center p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800">
+              <div
+                class="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mx-auto mb-6">
+                <svg
+                  class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Lightning Fast
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Most services are delivered within seconds of payment
+                confirmation. No waiting, no delays.
+              </p>
+              <div class="text-amber-600 dark:text-amber-400 font-bold">
+                Instant Delivery
+              </div>
+            </div>
+
+            <!-- Reliability Card -->
+            <div
+              class="text-center p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800">
+              <div
+                class="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mx-auto mb-6">
+                <svg
+                  class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                99.8% Uptime
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Our systems are built for reliability, ensuring services are
+                available when you need them most.
+              </p>
+              <div class="text-amber-600 dark:text-amber-400 font-bold">
+                Always Available
+              </div>
+            </div>
+
+            <!-- Support Card -->
+            <div
+              class="text-center p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800">
+              <div
+                class="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mx-auto mb-6">
+                <svg
+                  class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                24/7 Support
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Our support team is always ready to help with any issues or
+                questions you may have.
+              </p>
+              <div class="text-amber-600 dark:text-amber-400 font-bold">
+                Always Here to Help
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk Services -->
+        <div class="relative group mb-24">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-amber-400/10 to-amber-500/10 rounded-3xl blur"></div>
+
+          <div
+            class="relative bg-gradient-to-r from-white to-amber-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl border border-amber-200 dark:border-amber-800/30 p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3
+                  class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                  Bulk & Business Services
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">
+                  Special rates and dedicated support for businesses, schools,
+                  and organizations requiring bulk purchases of data, airtime,
+                  or other services.
+                </p>
+                <div class="space-y-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                    <span class="text-gray-700 dark:text-gray-300"
+                      >Volume discounts for bulk purchases</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                    <span class="text-gray-700 dark:text-gray-300"
+                      >Dedicated account manager</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                    <span class="text-gray-700 dark:text-gray-300"
+                      >Custom API integration available</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-3 mt-8 px-6 py-3 border-2 border-amber-400 dark:border-amber-500 text-amber-600 dark:text-amber-400 font-semibold rounded-xl hover:bg-amber-50 dark:hover:bg-gray-800 transition-all duration-300">
+                  <span>Request Business Rates</span>
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div
+                  class="text-center p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-800 dark:to-gray-900 border border-amber-100 dark:border-amber-800/30">
+                  <div
+                    class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    50%+
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    Business Savings
+                  </div>
+                </div>
+                <div
+                  class="text-center p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-800 dark:to-gray-900 border border-amber-100 dark:border-amber-800/30">
+                  <div
+                    class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    500+
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    Business Clients
+                  </div>
+                </div>
+                <div
+                  class="text-center p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-800 dark:to-gray-900 border border-amber-100 dark:border-amber-800/30">
+                  <div
+                    class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    24h
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    API Response
+                  </div>
+                </div>
+                <div
+                  class="text-center p-6 rounded-2xl bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-800 dark:to-gray-900 border border-amber-100 dark:border-amber-800/30">
+                  <div
+                    class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    98%
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    Satisfaction
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center">
+          <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            Ready to Get Started?
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Join thousands of satisfied customers who trust MKH Data Plug for
+            all their digital service needs.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://app.mkhdataplug.com/register"
+              class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-semibold rounded-xl hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+              </svg>
+              <span>Create Free Account</span>
+            </a>
+            <a
+              href="https://app.mkhdataplug.com"
+              class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              <span>Access Dashboard</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE MKH DATA PLUG SECTION -->
+    <section
+      id="why-choose-us"
+      class="py-32 bg-gradient-to-b from-white to-amber-50/20 dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <!-- Geometric Pattern -->
+        <div
+          class="absolute inset-0 opacity-5 dark:opacity-[0.03]"
+          style="
+            background-image:
+              linear-gradient(
+                90deg,
+                transparent 49%,
+                currentColor 49%,
+                currentColor 51%,
+                transparent 51%
+              ),
+              linear-gradient(
+                0deg,
+                transparent 49%,
+                currentColor 49%,
+                currentColor 51%,
+                transparent 51%
+              );
+            background-size: 50px 50px;
+          "></div>
+
+        <!-- Gradient Orbs -->
+        <div
+          class="absolute top-1/4 -left-20 w-80 h-80 bg-amber-400/10 dark:bg-amber-500/5 rounded-full blur-3xl"></div>
+        <div
+          class="absolute bottom-1/3 -right-20 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/3 rounded-full blur-3xl"></div>
+
+        <!-- Animated Dots -->
+        <div class="absolute top-20 right-20">
+          <div
+            class="w-3 h-3 bg-amber-400 dark:bg-amber-500 rounded-full animate-bounce"
+            style="animation-delay: 0.2s"></div>
+        </div>
+        <div class="absolute bottom-40 left-32">
+          <div
+            class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-bounce"
+            style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Header Section -->
+        <div class="text-center max-w-4xl mx-auto mb-20">
+          <!-- Badge -->
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              THE SMART CHOICE FOR DIGITAL SERVICES
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            Why Thousands Trust
+            <span class="text-amber-500 dark:text-amber-400"
+              >MKH Data Plug</span
+            >
+          </h2>
+
+          <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            We don't just provide services – we deliver peace of mind with every
+            transaction. Experience the difference that reliability, speed, and
+            customer care make.
+          </p>
+        </div>
+
+        <!-- Main Feature Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+          <!-- Speed Advantage -->
+          <div class="group relative">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-amber-400/20 to-amber-500/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+            <div
+              class="relative bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 h-full">
+              <div class="text-center mb-8">
+                <div
+                  class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 rounded-2xl flex items-center justify-center">
+                  <svg
+                    class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  Instant Delivery
+                </h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Data Bundles</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >~3s</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-[95%]"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Airtime Top-up</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >~1s</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-full"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >TV Subscriptions</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >~5s</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-[90%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reliability -->
+          <div class="group relative">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-amber-400/20 to-amber-500/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+            <div
+              class="relative bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 h-full">
+              <div class="text-center mb-8">
+                <div
+                  class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 rounded-2xl flex items-center justify-center">
+                  <svg
+                    class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  Guaranteed Reliability
+                </h3>
+              </div>
+
+              <div class="space-y-6">
+                <div class="text-center">
+                  <div
+                    class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                    99.8%
+                  </div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">
+                    Service Uptime
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div
+                    class="text-center p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50">
+                    <div
+                      class="text-xl font-bold text-amber-600 dark:text-amber-400">
+                      98.7%
+                    </div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                      Success Rate
+                    </div>
+                  </div>
+                  <div
+                    class="text-center p-4 rounded-xl bg-amber-50/50 dark:bg-gray-800/50">
+                    <div
+                      class="text-xl font-bold text-amber-600 dark:text-amber-400">
+                      10min
+                    </div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                      Issue Resolution
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Value -->
+          <div class="group relative">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-amber-400/20 to-amber-500/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+            <div
+              class="relative bg-white dark:bg-gray-900 rounded-3xl p-8 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 h-full">
+              <div class="text-center mb-8">
+                <div
+                  class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 rounded-2xl flex items-center justify-center">
+                  <svg
+                    class="w-10 h-10 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  Best Value Guarantee
+                </h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Data Plans</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >5-15%</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-[85%]"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >TV Subscriptions</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >3-10%</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-[80%]"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Airtime Rates</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >Best Price</span
+                  >
+                </div>
+                <div
+                  class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2">
+                  <div
+                    class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full w-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <!-- Security -->
+          <div
+            class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+            <div
+              class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg
+                class="w-8 h-8 text-amber-500 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Bank-Grade Security
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Every transaction protected with 256-bit encryption. Your payment
+              information is never stored.
+            </p>
+            <div class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+              SSL SECURE • PCI COMPLIANT
+            </div>
+          </div>
+
+          <!-- Support -->
+          <div
+            class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+            <div
+              class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg
+                class="w-8 h-8 text-amber-500 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              24/7 Customer Support
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Real human support available around the clock via chat, phone, and
+              email.
+            </p>
+            <div class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+              WHATSAPP • PHONE • EMAIL
+            </div>
+          </div>
+
+          <!-- Coverage -->
+          <div
+            class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+            <div
+              class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg
+                class="w-8 h-8 text-amber-500 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Nationwide Coverage
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Services available across all 36 states + FCT. No location
+              restrictions.
+            </p>
+            <div class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+              ALL NETWORKS • ALL STATES
+            </div>
+          </div>
+
+          <!-- Ease of Use -->
+          <div
+            class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300 hover:-translate-y-2">
+            <div
+              class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg
+                class="w-8 h-8 text-amber-500 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Simple & Intuitive
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Easy-to-use dashboard and mobile app. Complete transactions in 3
+              clicks.
+            </p>
+            <div class="text-xs text-amber-600 dark:text-amber-400 font-medium">
+              WEB • MOBILE APP • QUICK PAY
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Satisfaction -->
+        <div class="relative group mb-20">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-amber-400/10 to-amber-500/10 rounded-3xl blur"></div>
+
+          <div
+            class="relative bg-gradient-to-r from-white to-amber-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl border border-amber-200 dark:border-amber-800/30 p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+              <div>
+                <h3
+                  class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                  Customer Satisfaction
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">
+                  Join thousands of satisfied customers who have made MKH Data
+                  Plug their preferred choice for digital services.
+                </p>
+                <a
+                  href="#testimonials"
+                  class="inline-flex items-center gap-3 px-6 py-3 border-2 border-amber-400 dark:border-amber-500 text-amber-600 dark:text-amber-400 font-semibold rounded-xl hover:bg-amber-50 dark:hover:bg-gray-800 transition-all duration-300">
+                  <span>Read Customer Reviews</span>
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+
+              <div class="lg:col-span-2">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div class="text-center">
+                    <div
+                      class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                      10K+
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      Happy Customers
+                    </div>
+                    <div
+                      class="w-12 h-1 bg-amber-400 dark:bg-amber-500 mx-auto mt-4"></div>
+                  </div>
+                  <div class="text-center">
+                    <div
+                      class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                      98%
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      Satisfaction Rate
+                    </div>
+                    <div
+                      class="w-12 h-1 bg-amber-400 dark:bg-amber-500 mx-auto mt-4"></div>
+                  </div>
+                  <div class="text-center">
+                    <div
+                      class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                      4.9/5
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      Average Rating
+                    </div>
+                    <div
+                      class="w-12 h-1 bg-amber-400 dark:bg-amber-500 mx-auto mt-4"></div>
+                  </div>
+                  <div class="text-center">
+                    <div
+                      class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                      24h
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      Support Response
+                    </div>
+                    <div
+                      class="w-12 h-1 bg-amber-400 dark:bg-amber-500 mx-auto mt-4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="text-center">
+          <div
+            class="inline-flex flex-col sm:flex-row gap-6 items-center justify-center bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 rounded-3xl p-8 border border-amber-200/50 dark:border-amber-800/30">
+            <div class="text-left">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Ready to Experience the Difference?
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                Join our growing community of satisfied customers today.
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://app.mkhdataplug.com/register"
+                class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-semibold rounded-xl hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1">
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+                <span>Create Free Account</span>
+              </a>
+              <a
+                href="#contact"
+                class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                <span>Need Help? Chat Now</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION - CUSTOMER SUCCESS STORIES -->
+    <section
+      id="testimonials"
+      class="py-32 bg-gradient-to-b from-white to-amber-50/30 dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <!-- Quote Pattern -->
+        <div
+          class="absolute top-20 left-20 opacity-5 dark:opacity-[0.02] text-amber-400 dark:text-amber-500">
+          <svg class="w-40 h-40" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+        </div>
+        <div
+          class="absolute bottom-32 right-32 opacity-5 dark:opacity-[0.02] text-amber-400 dark:text-amber-500">
+          <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+        </div>
+
+        <!-- Gradient Orbs -->
+        <div
+          class="absolute -top-32 -left-40 w-[400px] h-[400px] bg-amber-400/10 dark:bg-amber-500/5 blur-3xl rounded-full"></div>
+        <div
+          class="absolute -bottom-20 -right-40 w-[500px] h-[500px] bg-amber-500/10 dark:bg-amber-500/3 blur-3xl rounded-full"></div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-1/3 left-1/4">
+          <div
+            class="w-4 h-4 bg-amber-400/30 dark:bg-amber-500/20 rounded-full animate-bounce"
+            style="animation-delay: 0.2s"></div>
+        </div>
+        <div class="absolute bottom-1/4 right-1/3">
+          <div
+            class="w-3 h-3 bg-amber-400/20 dark:bg-amber-500/15 rounded-full animate-bounce"
+            style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-20">
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              REAL CUSTOMER SUCCESS STORIES
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            Loved by
+            <span class="text-amber-500 dark:text-amber-400">Thousands</span>
+          </h2>
+
+          <p
+            class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Don't just take our word for it. Here's what our customers have to
+            say about their experience with MKH Data Plug.
+          </p>
+        </div>
+
+        <!-- Featured Testimonial -->
+        <div class="relative group mb-20">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-amber-400/20 to-amber-500/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+          <div
+            class="relative bg-gradient-to-br from-amber-400 to-amber-500 rounded-3xl p-10 text-gray-900 shadow-2xl border border-amber-300/50 dark:border-amber-600/30 overflow-hidden">
+            <!-- Background Pattern -->
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
+
+            <div class="relative z-10">
+              <div class="flex flex-col lg:flex-row items-start gap-10">
+                <!-- Customer Info -->
+                <div class="lg:w-1/3">
+                  <div class="flex items-center gap-6 mb-6">
+                    <div
+                      class="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center font-bold text-white text-3xl backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                      AM
+                    </div>
+                    <div>
+                      <h3 class="text-2xl font-bold text-white mb-2">
+                        Ahmad Muhammad
+                      </h3>
+                      <p class="text-amber-100 text-lg">
+                        Digital Content Creator
+                      </p>
+                      <div class="flex items-center gap-2 mt-3">
+                        <div class="flex">
+                          <svg
+                            class="w-5 h-5 text-yellow-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                          <svg
+                            class="w-5 h-5 text-yellow-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                          <svg
+                            class="w-5 h-5 text-yellow-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                          <svg
+                            class="w-5 h-5 text-yellow-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                          <svg
+                            class="w-5 h-5 text-yellow-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        </div>
+                        <span class="text-white font-semibold">5.0 Rating</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-white rounded-full"></div>
+                      <span class="text-amber-100"
+                        >Verified User • 2+ Years</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-white rounded-full"></div>
+                      <span class="text-amber-100">500+ Transactions</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-white rounded-full"></div>
+                      <span class="text-amber-100">All Services User</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial Content -->
+                <div class="lg:w-2/3">
+                  <div class="mb-8">
+                    <svg
+                      class="w-12 h-12 text-white/50 mb-6"
+                      fill="currentColor"
+                      viewBox="0 0 24 24">
+                      <path
+                        d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                    </svg>
+                    <p
+                      class="text-2xl text-white leading-relaxed font-light italic mb-8">
+                      "I've been using MKH Data Plug for over 2 years now, and
+                      it's completely transformed how I manage my digital life.
+                      From instant airtime for my family to reliable data for my
+                      YouTube channel, they've never let me down. The 24/7
+                      customer support actually responds in minutes!"
+                    </p>
+                  </div>
+
+                  <div class="flex flex-wrap gap-4">
+                    <span
+                      class="px-4 py-2 rounded-full bg-white/20 text-white text-sm"
+                      >Data Bundles</span
+                    >
+                    <span
+                      class="px-4 py-2 rounded-full bg-white/20 text-white text-sm"
+                      >Airtime Top-up</span
+                    >
+                    <span
+                      class="px-4 py-2 rounded-full bg-white/20 text-white text-sm"
+                      >DSTV Subscription</span
+                    >
+                    <span
+                      class="px-4 py-2 rounded-full bg-white/20 text-white text-sm"
+                      >Electricity Bills</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <!-- Student Testimonial -->
+          <div
+            class="group p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-2xl transition-all duration-300">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span
+                    class="text-amber-600 dark:text-amber-400 font-bold text-lg"
+                    >FA</span
+                  >
+                </div>
+                <div>
+                  <h4 class="text-gray-900 dark:text-white font-bold text-lg">
+                    Fatima Abdullahi
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    University Student
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-amber-600 dark:text-amber-400 font-semibold"
+                  >4.9</span
+                >
+              </div>
+            </div>
+
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              "As a student, I need to check WAEC results and buy data
+              frequently. MKH Data Plug makes it so easy and affordable. The
+              results come instantly and their data plans are perfect for online
+              classes."
+            </p>
+
+            <div
+              class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-800">
+              <span
+                class="text-amber-600 dark:text-amber-400 text-sm flex items-center gap-2 font-medium">
+                <span
+                  class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></span>
+                Verified Student
+              </span>
+              <span class="text-gray-500 dark:text-gray-500 text-sm"
+                >• WAEC • Data •</span
+              >
+            </div>
+          </div>
+
+          <!-- Business Owner Testimonial -->
+          <div
+            class="group p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-2xl transition-all duration-300">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span
+                    class="text-amber-600 dark:text-amber-400 font-bold text-lg"
+                    >CJ</span
+                  >
+                </div>
+                <div>
+                  <h4 class="text-gray-900 dark:text-white font-bold text-lg">
+                    Chinedu Johnson
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Business Owner
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-amber-600 dark:text-amber-400 font-semibold"
+                  >5.0</span
+                >
+              </div>
+            </div>
+
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              "Running a small business means managing expenses carefully. MKH
+              Data Plug's competitive rates on bulk airtime and data have saved
+              us thousands. Their business dashboard makes managing everything
+              so simple."
+            </p>
+
+            <div
+              class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-800">
+              <span
+                class="text-amber-600 dark:text-amber-400 text-sm flex items-center gap-2 font-medium">
+                <span
+                  class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></span>
+                Bulk Buyer
+              </span>
+              <span class="text-gray-500 dark:text-gray-500 text-sm"
+                >• Business • Savings •</span
+              >
+            </div>
+          </div>
+
+          <!-- Family User Testimonial -->
+          <div
+            class="group p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-2xl transition-all duration-300">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span
+                    class="text-amber-600 dark:text-amber-400 font-bold text-lg"
+                    >MA</span
+                  >
+                </div>
+                <div>
+                  <h4 class="text-gray-900 dark:text-white font-bold text-lg">
+                    Mrs. Adebayo
+                  </h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm">
+                    Household Manager
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20">
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-amber-600 dark:text-amber-400 font-semibold"
+                  >4.8</span
+                >
+              </div>
+            </div>
+
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              "From paying electricity bills to subscribing DSTV for the family,
+              MKH Data Plug has simplified everything. No more queuing or
+              stress. Everything is done from my phone in minutes."
+            </p>
+
+            <div
+              class="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-gray-800">
+              <span
+                class="text-amber-600 dark:text-amber-400 text-sm flex items-center gap-2 font-medium">
+                <span
+                  class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></span>
+                Family User
+              </span>
+              <span class="text-gray-500 dark:text-gray-500 text-sm"
+                >• Bills • TV • Family •</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Metrics -->
+        <div class="relative group mb-20">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-amber-400/10 to-amber-500/10 rounded-3xl blur"></div>
+
+          <div
+            class="relative bg-gradient-to-r from-white to-amber-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl border border-amber-200 dark:border-amber-800/30 p-12">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Trusted by Thousands Across Nigeria
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Join our growing community of satisfied customers who rely on
+                MKH Data Plug for all their digital service needs.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div class="text-center">
+                <div
+                  class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-3">
+                  10K+
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 font-medium">
+                  Happy Customers
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                  and counting
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-3">
+                  98%
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 font-medium">
+                  Satisfaction Rate
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                  based on reviews
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-3">
+                  4.9/5
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 font-medium">
+                  Average Rating
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                  180+ reviews
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-3">
+                  24/7
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 font-medium">
+                  Support Available
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                  always here to help
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="text-center">
+          <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            Ready to Join Our Happy Community?
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Experience the convenience and reliability that thousands of
+            Nigerians already enjoy.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://app.mkhdataplug.com/register"
+              class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-semibold rounded-xl hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+              </svg>
+              <span>Create Free Account</span>
+            </a>
+            <a
+              href="#testimonials"
+              class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span>Read More Reviews</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section
+      id="pricing"
+      class="py-32 relative overflow-hidden bg-gradient-to-b from-white to-amber-50/20 dark:from-black dark:to-gray-900">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <!-- Geometric shapes -->
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-amber-400/5 dark:bg-amber-500/3 rounded-full blur-3xl"></div>
+        <div
+          class="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/3 dark:bg-amber-500/2 rounded-full blur-3xl"></div>
+
+        <!-- Grid pattern overlay -->
+        <div
+          class="absolute inset-0 opacity-[0.03] dark:opacity-[0.02] bg-[linear-gradient(rgba(240,194,67,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(240,194,67,0.1)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(240,194,67,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(240,194,67,0.05)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+
+        <!-- Floating particles -->
+        <div
+          class="absolute top-20 right-20 w-4 h-4 bg-amber-400 dark:bg-amber-500 rounded-full opacity-30 animate-bounce"></div>
+        <div
+          class="absolute bottom-32 left-32 w-3 h-3 bg-amber-400 dark:bg-amber-500 rounded-full opacity-20 animate-bounce"
+          style="animation-delay: 0.5s"></div>
+        <div
+          class="absolute top-1/2 left-1/4 w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full opacity-40 animate-bounce"
+          style="animation-delay: 0.8s"></div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-20">
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              LIVE MARKET PRICES
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            Transparent
+            <span class="text-amber-500 dark:text-amber-400">Pricing</span>
+          </h2>
+
+          <p
+            class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Real-time pricing for all network data plans. No hidden fees—just
+            the best rates available in Nigeria.
+          </p>
+        </div>
+
+        <!-- Pricing Cards Container -->
+        <div
+          class="pricing-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <!-- Cards will be rendered from JavaScript -->
+        </div>
+
+        <!-- Additional Info Section -->
+        <div
+          class="mt-20 pt-10 border-t border-amber-200/20 dark:border-gray-800">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Info Card 1 -->
+            <div
+              class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+              <div
+                class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200/30 dark:border-amber-800/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Best Price Guarantee
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                We constantly monitor market rates to ensure you always get the
+                most competitive prices on all services.
+              </p>
+            </div>
+
+            <!-- Info Card 2 -->
+            <div
+              class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+              <div
+                class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200/30 dark:border-amber-800/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Secure Transactions
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                All purchases are protected with bank-grade encryption and
+                secure payment processing.
+              </p>
+            </div>
+
+            <!-- Info Card 3 -->
+            <div
+              class="group p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-300">
+              <div
+                class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200/30 dark:border-amber-800/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg
+                  class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Instant Delivery
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Your services are activated within seconds of payment
+                confirmation. No waiting periods.
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA at Bottom -->
+          <div class="mt-12 text-center">
+            <a
+              href="https://app.mkhdataplug.com/register"
+              class="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 font-semibold rounded-xl hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1 group">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span>Get Started Today</span>
+              <svg
+                class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <p class="text-gray-500 dark:text-gray-500 text-sm mt-6">
+              No hidden fees • 24/7 customer support • Money-back guarantee
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section
+      id="contact"
+      class="py-32 bg-gradient-to-b from-white to-amber-50/30 dark:from-black dark:to-gray-900 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <!-- Gradient Orbs -->
+        <div
+          class="absolute top-20 -right-20 w-96 h-96 bg-amber-400/10 dark:bg-amber-500/5 blur-3xl rounded-full"></div>
+        <div
+          class="absolute -bottom-20 -left-20 w-80 h-80 bg-amber-500/10 dark:bg-amber-500/3 blur-3xl rounded-full"></div>
+
+        <!-- Pattern -->
+        <div
+          class="absolute inset-0 opacity-5 dark:opacity-[0.02]"
+          style="
+            background-image: radial-gradient(
+              circle at 2px 2px,
+              currentColor 1.5px,
+              transparent 0
+            );
+            background-size: 40px 40px;
+          "></div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-32 left-32">
+          <div
+            class="w-3 h-3 bg-amber-400/30 dark:bg-amber-500/20 rounded-full animate-bounce"
+            style="animation-delay: 0.2s"></div>
+        </div>
+        <div class="absolute bottom-40 right-40">
+          <div
+            class="w-2 h-2 bg-amber-400/20 dark:bg-amber-500/15 rounded-full animate-bounce"
+            style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Header Section -->
+        <div class="text-center max-w-4xl mx-auto mb-20">
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400/10 to-amber-500/10 dark:from-amber-400/5 dark:to-amber-500/5 border border-amber-200/50 dark:border-amber-800/30 backdrop-blur-sm mb-8">
+            <div class="flex space-x-1">
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.2s"></div>
+              <div
+                class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full animate-pulse"
+                style="animation-delay: 0.4s"></div>
+            </div>
+            <span
+              class="text-sm font-medium text-amber-700 dark:text-amber-400 tracking-wide">
+              24/7 SUPPORT AVAILABLE
+            </span>
+          </div>
+
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+            We're Here to
+            <span class="text-amber-500 dark:text-amber-400">Help</span>
+          </h2>
+
+          <p
+            class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Got questions? Need assistance? Our dedicated support team is
+            available around the clock to help with all your service needs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-12">
+          <!-- Contact Information -->
+          <div class="xl:col-span-4 space-y-6">
+            <!-- Contact Card -->
+            <div
+              class="group p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-2xl transition-all duration-300">
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200 dark:border-amber-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Phone Support
+                  </h4>
+                  <a
+                    id="contactPhone"
+                    class="text-2xl font-bold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors duration-300">
+                    <!-- coming from js -->
+                  </a>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                    Available 24/7 for immediate assistance
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Technical issues resolution</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Service activation support</span
+                  >
+                </div>
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-2 h-2 bg-amber-400 dark:bg-amber-500 rounded-full"></div>
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Payment & billing assistance</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Support -->
+            <div
+              class="group p-8 rounded-3xl bg-gradient-to-br from-green-500 to-green-600 text-white hover:shadow-2xl transition-all duration-300">
+              <div class="flex items-start gap-4 mb-6">
+                <div
+                  class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.677-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.436 9.884-9.884 9.884zm8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.892 0-3.18-1.24-6.162-3.495-8.411z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-white mb-2">
+                    WhatsApp Chat
+                  </h4>
+                  <p class="text-green-100 text-lg font-medium">
+                    Instant Messaging Support
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href="https://wa.me/2347039881980"
+                class="inline-flex items-center justify-center gap-3 w-full py-4 bg-white text-green-600 font-semibold rounded-xl hover:bg-green-50 transition-all duration-300 mt-4 group">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.677-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.9 6.994c-.004 5.45-4.436 9.884-9.884 9.884zm8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.892 0-3.18-1.24-6.162-3.495-8.411z" />
+                </svg>
+                <span>Chat with Support</span>
+                <svg
+                  class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+            </div>
+
+            <!-- Email Support -->
+            <div
+              class="group p-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-2xl transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200 dark:border-amber-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    class="w-7 h-7 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Email Support
+                  </h4>
+                  <a
+                    id="contactEmail"
+                    class="text-lg font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors duration-300">
+                    <!-- Coming from js -->
+                  </a>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                    Typically replies within 1 hour
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Support Hours -->
+            <div
+              class="p-8 rounded-3xl bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-amber-900/5 border border-amber-200 dark:border-amber-800/30">
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                Support Hours
+              </h4>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Technical Support</span
+                  >
+                  <span class="text-amber-600 dark:text-amber-400 font-bold"
+                    >24/7</span
+                  >
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Sales & Billing</span
+                  >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >8AM - 8PM</span
+                  >
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >Email Response</span
+                  >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Within 1 hour</span
+                  >
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700 dark:text-gray-300"
+                    >WhatsApp Response</span
+                  >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >~5 minutes</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="xl:col-span-8">
+            <div
+              class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl p-10 hover:shadow-2xl transition-all duration-300">
+              <div class="flex items-center gap-4 mb-10">
+                <div
+                  class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-400/5 dark:to-amber-500/3 border border-amber-200 dark:border-amber-800 flex items-center justify-center">
+                  <svg
+                    class="w-8 h-8 text-amber-500 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    Send Us a Message
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 mt-2">
+                    We'll get back to you as soon as possible
+                  </p>
+                </div>
+              </div>
+
+              <form class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class="group">
+                    <label
+                      class="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-4"
+                      >Full Name</label
+                    >
+                    <input
+                      type="text"
+                      class="w-full px-6 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 outline-none transition-all duration-300 placeholder-gray-500 dark:placeholder-gray-500 hover:border-amber-300 dark:hover:border-amber-700"
+                      placeholder="Enter your full name" />
+                  </div>
+
+                  <div class="group">
+                    <label
+                      class="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-4"
+                      >Email Address</label
+                    >
+                    <input
+                      type="email"
+                      class="w-full px-6 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 outline-none transition-all duration-300 placeholder-gray-500 dark:placeholder-gray-500 hover:border-amber-300 dark:hover:border-amber-700"
+                      placeholder="your@email.com" />
+                  </div>
+                </div>
+
+                <div class="group">
+                  <label
+                    class="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-4"
+                    >Service Type</label
+                  >
+                  <select
+                    class="w-full px-6 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 outline-none transition-all duration-300 hover:border-amber-300 dark:hover:border-amber-700">
+                    <option value="">Select service type</option>
+                    <option value="data-plans">Data Bundles & Airtime</option>
+                    <option value="results">WAEC/NECO Results</option>
+                    <option value="cable">DSTV/GOTV Subscription</option>
+                    <option value="electricity">Electricity Bills</option>
+                    <option value="technical">Technical Support</option>
+                    <option value="other">Other Inquiry</option>
+                  </select>
+                </div>
+
+                <div class="group">
+                  <label
+                    class="block text-gray-700 dark:text-gray-300 text-lg font-semibold mb-4"
+                    >Your Message</label
+                  >
+                  <textarea
+                    rows="6"
+                    class="w-full px-6 py-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-2xl focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 outline-none transition-all duration-300 resize-none placeholder-gray-500 dark:placeholder-gray-500 hover:border-amber-300 dark:hover:border-amber-700"
+                    placeholder="Please describe your inquiry or support needs in detail..."></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full group bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 py-5 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3">
+                  <svg
+                    class="w-6 h-6 group-hover:translate-y-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+      class="relative bg-gradient-to-b from-gray-900 via-gray-950 to-black border-t border-amber-800/20 pt-20 pb-12 overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <!-- Gradient Overlays -->
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-950 to-black"></div>
+
+        <!-- Glow Effects -->
+        <div
+          class="absolute -top-20 left-1/4 w-80 h-80 bg-amber-500/5 blur-3xl rounded-full"></div>
+        <div
+          class="absolute -bottom-20 right-1/4 w-96 h-96 bg-amber-500/3 blur-3xl rounded-full"></div>
+
+        <!-- Pattern -->
+        <div
+          class="absolute inset-0 opacity-[0.03]"
+          style="
+            background-image:
+              linear-gradient(
+                90deg,
+                transparent 49%,
+                currentColor 49%,
+                currentColor 51%,
+                transparent 51%
+              ),
+              linear-gradient(
+                0deg,
+                transparent 49%,
+                currentColor 49%,
+                currentColor 51%,
+                transparent 51%
+              );
+            background-size: 40px 40px;
+          "></div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-32 left-32">
+          <div class="w-3 h-3 bg-amber-500/20 rounded-full animate-pulse"></div>
+        </div>
+        <div class="absolute bottom-40 right-40">
+          <div
+            class="w-2 h-2 bg-amber-500/15 rounded-full animate-pulse"
+            style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 mb-16">
+          <!-- Brand & Newsletter -->
+          <div class="xl:col-span-5 space-y-8">
+            <!-- Brand Section -->
+            <div class="text-center xl:text-left">
+              <div
+                class="flex items-center justify-center xl:justify-start mb-8">
+                <img
+                  src="assets/logo.png"
+                  alt="MKH DATA PLUG Logo"
+                  class="w-24 h-16 mr-4 rounded-lg" />
+              </div>
+              <span
+                class="text-white font-bold text-lg md:text-xl tracking-tight">
+                <span class="text-[rgb(240,194,67)]">MKH</span> DATA PLUG
+              </span>
+
+              <p
+                class="text-gray-400 leading-relaxed mb-8 text-lg max-w-md mx-auto xl:mx-0">
+                Your trusted partner for all digital services in Nigeria. From
+                data bundles to bill payments, we make digital life simpler.
+              </p>
+
+              <!-- Social Links -->
+              <div class="flex justify-center xl:justify-start gap-4">
+                <a
+                  href="#"
+                  class="group w-14 h-14 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M24 12.073c0-6.627-5.373-1212-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                <a
+                  href="#"
+                  class="group w-14 h-14 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.016 10.016 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                  </svg>
+                </a>
+                <a
+                  href="#"
+                  class="group w-14 h-14 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all duration-300 hover:scale-110">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div
+              class="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-700">
+              <h3
+                class="text-xl font-bold text-white mb-6 text-center xl:text-left">
+                Stay Updated
+              </h3>
+              <p class="text-gray-400 mb-6 text-center xl:text-left">
+                Get the latest updates on new services, special offers, and
+                important announcements.
+              </p>
+
+              <form class="space-y-4">
+                <div class="relative group">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    class="w-full px-6 py-4 rounded-2xl bg-gray-900 border border-gray-700 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 text-white placeholder-gray-500 transition-all duration-300 pr-12 group-hover:border-amber-500/50" />
+                  <svg
+                    class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full group bg-gradient-to-r from-amber-400 to-amber-500 text-gray-900 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3">
+                  <span>Subscribe to Updates</span>
+                  <svg
+                    class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Links Grid -->
+          <div class="xl:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Quick Links -->
+            <div>
+              <h3
+                class="text-lg font-bold text-white mb-8 flex items-center gap-3">
+                <div
+                  class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                Quick Links
+              </h3>
+
+              <ul class="space-y-4">
+                <li>
+                  <a
+                    href="#home"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#about"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#services"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Our Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#pricing"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Contact Support
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+              <h3
+                class="text-lg font-bold text-white mb-8 flex items-center gap-3">
+                <div
+                  class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                Our Services
+              </h3>
+
+              <ul class="space-y-4">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Data Bundles
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Airtime Top-up
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    WAEC/NECO Results
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    DSTV/GOTV Subscription
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-amber-400 transition-colors duration-300 text-base flex items-center gap-3 group">
+                    <div
+                      class="w-1.5 h-1.5 bg-amber-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    Electricity Bills
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-gray-800 pt-10 flex flex-col xl:flex-row justify-between items-center gap-6 text-gray-400">
+          <!-- Copyright -->
+          <div
+            class="flex flex-col xl:flex-row items-center gap-6 text-sm text-center xl:text-left">
+            <span
+              >&copy; 2025
+              <span class="font-semibold text-amber-400">MKH DATA PLUG</span>.
+              All rights reserved.</span
+            >
+            <span
+              class="hidden xl:block w-1 h-1 bg-amber-500 rounded-full"></span>
+            <span
+              >Built with <span class="text-amber-400">♥</span> in Nigeria</span
+            >
+            <span
+              class="hidden xl:block w-1 h-1 bg-amber-500 rounded-full"></span>
+            <a
+              href="https://smartteck.ng"
+              target="_blank"
+              class="hover:text-amber-400 transition-colors duration-300 flex items-center gap-2 group">
+              Developed by SmartTeck Consult
+              <svg
+                class="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Legal Links -->
+          <div class="flex gap-8 text-sm">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-amber-400 transition-colors duration-300"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-amber-400 transition-colors duration-300"
+              >Terms of Service</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-amber-400 transition-colors duration-300"
+              >Security</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-amber-400 transition-colors duration-300"
+              >Refund Policy</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Pricing Modal -->
+    <div
+      id="pricingModal"
+      class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+      <div
+        class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-amber-200/30 dark:border-amber-800/30 max-w-4xl w-full mx-auto overflow-hidden shadow-2xl shadow-amber-400/20 max-h-[90vh] flex flex-col">
+        <!-- Modal Header -->
+        <div
+          class="flex justify-between items-center p-6 border-b border-amber-200/20 dark:border-amber-800/20 bg-gradient-to-r from-amber-400/5 to-transparent dark:from-amber-500/5 dark:to-transparent">
+          <div>
+            <h3
+              id="modalTitle"
+              class="text-2xl font-bold text-gray-900 dark:text-white"></h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              Complete list of available data plans
+            </p>
+          </div>
+          <button
+            onclick="closeModal()"
+            class="w-10 h-10 bg-gradient-to-br from-amber-400/10 to-amber-500/5 dark:from-amber-500/10 dark:to-amber-500/5 hover:from-amber-400/20 hover:to-amber-500/10 dark:hover:from-amber-500/20 dark:hover:to-amber-500/10 rounded-xl border border-amber-300/30 dark:border-amber-700/30 hover:border-amber-400/50 dark:hover:border-amber-600/50 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-red-500 transition-all duration-300 group">
+            <svg
+              class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="flex-1 overflow-y-auto p-6">
+          <div id="modalContent" class="min-h-[200px]"></div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div
+          class="p-6 border-t border-amber-200/20 dark:border-amber-800/20 bg-gradient-to-r from-transparent to-amber-400/3 dark:to-amber-500/5">
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div
+              class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <svg
+                class="w-4 h-4 text-amber-500 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Prices are subject to change without notice</span>
+            </div>
+            <button
+              onclick="closeModal()"
+              class="px-6 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-gray-900 rounded-xl font-semibold shadow-lg shadow-amber-400/30 transition-all duration-300 hover:scale-105 hover:shadow-amber-400/40 flex items-center gap-2">
+              <span>Got it</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Mobile Menu Toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuIcon = document.getElementById("menuIcon");
+      const closeIcon = document.getElementById("closeIcon");
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.contains("scale-y-0");
+
+        if (isOpen) {
+          mobileMenu.classList.remove("scale-y-0", "opacity-0");
+          mobileMenu.classList.add("scale-y-100", "opacity-100");
+          menuIcon.classList.add("hidden");
+          closeIcon.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        } else {
+          mobileMenu.classList.add("scale-y-0", "opacity-0");
+          mobileMenu.classList.remove("scale-y-100", "opacity-100");
+          menuIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      });
+
+      // Close mobile menu when clicking a link
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("scale-y-0", "opacity-0");
+          mobileMenu.classList.remove("scale-y-100", "opacity-100");
+          menuIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
+          document.body.style.overflow = "";
+        });
+      });
+
+      // Theme Toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const sunIcon = document.getElementById("sunIcon");
+      const moonIcon = document.getElementById("moonIcon");
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (isDark) {
+          document.documentElement.classList.remove("dark");
+          sunIcon.classList.remove("hidden");
+          moonIcon.classList.add("hidden");
+          localStorage.setItem("theme", "light");
+        } else {
+          document.documentElement.classList.add("dark");
+          sunIcon.classList.add("hidden");
+          moonIcon.classList.remove("hidden");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+
+      // Check for saved theme preference
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+        sunIcon.classList.add("hidden");
+        moonIcon.classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
