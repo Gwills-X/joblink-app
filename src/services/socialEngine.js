@@ -47,7 +47,7 @@ export const socialEngine = {
   // 4. Get full profile details for the dedicated profile page
   async getUserFullProfile(userId) {
     const rows = await query(
-      "SELECT id, name, bio, profile_pic_url FROM users WHERE id = ?",
+      "SELECT id, name, bio, profile_pic_url, location, created_at, headline, website_url, github_handle FROM users WHERE id = ?",
       [userId],
     );
     return rows[0] || null;

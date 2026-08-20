@@ -1,51 +1,70 @@
 import crypto from "crypto";
 import * as seekerRepo from "./mysql/seekerService";
+import * as seekerRepo2 from "./mysql/seekerService2";
 
 export const seekerEngine = {
-  /**
-   * 📨 SUBMIT JOB OR COLLABORATION APPLICATION
-   */
+  /* =========================
+     APPLICATIONS
+  ========================= */
+
   applyToJob: async (payload) => {
-    const generatedApplicationId = crypto.randomUUID();
+    const id = crypto.randomUUID();
 
-    const unifiedPayload = {
+    return seekerRepo.insertMysqlApplication({
       ...payload,
-      id: generatedApplicationId,
-    };
-
-    return await seekerRepo.insertMysqlApplication(unifiedPayload);
+      id,
+    });
   },
 
-  /**
-   * 📊 FETCH CANDIDATE APPLICATION TRACKER
-   */
   getSeekerApplications: async (userId) => {
-    return await seekerRepo.fetchMysqlSeekerApplications(userId);
+    return seekerRepo.fetchMysqlSeekerApplications(userId);
   },
 
-  /**
-   * ❌ WITHDRAW APPLICATION
-   */
+  getSeekerApplicationDetails: async (applicationId, userId) => {
+    return seekerRepo.fetchMysqlSeekerApplicationDetails(applicationId, userId);
+  },
+
+  getApplicationForJob: async (jobId, userId) => {
+    return seekerRepo.checkMysqlExistingApplication(jobId, userId);
+  },
+
+  checkExistingApplication: async (jobId, userId) => {
+    return seekerRepo.checkMysqlExistingApplication(jobId, userId);
+  },
+
   withdrawApplication: async (applicationId, userId) => {
-    return await seekerRepo.removeMysqlApplication(applicationId, userId);
+    return seekerRepo.removeMysqlApplication(applicationId, userId);
   },
 
-  getMarketplaceListings: async (typeFilter, searchKeyword) => {
-    return await seekerRepo.fetchMysqlMarketplaceListings(
+  /* =========================
+     MARKETPLACE
+  ========================= */
+
+  getMarketplaceListings: async (typeFilter, searchKeyword, userId = null) => {
+    return seekerRepo2.fetchMysqlMarketplaceListings(
       typeFilter,
       searchKeyword,
+      userId,
     );
   },
+
+  getJobListingById: async (jobId, userId = null) => {
+    return seekerRepo2.fetchMysqlJobListingById(jobId, userId);
+  },
+
+  /* =========================
+     PROFILE
+  ========================= */
+
   hasSeekerProfile: async (userId) => {
-    return await seekerRepo.checkSeekerProfileExists(userId);
+    return seekerRepo.checkSeekerProfileExists(userId);
   },
 
-  // Focus seeker-specific updates on professional attributes stored in users table
   updateSeekerPreferences: async (userId, preferences) => {
-    return await seekerRepo.updateMysqlSeekerPreferences(userId, preferences);
+    return seekerRepo.updateMysqlSeekerPreferences(userId, preferences);
   },
 
-  getJobListingById: async (jobId) => {
-    return await seekerRepo.fetchMysqlJobListingById(jobId);
+  createSeekerProfile: async (profileData) => {
+    return seekerRepo.createMysqlSeekerProfile(profileData);
   },
 };

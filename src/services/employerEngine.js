@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import * as mysqlRepo from "./mysql/employerService";
+import * as mysqlRepo2 from "./mysql/employerService2";
 import * as mysqlCompanyRepo from "./mysql/companyService";
 
 const DRIVER_TOKEN = process.env.DATABASE_PROVIDER || "MYSQL";
@@ -47,6 +48,8 @@ export const employerEngine = {
     return await mysqlRepo.fetchMysqlJobApplicants(jobId);
   },
 
+  // applications
+
   reviewApplication: async (
     applicationId,
     employerId,
@@ -59,6 +62,37 @@ export const employerEngine = {
       status,
       employerFeedback,
     );
+  },
+
+  getApplicationDetailsForReview: async (applicationId, employerId) => {
+    return await mysqlRepo2.fetchMysqlApplicationDetails(
+      applicationId,
+      employerId,
+    );
+  },
+
+  rejectApplication: async ({
+    applicationId,
+    employerId,
+    rejectionFeedback,
+  }) => {
+    return await mysqlRepo2.updateMysqlApplicationRejection(
+      applicationId,
+      employerId,
+      rejectionFeedback,
+    );
+  },
+
+  acceptApplication: async (applicationId, employerId, employerFeedback) => {
+    return await mysqlRepo2.updateMysqlApplicationAcceptance(
+      applicationId,
+      employerId,
+      employerFeedback,
+    );
+  },
+
+  getEmployerApplications: async (employerId) => {
+    return await mysqlRepo2.fetchMysqlEmployerApplications(employerId);
   },
 
   // ==========================================

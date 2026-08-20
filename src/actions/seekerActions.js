@@ -6,8 +6,13 @@ import getAuthUser from "@/lib/getAuthUser";
 import { seekerEngine } from "@/services/seekerEngine";
 import { uploadMedia } from "@/services/storageService";
 
+/* =========================
+   APPLY FOR JOB
+========================= */
+
 export async function applyToJobAction(prevState, formData) {
   const user = await getAuthUser();
+
   if (!user) return redirect("/login");
 
   const fd =
@@ -20,21 +25,26 @@ export async function applyToJobAction(prevState, formData) {
   if (!fd) {
     return {
       success: false,
-      message: "Form data was not provided to the action.",
+      message: "Form data was not provided.",
     };
   }
 
-  const jobId = fd.get("job_id");
-  const fullName = fd.get("full_name");
-  const email = fd.get("email");
-  const phone = fd.get("phone");
-  const githubRepo = fd.get("github_repo");
-  const portfolioLink = fd.get("portfolio_link");
-  const bio = fd.get("bio");
-  const coverLetter = fd.get("cover_letter");
+  const applicantId = String(user.userId || user.id);
+  const jobId = String(fd.get("job_id") || "").trim();
+
+  const fullName = String(fd.get("full_name") || "").trim();
+  const email = String(fd.get("email") || "").trim();
+  const phone = String(fd.get("phone") || "").trim();
+
+  const githubRepo = String(fd.get("github_repo") || "").trim();
+  const portfolioLink = String(fd.get("portfolio_link") || "").trim();
+
+  const bio = String(fd.get("bio") || "").trim();
+  const coverLetter = String(fd.get("cover_letter") || "").trim();
 
   const cvFile = fd.get("cv_file");
-  let cvUrl = fd.get("existing_cv_url");
+
+  let cvUrl = String(fd.get("existing_cv_url") || "").trim();
 
   if (!jobId || !fullName || !email || !phone || !githubRepo || !coverLetter) {
     return {
@@ -45,10 +55,35 @@ export async function applyToJobAction(prevState, formData) {
   }
 
   try {
-    // Only upload if a valid file was attached (size > 0)
-    if (cvFile && cvFile.size > 0) {
+    /* Prevent duplicate applications before upload. */
+    const existing = await seekerEngine.getApplicationForJob(
+      jobId,
+      applicantId,
+    );
+
+    if (existing) {
+      return {
+        success: false,
+        alreadyApplied: true,
+        applicationId: existing.id,
+        applicationStatus: existing.status,
+        message:
+          existing.status === "WITHDRAWN"
+            ? "You previously applied for this opportunity and withdrew the application. You cannot apply again."
+            : `You have already applied for this opportunity. Current status: ${existing.status}.`,
+      };
+    }
+
+    /* Upload CV only when a new file exists. */
+    if (
+      cvFile &&
+      typeof cvFile === "object" &&
+      "size" in cvFile &&
+      cvFile.size > 0
+    ) {
       const uploadResult = await uploadMedia(cvFile);
-      if (uploadResult && uploadResult.url) {
+
+      if (uploadResult?.url) {
         cvUrl = uploadResult.url;
       }
     }
@@ -61,84 +96,218 @@ export async function applyToJobAction(prevState, formData) {
       };
     }
 
-    await seekerEngine.applyToJob({
+    const result = await seekerEngine.applyToJob({
       job_id: jobId,
-      applicant_id: String(user.userId || user.id),
+      applicant_id: applicantId,
       full_name: fullName,
-      email: email,
-      phone: phone,
+      email,
+      phone,
       github_repo: githubRepo,
       portfolio_link: portfolioLink,
       cv_url: cvUrl,
-      bio: bio,
+      bio,
       cover_letter: coverLetter,
     });
+
+    revalidatePath("/jobs");
+    revalidatePath(`/jobs/${jobId}`);
+    revalidatePath("/dashboard/seeker/applications");
+
+    return {
+      success: true,
+      applicationId: result?.insertId || null,
+      message: "Application submitted successfully!",
+    };
   } catch (error) {
-    console.error("Application Processing Error:", error);
+    console.error("❌ Application Processing Error:", error);
+
+    const message = error?.message || "";
+
+    if (
+      error?.code === "ER_DUP_ENTRY" ||
+      message.toLowerCase().includes("unique_application") ||
+      message.toLowerCase().includes("already applied")
+    ) {
+      return {
+        success: false,
+        alreadyApplied: true,
+        message: "You have already applied for this opportunity.",
+      };
+    }
+
     return {
       success: false,
-      message: error.message || "Failed to submit application.",
+      message: message || "Failed to submit application.",
     };
   }
-
-  revalidatePath("/jobs");
-  revalidatePath("/dashboard/seeker/applications");
-
-  // Return success state so the client-side component can trigger the toast notification
-  return {
-    success: true,
-    message: "Application submitted successfully!",
-  };
 }
 
-/**
- * Server Action to handle withdrawing an active application.
- */
+/* =========================
+   WITHDRAW APPLICATION
+========================= */
+
 export async function withdrawApplicationAction(applicationId) {
   const user = await getAuthUser();
+
   if (!user) return redirect("/login");
 
-  try {
-    await seekerEngine.withdrawApplication(
-      applicationId,
-      String(user.userId || user.id),
-    );
-  } catch (error) {
-    console.error("Application Withdrawal Error:", error);
+  if (!applicationId) {
     return {
       success: false,
-      message: "Failed to withdraw application.",
+      message: "Application ID is required.",
     };
   }
 
-  revalidatePath("/dashboard/seeker/applications");
-  return { success: true, message: "Application withdrawn successfully." };
+  const userId = String(user.userId || user.id);
+
+  try {
+    const application = await seekerEngine.getSeekerApplicationDetails(
+      applicationId,
+      userId,
+    );
+
+    if (!application) {
+      return {
+        success: false,
+        message: "Application not found.",
+      };
+    }
+
+    if (application.status !== "PENDING") {
+      return {
+        success: false,
+        message: "Only pending applications can be withdrawn.",
+      };
+    }
+
+    await seekerEngine.withdrawApplication(applicationId, userId);
+
+    revalidatePath("/dashboard/seeker/applications");
+    revalidatePath(`/dashboard/seeker/applications/${applicationId}`);
+
+    if (application.job_id) {
+      revalidatePath(`/jobs/${application.job_id}`);
+    }
+
+    return {
+      success: true,
+      message: "Application withdrawn successfully.",
+    };
+  } catch (error) {
+    console.error("❌ Withdrawal Error:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Failed to withdraw application.",
+    };
+  }
 }
 
-/**
- * Server Action to update candidate professional profile details.
- */
+/* =========================
+   UPDATE PROFILE
+========================= */
+
 export async function updateSeekerProfileProfile(formData) {
   const user = await getAuthUser();
+
   if (!user) return redirect("/login");
 
   const userId = String(user.userId || user.id);
 
-  const preferences = {
-    headline: formData.get("headline"),
-    interest_field: formData.get("interest_field"),
-  };
+  const headline = String(formData.get("headline") || "").trim();
 
-  try {
-    await seekerEngine.updateSeekerPreferences(userId, preferences);
-  } catch (error) {
-    console.error("Seeker Preferences Update Error:", error);
+  const interestField = String(formData.get("interest_field") || "").trim();
+
+  if (!headline || !interestField) {
     return {
       success: false,
-      message: error.message || "Failed to update seeker preferences.",
+      message: "Professional headline and technical focus are required.",
+    };
+  }
+
+  try {
+    await seekerEngine.updateSeekerPreferences(userId, {
+      headline,
+      interest_field: interestField,
+    });
+  } catch (error) {
+    console.error("❌ Profile Update Error:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Failed to update seeker profile.",
     };
   }
 
   revalidatePath("/dashboard/seeker/profile");
+  revalidatePath("/dashboard/seeker/applications");
+
   redirect("/dashboard/seeker/profile");
+}
+
+/* =========================
+   CREATE PROFILE
+========================= */
+
+export async function createSeekerProfileAction(prevState, formData) {
+  const user = await getAuthUser();
+
+  if (!user) return redirect("/login");
+
+  const fd =
+    formData instanceof FormData
+      ? formData
+      : prevState instanceof FormData
+        ? prevState
+        : null;
+
+  if (!fd) {
+    return {
+      success: false,
+      message: "Form data was not provided.",
+    };
+  }
+
+  const userId = String(user.userId || user.id);
+
+  const headline = String(fd.get("headline") || "").trim();
+
+  const bio = String(fd.get("bio") || "").trim();
+
+  const location = String(fd.get("location") || "").trim();
+
+  const githubHandle = String(fd.get("github_handle") || "").trim();
+
+  const websiteUrl = String(fd.get("website_url") || "").trim();
+
+  if (!headline || !bio) {
+    return {
+      success: false,
+      message: "Please fill in your headline and professional bio.",
+    };
+  }
+
+  try {
+    await seekerEngine.createSeekerProfile({
+      userId,
+      headline,
+      bio,
+      location,
+      github_handle: githubHandle,
+      website_url: websiteUrl,
+    });
+  } catch (error) {
+    console.error("❌ Profile Creation Error:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Failed to create seeker profile.",
+    };
+  }
+
+  revalidatePath("/jobs");
+  revalidatePath("/dashboard/seeker/profile");
+  revalidatePath("/dashboard/seeker/applications");
+
+  redirect("/jobs");
 }

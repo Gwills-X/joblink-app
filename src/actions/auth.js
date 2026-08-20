@@ -118,6 +118,7 @@ export async function login(state, formData) {
     }
   } catch (error) {
     // 🚀 NEW: Cold Start / Database Timeout Handling
+    console.log(error);
     if (
       error.code === "ETIMEDOUT" ||
       error.message === "DATABASE_UNAVAILABLE"

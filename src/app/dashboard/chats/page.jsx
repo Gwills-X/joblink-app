@@ -1,111 +1,215 @@
-"use client";
+import getAuthUser from "@/lib/getAuthUser";
+import { chatEngine } from "@/services/chatEngine";
+import ChatRoomCard from "@/components/ChatRoomCard";
+import { acceptChatRequestAction } from "@/actions/chatActions";
+import {
+  MessageSquareText,
+  BellRing,
+  CheckCheck,
+  Sparkles,
+} from "lucide-react";
 
-import Link from "next/link";
-import { Radio, ArrowRight, MessageSquare, Circle } from "lucide-react";
+export const dynamic = "force-dynamic";
 
-export default function NexusHub() {
-  const connections = [
-    {
-      id: 1,
-      name: "Core Architecture Team",
-      lastMessage: "Can we refine the socket...",
-      time: "2m ago",
-      unread: 3,
-      status: "online",
-    },
-    {
-      id: 2,
-      name: "Database Migrations",
-      lastMessage: "Migration failed at 4:02 PM",
-      time: "1h ago",
-      unread: 0,
-      status: "offline",
-    },
-    {
-      id: 3,
-      name: "Frontend Sync (Chayil)",
-      lastMessage: "Looks great on mobile!",
-      time: "3h ago",
-      unread: 1,
-      status: "online",
-    },
-  ];
+export default async function ChatsPage() {
+  const user = await getAuthUser();
+
+  if (!user) {
+    return (
+      <div className='p-6 text-slate-300'>
+        Please log in to view your chats.
+      </div>
+    );
+  }
+
+  const userId = String(user.userId || user.id);
+  const rooms = await chatEngine.getUserRooms(userId);
+  const requests = await chatEngine.getUserChatRequests(userId);
+
+  const incomingRequests = requests.filter(
+    (request) => request.receiver_id === userId && request.status === "PENDING",
+  );
 
   return (
-    <div className='mx-auto max-w-4xl space-y-6 py-8 px-4'>
-      <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <div>
-          <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
-            Communication Streams
-          </span>
-          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
-            Nexus <span className='text-emerald-400'>Hub</span>
-          </h1>
-          <p className='mt-1 text-xs text-slate-500'>
-            Active data streams and peer connections.
-          </p>
+    <div className='space-y-6 p-4 md:p-8'>
+      <div className='space-y-1'>
+        <div className='inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-emerald-300'>
+          <Sparkles className='h-3.5 w-3.5' />
+          Communication Hub
         </div>
-        <button className='inline-flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-wider text-emerald-400 transition-all duration-150 hover:bg-emerald-500/20'>
-          <Radio className='h-3.5 w-3.5' />
-          New Stream
-        </button>
+        <h1 className='text-3xl font-bold text-slate-50'>
+          Chat & Conversations
+        </h1>
+        <p className='text-sm leading-relaxed text-slate-400'>
+          Stay connected. Request conversations, manage incoming messages, and
+          build meaningful relationships.
+        </p>
       </div>
 
-      <div className='rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden'>
-        {connections.length > 0 ? (
-          <div className='divide-y divide-slate-800/50'>
-            {connections.map((conn) => (
-              <div
-                key={conn.id}
-                className='group flex items-center justify-between gap-4 px-5 py-4 transition-colors duration-150 hover:bg-slate-800/30'>
-                <div className='flex items-center gap-3.5 min-w-0'>
-                  <Circle
-                    className={`h-2 w-2 shrink-0 fill-current ${
-                      conn.status === "online"
-                        ? "text-emerald-400"
-                        : "text-slate-600"
-                    }`}
-                  />
-                  <div className='min-w-0'>
-                    <h3 className='truncate text-sm font-medium text-slate-200 transition-colors duration-150 group-hover:text-slate-100'>
-                      {conn.name}
-                    </h3>
-                    <p className='mt-0.5 truncate font-mono text-[11px] tracking-wide text-slate-600'>
-                      {conn.lastMessage}
-                    </p>
-                  </div>
-                </div>
-
-                <div className='flex shrink-0 items-center gap-4'>
-                  <span className='font-mono text-[10px] tracking-wide text-slate-600'>
-                    {conn.time}
-                  </span>
-                  {conn.unread > 0 && (
-                    <span className='flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 font-mono text-[10px] font-bold text-[var(--color-slate)]'>
-                      {conn.unread}
-                    </span>
-                  )}
-                  <Link
-                    href={`/nexus/${conn.id}`}
-                    className='inline-flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-400 transition-colors duration-150 hover:text-emerald-300'>
-                    Enter
-                    <ArrowRight className='h-3 w-3' />
-                  </Link>
-                </div>
-              </div>
-            ))}
+      <div className='rounded-2xl border border-slate-700/50 bg-gradient-to-r from-slate-900/40 via-slate-900/30 to-slate-950/40 p-4 backdrop-blur-sm'>
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-2'>
+            <BellRing className='h-4 w-4 text-amber-400' />
+            <span className='text-sm font-medium text-slate-200'>
+              {incomingRequests.length} pending
+            </span>
           </div>
-        ) : (
-          <div className='flex flex-col items-center justify-center py-16 px-6'>
-            <MessageSquare className='h-5 w-5 text-slate-600' />
-            <p className='mt-3 font-mono text-xs text-slate-500'>
-              No active communication streams.
-            </p>
-            <div className='mt-4 font-mono text-[10px] tracking-wider text-slate-700 uppercase'>
-              Status: <span className='text-slate-600'>NO_STREAMS</span>
+          <span className='text-xs text-slate-500'>
+            request{incomingRequests.length === 1 ? "" : "s"}
+          </span>
+        </div>
+      </div>
+
+      <div className='mt-8 grid gap-6 lg:grid-cols-[1.1fr,1.4fr]'>
+        <div className='grid gap-6 lg:grid-cols-[1.1fr,1.4fr]'>
+          <section className='rounded-2xl border border-slate-700 bg-[var(--color-surface)] p-5 backdrop-blur'>
+            <div className='mb-6 flex items-center justify-between'>
+              <div>
+                <h2 className='text-lg font-semibold text-slate-100'>
+                  Incoming Requests
+                </h2>
+                <p className='mt-1 text-xs text-slate-500'>
+                  People wanting to connect
+                </p>
+              </div>
+              <div className='rounded-lg border border-slate-700/50 bg-slate-950/60 px-2.5 py-1.5 text-[10px] font-mono font-semibold text-slate-300'>
+                {incomingRequests.length}
+              </div>
+            </div>
+
+            <div className='space-y-3'>
+              {incomingRequests.length === 0 ? (
+                <div className='rounded-xl border border-dashed border-slate-700/40 p-6 text-center text-sm text-slate-500'>
+                  <div className='mx-auto mb-2 h-8 w-8 rounded-full bg-slate-800/40' />
+                  No pending requests
+                </div>
+              ) : (
+                incomingRequests.map((request) => (
+                  <div
+                    key={request.id}
+                    className='group rounded-xl border border-slate-700 bg-slate-950/50 p-4 transition-all hover:border-emerald-500/30 hover:bg-slate-900/80'>
+                    <div className='flex items-start justify-between gap-3'>
+                      <div>
+                        <div className='text-[10px] uppercase tracking-[0.2em] text-slate-600'>
+                          From
+                        </div>
+                        <h3 className='mt-1.5 text-sm font-semibold text-slate-100'>
+                          {request.sender_name}
+                        </h3>
+                      </div>
+                      <span className='rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-amber-300'>
+                        New
+                      </span>
+                    </div>
+
+                    <p className='mt-3 text-sm leading-relaxed text-slate-300'>
+                      "{request.message}"
+                    </p>
+
+                    <div className='mt-4 pt-3 border-t border-slate-700/50'>
+                      <form
+                        action={acceptChatRequestAction.bind(null, request.id)}>
+                        <button
+                          type='submit'
+                          className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-3 py-2 text-xs font-semibold text-slate-950 transition-all hover:bg-emerald-400 active:scale-95'>
+                          <CheckCheck className='h-3.5 w-3.5' />
+                          Accept
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+
+          <section className='rounded-2xl border border-slate-700 bg-[var(--color-surface)] p-5 backdrop-blur'>
+            <div className='mb-6 flex items-center justify-between'>
+              <div>
+                <h2 className='text-lg font-semibold text-slate-100'>
+                  Active Conversations
+                </h2>
+                <p className='mt-1 text-xs text-slate-500'>
+                  Your message threads
+                </p>
+              </div>
+              <div className='rounded-lg border border-slate-700/50 bg-slate-950/60 px-2.5 py-1.5 text-[10px] font-mono font-semibold text-slate-300'>
+                {rooms.length}
+              </div>
+            </div>
+
+            <div className='space-y-3'>
+              {rooms.length === 0 ? (
+                <div className='rounded-xl border border-dashed border-slate-700/40 p-6 text-center text-sm text-slate-500'>
+                  <div className='mx-auto mb-2 h-8 w-8 rounded-full bg-slate-800/40' />
+                  Start a new conversation
+                </div>
+              ) : (
+                rooms.map((room) => (
+                  <ChatRoomCard
+                    key={room.id}
+                    room={room}
+                    currentUserId={userId}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+        </div>
+
+        <section className='rounded-2xl border border-slate-700 bg-[var(--color-surface)] p-5 backdrop-blur'>
+          <div className='mb-6 flex items-center gap-3'>
+            <div className='rounded-lg bg-emerald-500/15 p-2.5 text-emerald-400'>
+              <MessageSquareText className='h-5 w-5' />
+            </div>
+            <div>
+              <h2 className='text-lg font-semibold text-slate-100'>
+                Request History
+              </h2>
+              <p className='mt-0.5 text-xs text-slate-500'>
+                All sent and received connection requests
+              </p>
             </div>
           </div>
-        )}
+
+          <div className='space-y-2'>
+            {requests.length === 0 ? (
+              <div className='rounded-xl border border-dashed border-slate-700/40 p-6 text-center text-sm text-slate-500'>
+                <div className='mx-auto mb-2 h-8 w-8 rounded-full bg-slate-800/40' />
+                No request history
+              </div>
+            ) : (
+              requests.map((request) => (
+                <div
+                  key={request.id}
+                  className='flex items-center justify-between gap-3 rounded-lg border border-slate-700/50 bg-slate-950/40 px-4 py-3 transition-all hover:bg-slate-900/60'>
+                  <div>
+                    <div className='text-[10px] uppercase tracking-[0.2em] text-slate-600'>
+                      {request.sender_id === userId
+                        ? "Sent to"
+                        : "Received from"}
+                    </div>
+                    <div className='mt-1 text-sm font-medium text-slate-200'>
+                      {request.sender_id === userId
+                        ? request.receiver_name
+                        : request.sender_name}
+                    </div>
+                  </div>
+                  <span
+                    className={`inline-flex rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                      request.status === "ACCEPTED"
+                        ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                        : request.status === "PENDING"
+                          ? "border-amber-500/30 bg-amber-500/10 text-amber-300"
+                          : "border-slate-700/50 bg-slate-800/30 text-slate-400"
+                    }`}>
+                    {request.status}
+                  </span>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );

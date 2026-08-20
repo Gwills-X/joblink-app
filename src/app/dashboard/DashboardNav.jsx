@@ -8,6 +8,7 @@ import {
   Briefcase,
   BarChart3,
   Users,
+  MessageSquare,
   Settings,
 } from "lucide-react";
 
@@ -24,6 +25,7 @@ export default function DashboardNav() {
     { name: "Employer Hub", href: "/dashboard/employer", icon: Briefcase },
     { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
     { name: "Network", href: "/dashboard/network", icon: Users },
+    { name: "Chat", href: "/dashboard/chats", icon: MessageSquare },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 

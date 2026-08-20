@@ -25,10 +25,11 @@ export default async function EmployerApplicationDetailPage({ params }) {
 
   let application = null;
   try {
-    application = await employerEngine.getApplicationDetailById(
+    application = await employerEngine.getApplicationDetailsForReview(
       applicationId,
       userId,
     );
+
     if (!application) return redirect("/dashboard/employer");
   } catch (error) {
     console.error("Application Detail Fetch Error:", error);
@@ -53,7 +54,7 @@ export default async function EmployerApplicationDetailPage({ params }) {
           <div className='space-y-1.5'>
             <div className='flex items-center gap-2'>
               <span className='font-mono text-[10px] uppercase bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800 text-slate-300'>
-                Application ID: #{application.id}
+                Application ID: #{application.application_id}
               </span>
               <span
                 className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${

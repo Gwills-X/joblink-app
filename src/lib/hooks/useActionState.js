@@ -2,15 +2,6 @@
 
 import { useState, useCallback } from "react";
 
-const isRedirectError = (error) =>
-  Boolean(
-    error &&
-    (error.name === "Redirect" ||
-      error.constructor?.name === "Redirect" ||
-      error.type === "redirect" ||
-      error.code === "NEXT_REDIRECT"),
-  );
-
 /**
  * Lightweight compatibility hook for `useActionState` used across the app.
  * Returns [state, actionFn, isPending].

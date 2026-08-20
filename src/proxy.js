@@ -52,9 +52,9 @@ export async function proxy(request) {
       }
     }
 
-    if (isSeekerRoute && payload.role === "employer") {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
-    }
+    // if (isSeekerRoute && payload.role === "employer") {
+    //   return NextResponse.redirect(new URL("/dashboard", request.url));
+    // }
   }
 
   return NextResponse.next();

@@ -189,8 +189,10 @@ export async function deleteJobAction(postId) {
   const user = await getAuthUser();
   if (!user) return redirect("/login");
 
+  const employerId = String(user.userId || user.id);
+
   try {
-    await employerEngine.deleteJobListing(postId);
+    await employerEngine.deleteJobListing(postId, employerId);
   } catch (error) {
     console.error("Job Deletion Error:", error);
     return {
@@ -204,42 +206,81 @@ export async function deleteJobAction(postId) {
   redirect("/dashboard/employer");
 }
 
-/**
- * Server Action to handle reviewing and updating applicant status/feedback.
- */
 export async function reviewApplicationAction(formData) {
   const user = await getAuthUser();
+
   if (!user) return redirect("/login");
 
-  const applicationId = formData.get("application_id");
-  const jobId = formData.get("job_id");
-  const status = formData.get("status");
-  const employerFeedback = formData.get("employer_feedback") || null;
+  const employerId = String(user.userId || user.id);
+
+  const applicationId = formData.application_id;
+  const jobId = formData.job_id;
+  const status = formData.status;
+  const employerFeedback = formData.employer_feedback?.trim() || null;
 
   if (!applicationId || !status) {
     return {
       success: false,
-      errors: { server: ["Application ID and status are required."] },
-    };
-  }
-
-  try {
-    await employerEngine.reviewApplication(
-      applicationId,
-      String(user.userId || user.id),
-      status,
-      employerFeedback,
-    );
-  } catch (error) {
-    console.error("Application Review Error:", error);
-    return {
-      success: false,
       errors: {
-        server: [error.message || "Failed to update application review."],
+        server: ["Application ID and status are required."],
       },
     };
   }
 
-  revalidatePath(`/dashboard/employer/job/${jobId}/applicants`);
-  redirect(`/dashboard/employer/job/${jobId}/applicants`);
+  try {
+    if (status === "REJECTED") {
+      await employerEngine.rejectApplication({
+        applicationId,
+        employerId,
+        rejectionFeedback: employerFeedback,
+      });
+    } else if (status === "ACCEPTED") {
+      await employerEngine.acceptApplication(
+        applicationId,
+        employerId,
+        employerFeedback,
+      );
+    } else if (status === "PENDING" || status === "SHORTLISTED") {
+      await employerEngine.reviewApplication(
+        applicationId,
+        employerId,
+        status,
+        employerFeedback,
+      );
+    } else {
+      return {
+        success: false,
+        errors: {
+          server: ["Invalid application status."],
+        },
+      };
+    }
+  } catch (error) {
+    console.error("Application Review Error:", error);
+
+    return {
+      success: false,
+      errors: {
+        server: [error.message || "Failed to update application."],
+      },
+    };
+  }
+
+  revalidatePath("/dashboard/employer/applications");
+
+  revalidatePath(`/dashboard/employer/applications/${applicationId}`);
+
+  if (jobId) {
+    revalidatePath(`/dashboard/employer/jobs/${jobId}/applicants`);
+  }
+
+  return {
+    success: true,
+    message:
+      status === "REJECTED"
+        ? "Application rejected successfully."
+        : status === "ACCEPTED"
+          ? "Application accepted successfully."
+          : "Application status updated successfully.",
+  };
 }

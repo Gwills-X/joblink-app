@@ -21,6 +21,17 @@ export async function insertMysqlJob(employerId, jobData) {
   const sanitizedCompanyId =
     company_id && company_id !== "" ? company_id : null;
 
+  if (sanitizedCompanyId) {
+    const ownedCompanyRows = await query(
+      "SELECT id FROM companies WHERE id = ? AND owner_id = ? LIMIT 1",
+      [sanitizedCompanyId, employerId],
+    );
+
+    if (!ownedCompanyRows || ownedCompanyRows.length === 0) {
+      throw new Error("You do not own the selected company profile.");
+    }
+  }
+
   const sql = `
     INSERT INTO jobs (id, company_id, posted_by, title, description, employment_type, location, salary, deadline, max_applicants, listing_type, status) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'OPEN')
@@ -124,7 +135,19 @@ export async function modifyMysqlJob(postId, userId, updateData) {
       deadline,
       max_applicants,
       status,
+      company_id,
     } = updateData;
+
+    if (company_id && company_id !== "") {
+      const ownedCompanyRows = await query(
+        "SELECT id FROM companies WHERE id = ? AND owner_id = ? LIMIT 1",
+        [company_id, userId],
+      );
+
+      if (!ownedCompanyRows || ownedCompanyRows.length === 0) {
+        throw new Error("You do not own the selected company profile.");
+      }
+    }
 
     const sql = `
       UPDATE jobs 
@@ -192,11 +215,15 @@ export async function updateMysqlApplicationReview(
 ) {
   try {
     const checkSql = `
-      SELECT ja.id 
+      SELECT ja.id, ja.status
       FROM job_applications ja
-      JOIN jobs j ON ja.job_id = j.id
-      WHERE ja.id = ? AND j.posted_by = ?
+      INNER JOIN jobs j
+        ON ja.job_id = j.id
+      WHERE ja.id = ?
+        AND j.posted_by = ?
+      LIMIT 1
     `;
+
     const rows = await query(checkSql, [applicationId, employerId]);
 
     if (!rows || rows.length === 0) {
@@ -204,18 +231,31 @@ export async function updateMysqlApplicationReview(
     }
 
     const updateSql = `
-      UPDATE job_applications 
-      SET status = ?, employer_feedback = ? 
+      UPDATE job_applications
+      SET
+        status = ?,
+        employer_feedback = ?,
+        rejection_reason = ?
       WHERE id = ?
     `;
 
-    return await query(updateSql, [
+    const rejectionReason =
+      status === "REJECTED" ? employerFeedback || null : null;
+
+    const result = await query(updateSql, [
       status,
       employerFeedback || null,
+      rejectionReason,
       applicationId,
     ]);
+
+    return {
+      success: true,
+      result,
+    };
   } catch (error) {
     console.error("❌ MySQL Application Review Update Fault:", error.message);
+
     throw error;
   }
 }
