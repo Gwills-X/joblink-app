@@ -35,9 +35,9 @@ export default function CreateJobForm({ companies = [] }) {
   }, [isCompanyPost, listingType]);
 
   return (
-    <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8'>
+    <div className='rounded-xl border border-slate-200 bg-white p-6 text-slate-900 shadow-md sm:p-8 dark:border-slate-800 dark:bg-slate-900 dark:text-white dark:shadow-none'>
       <div className='mb-6'>
-        <h2 className='text-lg font-semibold text-slate-100'>
+        <h2 className='text-lg font-semibold text-slate-900 dark:text-slate-100'>
           Post a New Listing
         </h2>
 
@@ -58,7 +58,7 @@ export default function CreateJobForm({ companies = [] }) {
         <div>
           <label
             htmlFor='company_id'
-            className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+            className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Associated Company{" "}
             <span className='text-slate-600 normal-case'>(Optional)</span>
           </label>
@@ -69,7 +69,7 @@ export default function CreateJobForm({ companies = [] }) {
             value={companyId}
             onChange={(e) => setCompanyId(e.target.value)}
             disabled={isPending}
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'>
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100'>
             <option value=''>Personal / Independent Post</option>
 
             {companies.map((company, index) => (
@@ -91,7 +91,7 @@ export default function CreateJobForm({ companies = [] }) {
         <div>
           <label
             htmlFor='title'
-            className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+            className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Listing Title <span className='text-rose-400'>*</span>
           </label>
 
@@ -110,7 +110,7 @@ export default function CreateJobForm({ companies = [] }) {
                     ? "e.g. Looking for a UI/UX Designer to Collaborate"
                     : "e.g. Partnership Opportunity for Digital Product"
             }
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 disabled:opacity-50'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
 

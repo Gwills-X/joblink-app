@@ -21,6 +21,7 @@ export default function FollowButton({
     startTransition(async () => {
       try {
         const res = await toggleFollowAction(currentUserId, targetId);
+        setIsFollowing(res?.status === "followed");
 
         // 3. Refresh the Server Component data (stats) without a full page reload
         router.refresh();
@@ -59,7 +60,7 @@ export default function FollowButton({
       disabled={isPending}
       className={`px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-widest transition-all duration-200 ${
         isFollowing
-          ? "bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700"
+          ? "border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
           : "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
       }`}>
       {isPending ? "Updating..." : isFollowing ? "Following" : "Follow"}

@@ -40,14 +40,14 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
 
     return (
       <div
-        className='relative border-l border-slate-800 pl-4 mt-4 transition-all'
+        className='relative mt-4 border-l border-slate-200 pl-4 transition-all dark:border-slate-800'
         style={{
           marginLeft: depth > 0 ? `${Math.min(depth * 0.5, 2)}rem` : "0rem",
         }}>
         {/* Connection node dot element indicator */}
-        <div className='absolute -left-[4.5px] top-4 w-2 h-2 rounded-full bg-slate-800' />
+        <div className='absolute left-[-4.5px] top-4 h-2 w-2 rounded-full bg-slate-800 dark:bg-slate-700' />
 
-        <div className='bg-slate-900/40 border border-slate-800/60 rounded-xl p-4 hover:border-slate-700/50 transition-all'>
+        <div className='rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-emerald-200 dark:border-slate-800/60 dark:bg-slate-900/40 dark:hover:border-slate-700/50'>
           <div className='flex items-center justify-between text-[11px] font-mono text-slate-500 mb-1'>
             <span className='text-emerald-400 font-bold'>
               @{node.author || "anonymous"}
@@ -85,7 +85,7 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
             </div>
           </div>
 
-          <p className='text-xs text-slate-300 font-sans leading-relaxed'>
+          <p className='font-sans text-xs leading-relaxed text-slate-700 dark:text-slate-300'>
             {node.content}
           </p>
 
@@ -118,7 +118,7 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
                     type='text'
                     name='content'
                     placeholder={`Reply directly to @${node.author}...`}
-                    className='w-full px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 focus:outline-none focus:border-emerald-500'
+                    className='w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200'
                     required
                   />
                   <button
@@ -148,8 +148,8 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
   return (
     <div className='space-y-6'>
       {/* 📥 TOP LEVEL COMMENT INPUT INJECTION INTERFACE */}
-      <div className='bg-slate-900/20 border border-slate-800/80 rounded-2xl p-4 mt-4'>
-        <h3 className='text-xs font-mono font-bold uppercase text-slate-400 mb-2'>
+      <div className='mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800/80 dark:bg-slate-900/20'>
+        <h3 className='mb-2 text-xs font-mono font-bold uppercase text-slate-600 dark:text-slate-400'>
           Broadcast New Thread Node
         </h3>
         {currentUserId ? (
@@ -164,7 +164,7 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
               name='content'
               placeholder='Type out your response array payload here...'
               rows={3}
-              className='w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-emerald-500 resize-none'
+              className='w-full resize-none rounded-xl border border-slate-300 bg-white p-3 text-xs text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200'
               required
             />
             <div className='flex justify-end'>
@@ -176,7 +176,7 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
             </div>
           </form>
         ) : (
-          <div className='p-3 bg-slate-950/40 border border-slate-900 rounded-xl text-center'>
+          <div className='rounded-xl border border-slate-200 bg-white p-3 text-center dark:border-slate-900 dark:bg-slate-950/40'>
             <p className='text-xs font-mono text-slate-500 italic'>
               // Core stream locked. Please sign in to write comments on this
               pipeline.
@@ -186,7 +186,7 @@ export default function LikeComments({ post, currentUserId, comments = [] }) {
       </div>
 
       {/* SYSTEM THREADS LAYER */}
-      <div className='mt-8 pt-6 border-t border-slate-800/60'>
+      <div className='mt-8 border-t border-slate-200 pt-6 dark:border-slate-800/60'>
         <h2 className='text-sm font-mono font-bold uppercase tracking-wider text-slate-400 mb-4'>
           System Threads Layer
         </h2>

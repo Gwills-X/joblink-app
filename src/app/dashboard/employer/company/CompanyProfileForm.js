@@ -192,11 +192,11 @@ export default function CompanyProfileForm({ companyProfile = null }) {
   // ---------------------------------------------------------
 
   return (
-    <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8'>
+    <div className='rounded-xl border border-slate-200 bg-white p-6 text-slate-900 shadow-md sm:p-8 dark:border-slate-800 dark:bg-slate-900 dark:text-white dark:shadow-none'>
       <form action={formAction} className='space-y-6'>
         {/* COMPANY NAME */}
         <div>
-          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Company Name <span className='text-rose-400'>*</span>
           </label>
 
@@ -206,7 +206,7 @@ export default function CompanyProfileForm({ companyProfile = null }) {
             required
             disabled={isPending}
             placeholder='TechNova Solutions'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
 
           {state?.errors?.name && (
@@ -216,7 +216,7 @@ export default function CompanyProfileForm({ companyProfile = null }) {
 
         {/* TAGLINE */}
         <div>
-          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Tagline
           </label>
 
@@ -225,13 +225,13 @@ export default function CompanyProfileForm({ companyProfile = null }) {
             defaultValue={companyProfile?.tagline || ""}
             disabled={isPending}
             placeholder='Building digital solutions for a smarter future'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
 
         {/* INDUSTRY */}
         <div>
-          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Industry
           </label>
 
@@ -240,13 +240,13 @@ export default function CompanyProfileForm({ companyProfile = null }) {
             defaultValue={companyProfile?.industry || ""}
             disabled={isPending}
             placeholder='Information Technology'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
 
         {/* LOCATION */}
         <div>
-          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Company Location
           </label>
 
@@ -255,13 +255,13 @@ export default function CompanyProfileForm({ companyProfile = null }) {
             defaultValue={companyProfile?.location || ""}
             disabled={isPending}
             placeholder='Abuja, Nigeria'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
 
         {/* DESCRIPTION */}
         <div>
-          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+          <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
             Company Description
           </label>
 
@@ -271,7 +271,7 @@ export default function CompanyProfileForm({ companyProfile = null }) {
             rows={6}
             disabled={isPending}
             placeholder='Describe your company, your mission, the services you provide, and the type of talent you are looking to hire.'
-            className='block w-full resize-y rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50'
+            className='block w-full resize-y rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
 

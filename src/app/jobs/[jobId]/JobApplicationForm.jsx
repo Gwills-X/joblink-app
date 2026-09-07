@@ -58,8 +58,8 @@ export default function JobApplicationForm({
 
   if (!authUser) {
     return (
-      <div className='space-y-4 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 text-center shadow-xl backdrop-blur-md'>
-        <p className='text-sm text-slate-300'>
+      <div className='space-y-4 rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-900 shadow-md backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/60 dark:text-white dark:shadow-xl'>
+        <p className='text-sm text-slate-700 dark:text-slate-300'>
           You must be logged into your account to submit an{" "}
           {isJob ? "application" : "opportunity proposal"}.
         </p>
@@ -78,11 +78,11 @@ export default function JobApplicationForm({
   // ---------------------------------------------------------
 
   return (
-    <div className='space-y-6 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 shadow-xl backdrop-blur-md'>
+    <div className='space-y-6 rounded-3xl border border-slate-200 bg-white p-8 text-slate-900 shadow-md backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/60 dark:text-white dark:shadow-xl'>
       {/* HEADER */}
       <div className='space-y-2'>
         <div className='flex flex-wrap items-center justify-between gap-3'>
-          <h2 className='text-xl font-bold tracking-tight text-white'>
+          <h2 className='text-xl font-bold tracking-tight text-slate-900 dark:text-white'>
             {heading}
           </h2>
 
@@ -91,7 +91,9 @@ export default function JobApplicationForm({
           </span>
         </div>
 
-        <p className='font-mono text-xs text-slate-400'>{description}</p>
+        <p className='font-mono text-xs text-slate-600 dark:text-slate-400'>
+          {description}
+        </p>
       </div>
 
       {/* SERVER ERROR */}
@@ -119,11 +121,11 @@ export default function JobApplicationForm({
         {/* PERSONAL INFORMATION */}
         <div className='space-y-4'>
           <div>
-            <h3 className='text-sm font-semibold text-white'>
+            <h3 className='text-sm font-semibold text-slate-900 dark:text-white'>
               Personal Information
             </h3>
 
-            <p className='mt-1 text-xs text-slate-500'>
+            <p className='mt-1 text-xs text-slate-600 dark:text-slate-500'>
               Make sure your contact information is correct.
             </p>
           </div>
@@ -131,7 +133,7 @@ export default function JobApplicationForm({
           <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
             {/* NAME */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 Full Name <span className='text-emerald-400'>*</span>
               </label>
 
@@ -142,13 +144,13 @@ export default function JobApplicationForm({
                 required
                 placeholder='e.g. Godswill Eguavoen'
                 disabled={isPending}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
               />
             </div>
 
             {/* EMAIL */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 Email Address <span className='text-emerald-400'>*</span>
               </label>
 
@@ -159,13 +161,13 @@ export default function JobApplicationForm({
                 required
                 placeholder='e.g. user@example.com'
                 disabled={isPending}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
               />
             </div>
 
             {/* PHONE */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 Phone Number <span className='text-emerald-400'>*</span>
               </label>
 
@@ -176,13 +178,13 @@ export default function JobApplicationForm({
                 required
                 placeholder='e.g. +234 800 000 0000'
                 disabled={isPending}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
               />
             </div>
 
             {/* GITHUB */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 GitHub Repository Link{" "}
                 <span className='text-emerald-400'>*</span>
               </label>
@@ -194,13 +196,13 @@ export default function JobApplicationForm({
                 required
                 placeholder='https://github.com/username'
                 disabled={isPending}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
               />
             </div>
 
             {/* PORTFOLIO */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 Portfolio Link{" "}
                 <span className='text-slate-500'>(Optional)</span>
               </label>
@@ -213,13 +215,13 @@ export default function JobApplicationForm({
                 }
                 placeholder='https://yourportfolio.com'
                 disabled={isPending}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
               />
             </div>
 
             {/* CV */}
             <div className='space-y-2'>
-              <label className='block font-mono text-xs text-slate-300'>
+              <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
                 CV / Resume <span className='text-emerald-400'>*</span>
               </label>
 
@@ -231,11 +233,11 @@ export default function JobApplicationForm({
                 onChange={(event) => {
                   setCvFileSelected(Boolean(event.target.files?.length));
                 }}
-                className='w-full rounded-xl border border-slate-800 bg-slate-950 p-2.5 text-xs text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-emerald-500 file:px-4 file:py-2 file:font-mono file:text-xs file:text-slate-950 hover:file:bg-emerald-400'
+                className='w-full rounded-xl border border-slate-300 bg-slate-50 p-2.5 text-xs text-slate-700 file:mr-4 file:rounded-lg file:border-0 file:bg-emerald-500 file:px-4 file:py-2 file:font-mono file:text-xs file:text-slate-950 hover:file:bg-emerald-400 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300'
               />
 
               {authUser.cv_url ? (
-                <p className='text-[10px] leading-relaxed text-slate-400'>
+                <p className='text-[10px] leading-relaxed text-slate-600 dark:text-slate-400'>
                   📌 You already have a resume saved to your profile. You can
                   use it, or upload a new one for this{" "}
                   {isJob ? "application" : "proposal"}.
@@ -256,8 +258,8 @@ export default function JobApplicationForm({
         </div>
 
         {/* BIO */}
-        <div className='space-y-2 border-t border-slate-800 pt-6'>
-          <label className='block font-mono text-xs text-slate-300'>
+        <div className='space-y-2 border-t border-slate-200 pt-6 dark:border-slate-800'>
+          <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
             Short Bio / About Yourself{" "}
             <span className='text-emerald-400'>*</span>
           </label>
@@ -269,13 +271,13 @@ export default function JobApplicationForm({
             defaultValue={authUser.bio || ""}
             disabled={isPending}
             placeholder='Tell the employer about yourself, your experience, strengths, skills, and relevant background...'
-            className='w-full rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm leading-relaxed text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+            className='w-full rounded-xl border border-slate-300 bg-slate-50 p-4 text-sm leading-relaxed text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
           />
         </div>
 
         {/* COVER LETTER / PITCH */}
         <div className='space-y-2'>
-          <label className='block font-mono text-xs text-slate-300'>
+          <label className='block font-mono text-xs text-slate-700 dark:text-slate-300'>
             {isJob
               ? "Cover Letter / Why You Are Applying"
               : `${applicationLabel} / Why You Are Interested`}{" "}
@@ -292,12 +294,12 @@ export default function JobApplicationForm({
                 ? "Explain why you are a strong fit for this position..."
                 : `Explain your interest in this ${listingType.toLowerCase()} and what you can bring to the opportunity...`
             }
-            className='w-full rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm leading-relaxed text-white focus:border-emerald-500 focus:outline-none disabled:opacity-50'
+            className='w-full rounded-xl border border-slate-300 bg-slate-50 p-4 text-sm leading-relaxed text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 disabled:opacity-50'
           />
         </div>
 
         {/* SUBMIT */}
-        <div className='flex flex-col gap-4 border-t border-slate-800 pt-5 sm:flex-row sm:items-center sm:justify-between'>
+        <div className='flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800'>
           <div>
             <p className='font-mono text-[10px] text-slate-500'>
               By submitting, your information will be sent to the listing owner

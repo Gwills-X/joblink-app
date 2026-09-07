@@ -3,9 +3,9 @@ import { Building2, MapPin, ArrowRight } from "lucide-react";
 
 export default function CompanyCard({ company }) {
   return (
-    <div className='group rounded-xl border border-slate-800 bg-slate-900/40 p-5 transition-all hover:border-slate-700'>
+    <div className='group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-300 dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none dark:hover:border-slate-700'>
       <div className='flex items-start justify-between gap-4'>
-        <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-slate-800 bg-slate-950'>
+        <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
           {company.logo_url ? (
             <img
               src={company.logo_url}
@@ -18,7 +18,7 @@ export default function CompanyCard({ company }) {
         </div>
       </div>
 
-      <h3 className='mt-4 text-sm font-semibold text-slate-200'>
+      <h3 className='mt-4 text-sm font-semibold text-slate-900 dark:text-slate-200'>
         {company.name}
       </h3>
 

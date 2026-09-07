@@ -13,7 +13,7 @@ const NavLinks = ({ label, href, className = "" }) => {
     ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm"
     : className
       ? "" // If a custom parent style block is passed for a state (like Register), bypass defaults
-      : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/50";
+      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800/50";
 
   return (
     <Link

@@ -4,8 +4,10 @@ export default function TermsPage() {
   return (
     <main className='max-w-3xl mx-auto py-16 px-6'>
       <BackLink />
-      <h1 className='text-4xl font-bold text-white mb-6'>Terms of Service</h1>
-      <div className='text-slate-400 space-y-4 text-sm'>
+      <h1 className='mb-6 text-4xl font-bold text-slate-900 dark:text-white'>
+        Terms of Service
+      </h1>
+      <div className='space-y-4 text-sm text-slate-700 dark:text-slate-400'>
         <p>
           By using VibeCred, you agree to these terms. Our platform is a
           professional space dedicated to constructive exchange.

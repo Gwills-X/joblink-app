@@ -24,13 +24,13 @@ export default function SettingsLayout({ children }) {
         <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
           Configuration
         </span>
-        <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
+        <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           Account <span className='text-emerald-400'>Settings</span>
         </h1>
       </div>
 
       {/* Sub-Nav */}
-      <div className='flex items-center gap-1 border-b border-slate-800 pb-0'>
+      <div className='flex items-center gap-1 border-b border-slate-200 pb-0 dark:border-slate-800'>
         {tabs.map((tab) => {
           const isActive = pathname === tab.href;
           return (
@@ -40,7 +40,7 @@ export default function SettingsLayout({ children }) {
               className={`inline-flex items-center gap-2 border-b-2 px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-wider transition-all duration-150 ${
                 isActive
                   ? "border-emerald-400 text-emerald-400"
-                  : "border-transparent text-slate-500 hover:text-slate-300"
+                  : "border-transparent text-slate-600 hover:text-slate-900 dark:text-slate-500 dark:hover:text-slate-300"
               }`}>
               <tab.icon className='h-3.5 w-3.5' />
               {tab.name}
@@ -49,7 +49,7 @@ export default function SettingsLayout({ children }) {
         })}
       </div>
 
-      <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6'>
+      <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:shadow-none'>
         {children}
       </div>
     </div>

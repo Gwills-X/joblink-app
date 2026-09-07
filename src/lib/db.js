@@ -66,3 +66,25 @@ export async function query(sql, values = [], retries = 2) {
     throw err;
   }
 }
+
+export async function withTransaction(callback) {
+  const db = await connectToDatabase();
+  const connection = await db.getConnection();
+
+  try {
+    await connection.beginTransaction();
+    const result = await callback({
+      query: async (sql, values = []) => {
+        const [rows] = await connection.query(sql, values);
+        return rows;
+      },
+    });
+    await connection.commit();
+    return result;
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
+}

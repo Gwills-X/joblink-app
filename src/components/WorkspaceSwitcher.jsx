@@ -9,7 +9,7 @@ export default function WorkspaceSwitcher({
 
   return (
     <div className='panel p-4 flex flex-col gap-4 font-mono'>
-      <div className='flex items-center justify-between text-xs text-slate-400 uppercase tracking-wider border-b border-slate-800/70 pb-3'>
+      <div className='flex items-center justify-between border-b border-slate-200 pb-3 text-xs uppercase tracking-wider text-slate-600 dark:border-slate-800/70 dark:text-slate-400'>
         <span>Active Workspace</span>
         <span className='text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20'>
           {isEmployerActive ? "Employer Mode" : "Candidate Mode"}
@@ -23,7 +23,7 @@ export default function WorkspaceSwitcher({
             className={`flex flex-col items-start p-3 rounded-3xl border transition-all ${
               !isEmployerActive
                 ? "bg-emerald-500/10 border-emerald-500/40 text-white shadow-lg shadow-emerald-500/10"
-                : "bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200"
             }`}>
             <span className='text-xs font-semibold uppercase tracking-[0.2em]'>
               Seeker Hub
@@ -35,7 +35,7 @@ export default function WorkspaceSwitcher({
         ) : (
           <Link
             href='/dashboard/seeker/profile'
-            className='flex flex-col items-start p-3 rounded-xl border border-dashed border-slate-700 bg-slate-950/30 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all'>
+            className='flex flex-col items-start rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-slate-600 transition-all hover:border-emerald-500/50 hover:text-emerald-600 dark:border-slate-700 dark:bg-slate-950/30 dark:text-slate-400 dark:hover:text-emerald-400'>
             <span className='text-xs font-bold uppercase tracking-wider'>
               + Seeker Profile
             </span>
@@ -51,7 +51,7 @@ export default function WorkspaceSwitcher({
             className={`flex flex-col items-start p-3 rounded-3xl border transition-all ${
               isEmployerActive
                 ? "bg-emerald-500/10 border-emerald-500/40 text-white shadow-lg shadow-emerald-500/10"
-                : "bg-slate-950/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-slate-200"
             }`}>
             <span className='text-xs font-semibold uppercase tracking-[0.2em]'>
               Employer Portal
@@ -63,7 +63,7 @@ export default function WorkspaceSwitcher({
         ) : (
           <Link
             href='/dashboard/employer/company'
-            className='flex flex-col items-start p-3 rounded-xl border border-dashed border-slate-700 bg-slate-950/30 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all'>
+            className='flex flex-col items-start rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-slate-600 transition-all hover:border-emerald-500/50 hover:text-emerald-600 dark:border-slate-700 dark:bg-slate-950/30 dark:text-slate-400 dark:hover:text-emerald-400'>
             <span className='text-xs font-bold uppercase tracking-wider'>
               + Company Profile
             </span>

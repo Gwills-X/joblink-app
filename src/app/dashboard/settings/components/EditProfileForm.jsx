@@ -31,8 +31,8 @@ export default function EditProfileForm({ initialUser }) {
   return (
     <form action={formAction} className='mx-auto w-full max-w-lg space-y-5'>
       {/* Avatar */}
-      <div className='flex items-center gap-4 rounded-lg border border-slate-800 bg-slate-950 p-4'>
-        <div className='flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-[var(--color-slate)]'>
+      <div className='flex items-center gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950'>
+        <div className='flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800'>
           {avatarUrl ? (
             <img
               src={avatarUrl}
@@ -67,7 +67,7 @@ export default function EditProfileForm({ initialUser }) {
             name='name'
             defaultValue={initialUser.name}
             placeholder='Your name'
-            className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+            className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
           />
         </div>
         <div>
@@ -80,7 +80,7 @@ export default function EditProfileForm({ initialUser }) {
               name='location'
               defaultValue={initialUser.location}
               placeholder='City, Country'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 py-2.5 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function EditProfileForm({ initialUser }) {
               name='github'
               defaultValue={initialUser.github_handle}
               placeholder='username'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 py-2.5 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function EditProfileForm({ initialUser }) {
               name='website'
               defaultValue={initialUser.website_url}
               placeholder='https://'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 py-2.5 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function EditProfileForm({ initialUser }) {
           defaultValue={initialUser.bio}
           placeholder='Write a short professional bio...'
           rows={4}
-          className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+          className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
         />
       </div>
 
@@ -136,13 +136,13 @@ export default function EditProfileForm({ initialUser }) {
           name='currentPassword'
           required
           placeholder='Enter current password to save changes'
-          className='block w-full rounded-lg border border-rose-500/20 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-rose-500/50 focus:outline-none focus:ring-1 focus:ring-rose-500/20 transition-all duration-150'
+          className='block w-full rounded-lg border border-rose-500/20 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-rose-500/50 focus:outline-none focus:ring-1 focus:ring-rose-500/20 transition-all duration-150 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
         />
       </div>
 
       <button
         disabled={isPending}
-        className='flex w-full items-center justify-center rounded-lg bg-emerald-500 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50'>
+        className='flex w-full items-center justify-center rounded-lg bg-emerald-500 py-2.5 text-sm font-medium text-(--color-slate) transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50'>
         {isPending ? (
           <span className='flex items-center gap-2'>
             <Loader2 className='h-4 w-4 animate-spin' />

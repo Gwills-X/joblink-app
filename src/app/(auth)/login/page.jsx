@@ -17,12 +17,12 @@ export default function Login() {
           <div className='flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10 font-mono text-sm font-bold text-emerald-400'>
             J
           </div>
-          <span className='font-mono text-lg font-semibold tracking-tight text-slate-100'>
+          <span className='font-mono text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
             JobLink
           </span>
         </div>
 
-        <h2 className='mt-6 text-center text-xl font-semibold tracking-tight text-slate-100'>
+        <h2 className='mt-6 text-center text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           Sign in to your account
         </h2>
         <p className='mt-2 text-center text-sm text-slate-500'>
@@ -36,7 +36,7 @@ export default function Login() {
       </div>
 
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0'>
-        <div className='rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-8 sm:px-10'>
+        <div className='rounded-xl border border-slate-200 bg-white px-6 py-8 shadow-md sm:px-10 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none'>
           <form action={action} className='space-y-5'>
             {state?.errors?.server && (
               <div className='rounded-lg border border-rose-500/20 bg-rose-500/10 p-3'>
@@ -54,7 +54,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor='email'
-                className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+                className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
                 Email Address
               </label>
               <input
@@ -64,7 +64,7 @@ export default function Login() {
                 defaultValue={state?.email}
                 disabled={isPending}
                 required
-                className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-150'
+                className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
                 placeholder='name@company.com'
               />
               {state?.errors?.email && (
@@ -79,7 +79,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor='password'
-                className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+                className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
                 Password
               </label>
               <div className='relative'>
@@ -89,7 +89,7 @@ export default function Login() {
                   name='password'
                   disabled={isPending}
                   required
-                  className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 pr-10 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-150'
+                  className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 pr-10 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
                   placeholder='••••••••••••'
                 />
                 <button

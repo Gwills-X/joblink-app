@@ -67,7 +67,7 @@ export default function ToastProvider({ children }) {
                 ? "bg-emerald-500 text-slate-900 border-emerald-600"
                 : t.type === "error"
                   ? "bg-rose-600 text-white border-rose-700"
-                  : "bg-slate-800 text-white border-slate-700"
+                  : "border-slate-200 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
             }`}>
             <div className='flex items-start gap-3'>
               <div className='flex-1 text-sm font-medium'>{t.message}</div>

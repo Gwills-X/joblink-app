@@ -61,6 +61,16 @@ export const socialEngine = {
     );
   },
 
+  async getUserCompanies(userId) {
+    return await query(
+      `SELECT id, name, tagline, description, industry, website, logo_url, location
+       FROM companies
+       WHERE owner_id = ?
+       ORDER BY created_at DESC`,
+      [userId],
+    );
+  },
+
   async checkIfFollowing(followerId, targetId) {
     const rows = await query(
       "SELECT id FROM follows WHERE follower_id = ? AND followed_id = ?",

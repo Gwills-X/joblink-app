@@ -80,6 +80,10 @@ export async function fetchMysqlTimeline(currentUserId) {
         p.created_at AS createdAt, p.media_url AS mediaUrl, p.public_id AS publicId,
         p.file_type AS fileType, p.format AS format,
         p.category AS category, p.type AS type,
+        EXISTS(
+          SELECT 1 FROM follows f
+          WHERE f.follower_id = ? AND f.followed_id = p.authorId
+        ) AS isFollowing,
         COUNT(DISTINCT l.user_id, l.post_id) AS likesCount,
         SUM(CASE WHEN l.user_id = ? THEN 1 ELSE 0 END) AS hasLiked,
         (SELECT COUNT(*) FROM posts c WHERE c.parent_id = p.id) AS commentsCount
@@ -89,7 +93,7 @@ export async function fetchMysqlTimeline(currentUserId) {
       GROUP BY p.id, p.title, p.content, p.authorId, p.author, p.created_at, p.media_url, p.file_type, p.format, p.public_id, p.category, p.type
       ORDER BY p.created_at DESC
     `;
-    const rows = await query(sql, [currentUserId]);
+    const rows = await query(sql, [currentUserId, currentUserId]);
 
     return rows.map((row) => ({
       ...row,
@@ -108,6 +112,7 @@ export async function fetchMysqlTimeline(currentUserId) {
       likesCount: Number(row.likesCount || 0),
       hasLiked: Boolean(row.hasLiked > 0),
       commentsCount: Number(row.commentsCount || 0),
+      isFollowing: Boolean(row.isFollowing),
     }));
   } catch (error) {
     console.error("❌ MySQL Timeline Retrieval Fault:", error.message);
@@ -152,6 +157,23 @@ export async function fetchMysqlPostById(postId, currentUserId = null) {
     console.error("❌ MySQL Single Fetch Operational Fault:", error.message);
     throw error;
   }
+}
+
+export async function updateMysqlPost(postId, updateData) {
+  const { title, content } = updateData;
+  await query(
+    "UPDATE posts SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+    [title, content, postId],
+  );
+  return { success: true };
+}
+
+export async function updateMysqlPostMedia(postId, mediaUrl, publicId) {
+  await query(
+    "UPDATE posts SET media_url = ?, public_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+    [mediaUrl, publicId || null, postId],
+  );
+  return { success: true };
 }
 
 /**

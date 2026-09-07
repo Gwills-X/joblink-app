@@ -32,7 +32,7 @@ export default function ChatRoomCard({ room, currentUserId }) {
   return (
     <Link
       href={`/dashboard/chats/${room.id}`}
-      className='group flex items-center justify-between gap-4 rounded-2xl border border-slate-700 bg-slate-950/60 p-4 transition-all duration-200 hover:border-emerald-500/50 hover:bg-slate-900'>
+      className='group flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-emerald-300 dark:border-slate-700 dark:bg-slate-950/60 dark:hover:border-emerald-500/50 dark:hover:bg-slate-900'>
       <div className='flex min-w-0 flex-1 items-center gap-3'>
         <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-sm font-semibold text-emerald-300'>
           {initials || "U"}
@@ -41,7 +41,7 @@ export default function ChatRoomCard({ room, currentUserId }) {
         <div className='min-w-0 flex-1'>
           <div className='flex items-center justify-between gap-2'>
             <div className='flex min-w-0 items-center gap-2'>
-              <h3 className='truncate text-sm font-semibold text-slate-100'>
+              <h3 className='truncate text-sm font-semibold text-slate-900 dark:text-slate-100'>
                 {otherUser.name}
               </h3>
               <Circle className='h-2 w-2 fill-emerald-400 text-emerald-400' />
@@ -51,9 +51,14 @@ export default function ChatRoomCard({ room, currentUserId }) {
             </span>
           </div>
 
-          <p className='mt-1 line-clamp-2 text-[11px] leading-relaxed text-slate-400'>
+          <p className='mt-1 line-clamp-2 text-[11px] leading-relaxed text-slate-600 dark:text-slate-400'>
             {lastMessage}
           </p>
+          {Number(room.unread_count) > 0 && (
+            <span className='mt-2 inline-flex rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-semibold text-slate-950'>
+              {room.unread_count} unread
+            </span>
+          )}
         </div>
       </div>
 

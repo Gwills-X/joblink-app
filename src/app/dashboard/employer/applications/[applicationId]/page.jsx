@@ -2,8 +2,10 @@ import getAuthUser from "@/lib/getAuthUser";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { employerEngine } from "@/services/employerEngine";
+import { chatEngine } from "@/services/chatEngine";
 import { reviewApplicationAction } from "@/actions/employerActions";
 import EmployerActionModal from "../../components/EmployerActionModal";
+import ChatRequestButton from "@/components/ChatRequestButton";
 import {
   ArrowLeft,
   Mail,
@@ -35,6 +37,10 @@ export default async function EmployerApplicationDetailPage({ params }) {
     console.error("Application Detail Fetch Error:", error);
     return redirect("/dashboard/employer");
   }
+  const chatRelationship = await chatEngine.getRelationship(
+    userId,
+    application.applicant_id,
+  );
 
   return (
     <div className='mx-auto max-w-4xl space-y-8 py-8 px-4'>
@@ -81,6 +87,18 @@ export default async function EmployerApplicationDetailPage({ params }) {
               application={application}
               onUpdateStatus={reviewApplicationAction}
             />
+            {(application.status === "SHORTLISTED" ||
+              application.status === "ACCEPTED") && (
+              <div className='mt-3'>
+                <ChatRequestButton
+                  receiverId={application.applicant_id}
+                  receiverName={application.candidate_name}
+                  relationshipStatus={chatRelationship.status}
+                  roomId={chatRelationship.roomId}
+                  requestId={chatRelationship.requestId}
+                />
+              </div>
+            )}
           </div>
         </div>
 

@@ -85,16 +85,16 @@ export default function EmployerActionModal({ application, onUpdateStatus }) {
       </button>
 
       {isOpen && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4'>
-          <div className='w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl space-y-6'>
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-slate-950/30 p-4 backdrop-blur-sm dark:bg-slate-950/80'>
+          <div className='w-full max-w-lg space-y-6 rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-2xl dark:border-slate-800 dark:bg-slate-900 dark:text-white'>
             {/* Header */}
-            <div className='flex items-center justify-between border-b border-slate-800 pb-4'>
+            <div className='flex items-center justify-between border-b border-slate-200 pb-4 dark:border-slate-800'>
               <div>
-                <h3 className='text-sm font-semibold text-white'>
+                <h3 className='text-sm font-semibold text-slate-900 dark:text-white'>
                   Candidate Communication & Decision
                 </h3>
 
-                <p className='text-xs text-slate-400 mt-0.5 font-mono'>
+                <p className='mt-0.5 text-xs font-mono text-slate-600 dark:text-slate-400'>
                   {application.candidate_name} ({application.candidate_email})
                 </p>
               </div>
@@ -118,7 +118,7 @@ export default function EmployerActionModal({ application, onUpdateStatus }) {
                 <select
                   value={actionType}
                   onChange={handleStatusChange}
-                  className='w-full rounded-xl border border-slate-800 bg-slate-950 px-3 py-2.5 text-xs text-white focus:border-emerald-500 focus:outline-none'>
+                  className='w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-xs text-slate-900 outline-none focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white'>
                   <option value='ACCEPTED'>ACCEPTED</option>
 
                   <option value='REJECTED'>REJECTED</option>
@@ -140,7 +140,7 @@ export default function EmployerActionModal({ application, onUpdateStatus }) {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder='Write a personalized message to the applicant...'
-                  className='w-full rounded-xl border border-slate-800 bg-slate-950 p-3.5 text-xs text-white focus:border-emerald-500 focus:outline-none leading-relaxed'
+                  className='w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-xs leading-relaxed text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-white'
                   required
                 />
 
@@ -150,11 +150,11 @@ export default function EmployerActionModal({ application, onUpdateStatus }) {
               </div>
 
               {/* Buttons */}
-              <div className='flex justify-end gap-3 pt-2 border-t border-slate-800'>
+              <div className='flex justify-end gap-3 border-t border-slate-200 pt-2 dark:border-slate-800'>
                 <button
                   type='button'
                   onClick={() => setIsOpen(false)}
-                  className='rounded-xl border border-slate-800 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-slate-800 transition-colors'>
+                  className='rounded-xl border border-slate-300 px-4 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-100 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800'>
                   Cancel
                 </button>
 

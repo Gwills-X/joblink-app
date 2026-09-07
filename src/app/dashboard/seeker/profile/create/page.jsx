@@ -24,7 +24,7 @@ export default function CreateSeekerProfilePage() {
         <span className='font-mono text-[10px] uppercase tracking-widest text-slate-500'>
           Candidate Onboarding
         </span>
-        <h1 className='mt-1 text-2xl font-semibold tracking-tight text-slate-100'>
+        <h1 className='mt-1 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           Create Your Profile
         </h1>
         <p className='mt-1 text-xs leading-relaxed text-slate-500'>
@@ -45,9 +45,9 @@ export default function CreateSeekerProfilePage() {
       )}
 
       <form action={formAction} className='space-y-4'>
-        <div className='space-y-4 rounded-xl border border-slate-800 bg-[var(--color-surface)] p-5 sm:p-6'>
+        <div className='space-y-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none'>
           <div>
-            <label className='mb-1.5 block text-xs font-semibold text-slate-200'>
+            <label className='mb-1.5 block text-xs font-semibold text-slate-900 dark:text-slate-200'>
               Professional Headline <span className='text-emerald-400'>*</span>
             </label>
             <input
@@ -56,7 +56,7 @@ export default function CreateSeekerProfilePage() {
               required
               maxLength={150}
               placeholder='e.g. Full-Stack Developer | React & Node.js'
-              className='w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-200 outline-none placeholder:text-slate-600 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30'
+              className='w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:placeholder:text-slate-600'
             />
             <p className='mt-1 text-[10px] text-slate-600'>
               A short description of your professional role.
@@ -64,7 +64,7 @@ export default function CreateSeekerProfilePage() {
           </div>
 
           <div>
-            <label className='mb-1.5 block text-xs font-semibold text-slate-200'>
+            <label className='mb-1.5 block text-xs font-semibold text-slate-900 dark:text-slate-200'>
               Professional Bio <span className='text-emerald-400'>*</span>
             </label>
             <textarea
@@ -73,7 +73,7 @@ export default function CreateSeekerProfilePage() {
               rows={5}
               maxLength={3000}
               placeholder='Tell employers about your experience, skills and career goals...'
-              className='w-full resize-none rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-slate-200 outline-none placeholder:text-slate-600 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30'
+              className='w-full resize-none rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:placeholder:text-slate-600'
             />
           </div>
 

@@ -15,7 +15,7 @@ export default function MediaVaultPage() {
         <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
           Asset Management
         </span>
-        <h1 className='mt-2 text-xl font-semibold tracking-tight text-slate-100'>
+        <h1 className='mt-2 text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           Media <span className='text-emerald-400'>Vault</span>
         </h1>
         <p className='mt-1 text-xs text-slate-500'>
@@ -24,8 +24,8 @@ export default function MediaVaultPage() {
       </div>
 
       {/* Upload Zone */}
-      <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-800 bg-[var(--color-surface)] py-10 px-6 transition-all duration-150 hover:border-slate-700'>
-        <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-slate-950'>
+      <div className='flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 bg-white px-6 py-10 shadow-sm transition-all duration-150 hover:border-emerald-300 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-slate-700'>
+        <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
           <Upload className='h-4 w-4 text-slate-600' />
         </div>
         <button className='mt-4 text-sm font-medium text-emerald-400 transition-colors duration-150 hover:text-emerald-300'>
@@ -41,11 +41,11 @@ export default function MediaVaultPage() {
         {assets.map((asset) => (
           <div
             key={asset.id}
-            className='group rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition-all duration-150 hover:border-slate-700'>
-            <div className='flex aspect-square items-center justify-center rounded-md border border-slate-800 bg-slate-950'>
+            className='group rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-emerald-300 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-slate-700'>
+            <div className='flex aspect-square items-center justify-center rounded-md border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
               <FileImage className='h-6 w-6 text-slate-700 transition-colors duration-150 group-hover:text-emerald-400/40' />
             </div>
-            <h3 className='mt-3 truncate text-xs font-medium text-slate-300'>
+            <h3 className='mt-3 truncate text-xs font-medium text-slate-900 dark:text-slate-300'>
               {asset.name}
             </h3>
             <p className='mt-1 font-mono text-[10px] tracking-wide text-slate-600'>

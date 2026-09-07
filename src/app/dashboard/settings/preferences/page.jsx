@@ -9,7 +9,7 @@ export default function PreferencesPage() {
         <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
           Configuration
         </span>
-        <h2 className='mt-1 text-lg font-semibold tracking-tight text-slate-100'>
+        <h2 className='mt-1 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           App Preferences
         </h2>
       </div>
@@ -37,13 +37,13 @@ export default function PreferencesPage() {
         ].map((item) => (
           <div
             key={item.label}
-            className='flex items-center justify-between rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition-all duration-150 hover:border-slate-700'>
+            className='flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-emerald-300 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-slate-700'>
             <div className='flex items-center gap-3'>
-              <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-slate-800 bg-slate-950 text-slate-500'>
+              <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-slate-50 text-slate-500 dark:border-slate-800 dark:bg-slate-950'>
                 <item.icon className='h-3.5 w-3.5' />
               </div>
               <div>
-                <h3 className='text-sm font-medium text-slate-200'>
+                <h3 className='text-sm font-medium text-slate-900 dark:text-slate-200'>
                   {item.label}
                 </h3>
                 <p className='text-xs text-slate-500'>{item.desc}</p>

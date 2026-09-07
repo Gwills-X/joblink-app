@@ -24,6 +24,12 @@ export async function fetchMysqlMarketplaceListings(
   if (userId) {
     sql += `,
       MAX(
+        EXISTS(
+          SELECT 1 FROM follows f
+          WHERE f.follower_id = ? AND f.followed_id = j.posted_by
+        )
+      ) AS isFollowing,
+      MAX(
         CASE
           WHEN myapp.id IS NOT NULL THEN 1
           ELSE 0
@@ -58,7 +64,7 @@ export async function fetchMysqlMarketplaceListings(
   const params = [];
 
   if (userId) {
-    params.push(userId);
+    params.push(userId, userId);
   }
 
   if (typeFilter && typeFilter !== "ALL") {

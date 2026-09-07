@@ -32,7 +32,7 @@ export default function SecurityPage({ userId }) {
         <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
           Authentication
         </span>
-        <h2 className='mt-1 text-lg font-semibold tracking-tight text-slate-100'>
+        <h2 className='mt-1 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
           Security & Access
         </h2>
       </div>
@@ -50,7 +50,7 @@ export default function SecurityPage({ userId }) {
 
       <div className='space-y-3'>
         <div>
-          <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
+          <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-500'>
             Current Password
           </label>
           <div className='relative'>
@@ -60,14 +60,14 @@ export default function SecurityPage({ userId }) {
               type='password'
               required
               placeholder='Enter current password'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 py-2.5 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
         </div>
 
         <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <div>
-            <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-500'>
+            <label className='mb-1.5 block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-500'>
               New Password
             </label>
             <input
@@ -75,7 +75,7 @@ export default function SecurityPage({ userId }) {
               type='password'
               required
               placeholder='New password'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
           <div>
@@ -87,7 +87,7 @@ export default function SecurityPage({ userId }) {
               type='password'
               required
               placeholder='Confirm password'
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function SecurityPage({ userId }) {
 
       <button
         type='submit'
-        className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-[var(--color-slate)] transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
+        className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-(--color-slate) transition-all duration-150 hover:bg-emerald-400 active:scale-[0.98]'>
         Update Credentials
       </button>
     </form>

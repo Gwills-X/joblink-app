@@ -123,7 +123,10 @@ export async function updatePostAction(postId, formData) {
     // Ownership & Time Shield Logic
     const createdAtTime = new Date(post.createdAt || post.created_at).getTime();
     const currentTime = new Date().getTime();
-    if (currentTime - createdAtTime > 30 * 60 * 1000) {
+    if (
+      Number.isNaN(createdAtTime) ||
+      currentTime - createdAtTime >= 30 * 60 * 1000
+    ) {
       return {
         success: false,
         errors: { server: ["The 30-minute edit window has expired."] },

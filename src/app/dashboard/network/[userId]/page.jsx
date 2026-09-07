@@ -1,4 +1,5 @@
 import { socialEngine } from "@/services/socialEngine";
+import { chatEngine } from "@/services/chatEngine";
 import FollowButton from "@/components/FollowButton";
 import ChatRequestButton from "@/components/ChatRequestButton";
 import Link from "next/link";
@@ -24,8 +25,13 @@ export default async function UserProfilePage({ params }) {
   if (!user) return notFound();
 
   const posts = await socialEngine.getUserPosts(userId);
+  const companies = await socialEngine.getUserCompanies(userId);
   const stats = await socialEngine.getFollowStats(userId);
   const isFollowing = await socialEngine.checkIfFollowing(
+    authUser.userId,
+    userId,
+  );
+  const chatRelationship = await chatEngine.getRelationship(
     authUser.userId,
     userId,
   );
@@ -40,9 +46,9 @@ export default async function UserProfilePage({ params }) {
       </Link>
 
       {/* Profile Card */}
-      <div className='rounded-2xl border border-slate-700 bg-[var(--color-surface)] p-8 backdrop-blur'>
+      <div className='rounded-2xl border border-slate-700 bg-(--color-surface) p-8 backdrop-blur'>
         <div className='flex flex-col gap-6 sm:flex-row sm:items-start'>
-          <div className='flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-gradient-to-br from-emerald-500/10 to-slate-900'>
+          <div className='flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-linear-to-br from-emerald-500/10 to-slate-900'>
             {user.profile_pic_url ? (
               <img
                 src={user.profile_pic_url}
@@ -85,16 +91,21 @@ export default async function UserProfilePage({ params }) {
               </div>
 
               <div className='flex flex-col gap-2 sm:items-end'>
-                <FollowButton
-                  currentUserId={authUser?.userId}
-                  targetId={userId}
-                  isInitiallyFollowing={isFollowing}
-                />
                 {String(authUser.userId || authUser.id) !== String(userId) && (
-                  <ChatRequestButton
-                    receiverId={userId}
-                    receiverName={user.name}
-                  />
+                  <>
+                    <FollowButton
+                      currentUserId={authUser?.userId}
+                      targetId={userId}
+                      isInitiallyFollowing={isFollowing}
+                    />
+                    <ChatRequestButton
+                      receiverId={userId}
+                      receiverName={user.name}
+                      relationshipStatus={chatRelationship.status}
+                      roomId={chatRelationship.roomId}
+                      requestId={chatRelationship.requestId}
+                    />
+                  </>
                 )}
               </div>
             </div>
@@ -121,6 +132,50 @@ export default async function UserProfilePage({ params }) {
           </div>
         </div>
       </div>
+
+      {companies.length > 0 && (
+        <div className='space-y-4'>
+          <div>
+            <h2 className='text-xl font-semibold text-slate-900 dark:text-slate-50'>
+              Companies
+            </h2>
+            <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
+              Organizations connected to {user.name}
+            </p>
+          </div>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            {companies.map((company) => (
+              <div
+                key={company.id}
+                className='rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+                <div className='flex items-start gap-3'>
+                  {company.logo_url ? (
+                    <img
+                      src={company.logo_url}
+                      alt=''
+                      className='h-10 w-10 rounded-lg border border-slate-200 object-cover dark:border-slate-700'
+                    />
+                  ) : null}
+                  <div className='min-w-0'>
+                    <h3 className='font-semibold text-slate-900 dark:text-slate-100'>
+                      {company.name}
+                    </h3>
+                    {company.tagline && (
+                      <p className='mt-1 text-xs text-slate-600 dark:text-slate-400'>
+                        {company.tagline}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className='mt-4 flex flex-wrap gap-3 text-xs text-slate-600 dark:text-slate-400'>
+                  {company.industry && <span>{company.industry}</span>}
+                  {company.location && <span>{company.location}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Posts */}
       <div className='space-y-5'>

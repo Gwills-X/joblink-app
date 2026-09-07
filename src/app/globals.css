@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-ink: #070b17;
   --color-slate: #0f172a;
@@ -11,6 +13,21 @@
   --color-foreground: #e2e8f0;
   --color-muted: #94a3b8;
   --color-border: rgba(148, 163, 184, 0.12);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+  --color-ink: #f5f7f8;
+  --color-slate: #0f172a;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f1f5f9;
+  --color-foreground: #0f172a;
+  --color-muted: #475569;
+  --color-border: rgba(15, 23, 42, 0.12);
 }
 
 @layer base {
@@ -33,6 +50,69 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.light body {
+    background-color: var(--color-ink);
+    color: var(--color-foreground);
+  }
+
+  html.light .bg-slate-50,
+  html.light .bg-slate-100 {
+    background-color: var(--color-surface-soft);
+  }
+
+  html.light .bg-slate-800,
+  html.light .bg-slate-800\/40,
+  html.light .bg-slate-800\/50 {
+    background-color: var(--color-surface-soft);
+  }
+  html.light .bg-slate-950\/70,
+  html.light .bg-slate-950,
+  html.light .bg-slate-950\/60,
+  html.light .bg-slate-950\/70,
+  html.light .bg-slate-950\/80,
+  html.light .bg-slate-950\/85,
+  html.light .bg-slate-950\/90,
+  html.light .bg-slate-950\/95 {
+    background-color: var(--color-surface-soft);
+  }
+
+  html.light .bg-slate-900,
+  html.light .bg-slate-900\/40,
+  html.light .bg-slate-900\/50,
+  html.light .bg-slate-900\/60,
+  html.light .bg-slate-950\/30,
+  html.light .bg-slate-950\/40,
+  html.light .bg-slate-950\/50,
+  html.light .bg-slate-900\/90 {
+    background-color: var(--color-surface);
+  }
+
+  html.light .text-white,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light .text-slate-300 {
+    color: var(--color-foreground);
+  }
+
+  html.light .text-slate-50,
+  html.light .text-slate-500,
+  html.light .text-slate-600 {
+    color: var(--color-muted);
+  }
+
+  html.light .text-slate-700,
+  html.light .text-slate-900 {
+    color: var(--color-foreground);
+  }
+
+  html.light .border-slate-200,
+  html.light .border-slate-300,
+  html.light .border-slate-800,
+  html.light .border-slate-700,
+  html.light .border-slate-900 {
+    border-color: var(--color-border);
   }
 
   ::selection {
@@ -98,5 +178,86 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     line-height: 1;
+  }
+
+  html.light .text-white,
+  html.light .text-slate-50,
+  html.light .text-slate-100,
+  html.light .text-slate-200,
+  html.light .text-slate-300 {
+    color: var(--color-foreground);
+  }
+
+  html.light .text-slate-400,
+  html.light .text-slate-500 {
+    color: #475569;
+  }
+
+  html.light .text-slate-600,
+  html.light .text-slate-700,
+  html.light .text-slate-900 {
+    color: #1e293b;
+  }
+
+  html.light .bg-slate-50,
+  html.light .bg-slate-100,
+  html.light .bg-slate-800,
+  html.light .bg-slate-800\/30,
+  html.light .bg-slate-800\/40,
+  html.light .bg-slate-800\/50,
+  html.light .bg-slate-950,
+  html.light .bg-slate-950\/30,
+  html.light .bg-slate-950\/40,
+  html.light .bg-slate-950\/50,
+  html.light .bg-slate-950\/60,
+  html.light .bg-slate-950\/70,
+  html.light .bg-slate-950\/80,
+  html.light .bg-slate-950\/85,
+  html.light .bg-slate-950\/90,
+  html.light .bg-slate-950\/95 {
+    background-color: var(--color-surface-soft);
+  }
+
+  html.light .bg-slate-900,
+  html.light .bg-slate-900\/30,
+  html.light .bg-slate-900\/40,
+  html.light .bg-slate-900\/50,
+  html.light .bg-slate-900\/60,
+  html.light .bg-slate-900\/70,
+  html.light .bg-slate-900\/80,
+  html.light .bg-slate-900\/90 {
+    background-color: var(--color-surface);
+  }
+
+  html.light .border-slate-200,
+  html.light .border-slate-300,
+  html.light .border-slate-700,
+  html.light .border-slate-800,
+  html.light .border-slate-900 {
+    border-color: rgba(15, 23, 42, 0.2);
+  }
+
+  html.light .hover\:bg-slate-100:hover,
+  html.light .hover\:bg-slate-200:hover,
+  html.light .hover\:bg-slate-800:hover,
+  html.light .hover\:bg-slate-800\/40:hover,
+  html.light .hover\:bg-slate-800\/50:hover,
+  html.light .dark\:hover\:bg-slate-800:hover,
+  html.light .dark\:hover\:bg-slate-900:hover {
+    background-color: #d1fae5;
+  }
+
+  html.light .hover\:text-slate-900:hover,
+  html.light .hover\:text-slate-100:hover,
+  html.light .dark\:hover\:text-slate-100:hover,
+  html.light .dark\:hover\:text-white:hover {
+    color: #047857;
+  }
+
+  html.light .hover\:border-slate-300:hover,
+  html.light .hover\:border-slate-400:hover,
+  html.light .dark\:hover\:border-slate-600:hover,
+  html.light .dark\:hover\:border-slate-700:hover {
+    border-color: #34d399;
   }
 }

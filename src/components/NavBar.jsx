@@ -1,156 +1,160 @@
-import React from "react";
-import NavLinks from "./NavLinks";
-import { logout } from "@/actions/auth";
-import MobileMenu from "./MobileMenu";
-import getAuthUser from "@/lib/getAuthUser";
 import Link from "next/link";
+import { BriefcaseBusiness, Compass, FileText, Plus } from "lucide-react";
+import { logout } from "@/actions/auth";
+import getAuthUser from "@/lib/getAuthUser";
+import MobileMenu from "./MobileMenu";
+import NavLinks from "./NavLinks";
+import UserMenu from "./UserMenu";
+import ThemeToggle from "./ThemeToggle";
+
+const discoveryLinks = [
+  { href: "/", label: "Explore", icon: Compass },
+  { href: "/jobs", label: "Jobs", icon: BriefcaseBusiness },
+  { href: "/docs", label: "Resources", icon: FileText },
+];
+
+function DiscoveryLinks({ mobile = false }) {
+  return (
+    <div
+      className={
+        mobile ? "flex flex-col gap-1" : "hidden items-center gap-1 md:flex"
+      }>
+      {discoveryLinks.map(({ href, label, icon: Icon }) => (
+        <NavLinks
+          key={href}
+          href={href}
+          label={
+            <span className='flex items-center gap-2'>
+              <Icon className='h-4 w-4' />
+              {label}
+            </span>
+          }
+          className='px-3 py-2'
+        />
+      ))}
+    </div>
+  );
+}
+
+function MobileAccountLinks({ user }) {
+  return (
+    <div className='space-y-3 border-t border-slate-200 pt-4 dark:border-slate-800'>
+      {user ? (
+        <>
+          <div className='flex items-center gap-3 px-2'>
+            <div className='flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-950'>
+              {user.profile_pic_url ? (
+                <img
+                  src={user.profile_pic_url}
+                  alt=''
+                  className='h-full w-full object-cover'
+                />
+              ) : (
+                <span className='font-mono text-xs font-bold text-emerald-400'>
+                  {user.name?.charAt(0).toUpperCase() || "U"}
+                </span>
+              )}
+            </div>
+            <div className='min-w-0'>
+              <p className='truncate text-sm font-semibold text-slate-900 dark:text-white'>
+                {user.name}
+              </p>
+              <p className='font-mono text-[10px] uppercase tracking-wider text-emerald-400'>
+                {user.role || "member"}
+              </p>
+            </div>
+          </div>
+          <Link
+            href='/dashboard'
+            className='block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'>
+            Dashboard
+          </Link>
+          <Link
+            href='/dashboard/seeker/applications'
+            className='block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'>
+            Applications
+          </Link>
+          <form action={logout}>
+            <button
+              type='submit'
+              className='w-full rounded-lg px-3 py-2 text-left text-sm text-rose-300 hover:bg-rose-500/10'>
+              Sign Out
+            </button>
+          </form>
+        </>
+      ) : (
+        <div className='flex flex-col gap-2'>
+          <NavLinks label='Sign In' href='/login' />
+          <NavLinks
+            label='Create Account'
+            href='/register'
+            className='rounded-lg bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-emerald-400'
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 const NavBar = async () => {
   const authUser = await getAuthUser();
-  const userRole = authUser?.role || "guest";
-
-  const LinksMarkup = ({ isMobile = false }) => (
-    <ul
-      className={`${
-        isMobile
-          ? "flex flex-col gap-4 text-sm w-full"
-          : "hidden md:flex items-center gap-6 text-sm"
-      } font-medium text-slate-400 [&_li]:transition-colors [&_li]:duration-200`}>
-      {/* MOBILE IDENTITY PANEL */}
-      {isMobile && authUser && (
-        <li className='flex items-center gap-3 border-b border-slate-800/80 pb-4 mb-2'>
-          <div className='w-10 h-10 rounded-xl border border-slate-800 overflow-hidden shrink-0 bg-slate-900 flex items-center justify-center'>
-            {authUser?.profile_pic_url ? (
-              <img
-                src={authUser.profile_pic_url}
-                alt='Avatar'
-                className='w-full h-full object-cover'
-              />
-            ) : (
-              <span className='text-xs font-bold text-emerald-400 font-mono'>
-                {authUser.name?.charAt(0).toUpperCase()}
-              </span>
-            )}
-          </div>
-          <div className='min-w-0 flex-1'>
-            <div className='text-white font-bold text-sm truncate'>
-              {authUser?.name || "User"}
-            </div>
-            <div className='text-[10px] text-emerald-400 font-mono uppercase tracking-wider'>
-              {userRole}
-            </div>
-          </div>
-        </li>
-      )}
-
-      {authUser ? (
-        <>
-          {/* Desktop Profile Icon Avatar Dropdown Link */}
-          {!isMobile && (
-            <li className='flex items-center'>
-              <Link
-                href='/dashboard/settings'
-                className='w-9 h-9 rounded-xl border border-slate-800 bg-slate-900 overflow-hidden hover:border-emerald-500/50 transition-all flex items-center justify-center shadow-inner'>
-                {authUser?.profile_pic_url ? (
-                  <img
-                    src={authUser.profile_pic_url}
-                    alt='Avatar'
-                    className='w-full h-full object-cover'
-                  />
-                ) : (
-                  <span className='text-xs font-bold text-emerald-400 font-mono'>
-                    {authUser.name?.charAt(0).toUpperCase()}
-                  </span>
-                )}
-              </Link>
-            </li>
-          )}
-
-          <li className='hover:text-white'>
-            <NavLinks label='Dashboard' href='/dashboard' />
-          </li>
-          <li className='hover:text-white'>
-            <NavLinks
-              label='Applications'
-              href='/dashboard/seeker/applications'
-            />
-          </li>
-          <li className='hover:text-white'>
-            <NavLinks label='Post Opportunity' href='/posts/create' />
-          </li>
-          <li>
-            <form action={logout}>
-              <button
-                type='submit'
-                className='text-rose-400 hover:text-rose-300 text-sm font-medium transition-colors cursor-pointer'>
-                Sign Out
-              </button>
-            </form>
-          </li>
-        </>
-      ) : (
-        <>
-          <li className='hover:text-white'>
-            <NavLinks label='Sign In' href='/login' />
-          </li>
-          <li>
-            <NavLinks
-              label='Create Account'
-              href='/register'
-              className='bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 rounded-xl font-semibold transition-all block text-xs shadow-md cursor-pointer'
-            />
-          </li>
-        </>
-      )}
-    </ul>
-  );
 
   return (
-    <header className='w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-900 sticky top-0 z-50 selection:bg-emerald-500/20 selection:text-emerald-400'>
-      <nav className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between'>
-        {/* Logo & Main Nav Items */}
-        <div className='flex items-center gap-8'>
-          <Link href='/' className='flex items-center gap-2.5 group'>
-            <div className='h-8 w-8 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white shadow-sm group-hover:bg-emerald-500 transition-colors'>
+    <header className='sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 text-slate-900 shadow-sm backdrop-blur-md selection:bg-emerald-500/20 selection:text-emerald-400 dark:border-slate-800 dark:bg-slate-900/90 dark:text-white dark:shadow-none'>
+      <nav className='mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8'>
+        <div className='flex min-w-0 items-center gap-5'>
+          <Link href='/' className='group flex shrink-0 items-center gap-2.5'>
+            <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 font-bold text-white shadow-sm transition-colors group-hover:bg-emerald-500'>
               J
             </div>
-            <span className='font-bold text-white text-lg tracking-tight font-mono'>
+            <span className='font-mono text-lg font-bold tracking-tight text-slate-900 dark:text-white'>
               JobLink
             </span>
           </Link>
-
-          <div className='hidden sm:flex items-center gap-6 text-sm text-slate-400 font-medium'>
-            <NavLinks
-              href='/'
-              label={
-                <span className='hover:text-white transition-colors'>
-                  Home Feed
-                </span>
-              }
-            />
-            <NavLinks
-              href='/jobs'
-              label={
-                <span className='hover:text-white transition-colors'>Jobs</span>
-              }
-            />
-            <NavLinks
-              href='/docs'
-              label={
-                <span className='hover:text-white transition-colors'>
-                  Resources
-                </span>
-              }
-            />
-          </div>
+          <DiscoveryLinks />
         </div>
 
-        {/* Desktop Navigation Links */}
-        <LinksMarkup isMobile={false} />
+        <div className='hidden items-center gap-3 md:flex'>
+          <ThemeToggle />
+          {authUser && (
+            <Link
+              href='/posts/create'
+              className='inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-3.5 py-2 text-xs font-semibold text-slate-950 shadow-sm transition-all hover:bg-emerald-400 hover:shadow-emerald-500/20 active:scale-[0.98]'>
+              <Plus className='h-4 w-4' />
+              Post Opportunity
+            </Link>
+          )}
+          {authUser ? (
+            <UserMenu user={authUser} logoutAction={logout} />
+          ) : (
+            <div className='flex items-center gap-2'>
+              <NavLinks label='Sign In' href='/login' />
+              <NavLinks
+                label='Create Account'
+                href='/register'
+                className='rounded-lg bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-emerald-400'
+              />
+            </div>
+          )}
+        </div>
 
-        {/* Mobile Navigation Drawer */}
         <MobileMenu>
-          <LinksMarkup isMobile={true} />
+          <DiscoveryLinks mobile />
+          <div className='flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-800'>
+            <span className='text-sm text-slate-600 dark:text-slate-400'>
+              Appearance
+            </span>
+            <ThemeToggle />
+          </div>
+          {authUser && (
+            <Link
+              href='/posts/create'
+              className='flex items-center gap-2 rounded-lg bg-emerald-500 px-3 py-2.5 text-sm font-semibold text-slate-950'>
+              <Plus className='h-4 w-4' />
+              Post Opportunity
+            </Link>
+          )}
+          <MobileAccountLinks user={authUser} />
         </MobileMenu>
       </nav>
     </header>

@@ -11,22 +11,22 @@ export default function ContactPage() {
           <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Get in Touch
           </span>
-          <h1 className='mt-2 text-3xl font-semibold tracking-tight text-slate-100'>
+          <h1 className='mt-2 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
             Contact <span className='text-emerald-400'>Support</span>
           </h1>
           <p className='mt-2 text-xs text-slate-500'>
-            Have questions, feedback, or need technical assistance with your
-            account? We are here to help.
+            Have questions, feedback, or need help finding your way around
+            JobLink? We are here to help.
           </p>
         </div>
 
-        <div className='space-y-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 text-sm leading-relaxed text-slate-400'>
+        <div className='space-y-5 rounded-xl border border-slate-200 bg-white p-6 text-sm leading-relaxed text-slate-700 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:shadow-none'>
           <p>
-            You can reach our engineering and support team directly via email.
-            We strive to review and respond to all platform inquiries promptly.
+            You can reach the JobLink support team directly via email. We review
+            account, opportunity, community, and partnership questions promptly.
           </p>
 
-          <div className='inline-flex items-center gap-3 rounded-lg border border-slate-800 bg-slate-950 px-4 py-3'>
+          <div className='inline-flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-950'>
             <Mail className='h-4 w-4 text-slate-600' />
             <span className='font-mono text-[11px] uppercase tracking-wider text-slate-500'>
               Email:
@@ -38,7 +38,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <div className='border-t border-slate-800 pt-5'>
+          <div className='border-t border-slate-200 pt-5 dark:border-slate-800'>
             <span className='block font-mono text-[10px] font-medium uppercase tracking-wider text-slate-600'>
               Operations Center
             </span>

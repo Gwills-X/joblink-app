@@ -108,10 +108,10 @@ export default function BlogPostForm({ handler }) {
 
     if (fileType === "raw") {
       return (
-        <div className='flex items-center gap-3 p-4 bg-slate-950 border border-slate-800 rounded-lg'>
+        <div className='flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950'>
           <span className='text-xl'>📄</span>
           <div className='flex flex-col'>
-            <span className='text-xs text-slate-400 font-mono uppercase font-bold tracking-wider'>
+            <span className='text-xs font-mono font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400'>
               Document Ready
             </span>
             <span className='text-xs text-emerald-400 font-mono'>
@@ -135,12 +135,12 @@ export default function BlogPostForm({ handler }) {
     <form
       ref={formRef}
       action={handleSubmit}
-      className='max-w-2xl mx-auto pt-4 bg-slate-900 rounded-2xl shadow-xl border border-slate-800 space-y-6'>
+      className='mx-auto max-w-2xl space-y-6 rounded-2xl border border-slate-200 bg-white pt-4 text-slate-900 shadow-md dark:border-slate-800 dark:bg-slate-900 dark:text-white dark:shadow-xl'>
       <div className='space-y-1 px-6'>
-        <h2 className='text-2xl font-bold tracking-tight text-slate-100'>
+        <h2 className='text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100'>
           Create New Post
         </h2>
-        <p className='text-sm text-slate-400'>
+        <p className='text-sm text-slate-600 dark:text-slate-400'>
           Share your latest insights and technical updates
         </p>
       </div>
@@ -151,7 +151,9 @@ export default function BlogPostForm({ handler }) {
       )}
       {/* Title Input Field */}
       <div className='flex flex-col space-y-1.5 px-6'>
-        <label htmlFor='title' className='text-sm font-medium text-slate-300'>
+        <label
+          htmlFor='title'
+          className='text-sm font-medium text-slate-700 dark:text-slate-300'>
           Title
         </label>
         <input
@@ -160,13 +162,15 @@ export default function BlogPostForm({ handler }) {
           name='title'
           defaultValue={state?.title || ""}
           disabled={isPending}
-          className='w-full rounded-lg bg-slate-950 border border-slate-800 p-2.5 text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm disabled:opacity-50'
+          className='w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 disabled:opacity-50'
           placeholder='Enter post title'
         />
       </div>
       {/* Content Input Field */}
       <div className='flex flex-col space-y-1.5 px-6'>
-        <label htmlFor='content' className='text-sm font-medium text-slate-300'>
+        <label
+          htmlFor='content'
+          className='text-sm font-medium text-slate-700 dark:text-slate-300'>
           Content
         </label>
         <textarea
@@ -175,13 +179,13 @@ export default function BlogPostForm({ handler }) {
           rows='6'
           defaultValue={state?.content || ""}
           disabled={isPending}
-          className='w-full rounded-lg bg-slate-950 border border-slate-800 p-2.5 text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm resize-none disabled:opacity-50'
+          className='w-full resize-none rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 disabled:opacity-50'
           placeholder='Write your post content here...'></textarea>
       </div>
       <div className='flex flex-col space-y-1.5 px-6'>
         <label
           htmlFor='category'
-          className='text-sm font-medium text-slate-300'>
+          className='text-sm font-medium text-slate-700 dark:text-slate-300'>
           Post Category
         </label>
         <select
@@ -190,7 +194,7 @@ export default function BlogPostForm({ handler }) {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           disabled={isPending}
-          className='w-full rounded-lg bg-slate-950 border border-slate-800 p-2.5 text-slate-100 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 text-sm'>
+          className='w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100'>
           <option value='General'>General</option>
           <option value='Announcement'>Announcement</option>
           <option value='Awareness'>Awareness</option>
@@ -208,7 +212,7 @@ export default function BlogPostForm({ handler }) {
       <input type='hidden' name='type' value='POST' />
       {/* File Upload Configuration Layer */}
       <div className='space-y-2 px-6'>
-        <label className='text-sm font-medium text-slate-300'>
+        <label className='text-sm font-medium text-slate-700 dark:text-slate-300'>
           Attach File
         </label>
         <input
@@ -216,7 +220,7 @@ export default function BlogPostForm({ handler }) {
           accept='image/*, video/mp4, video/x-m4v, video/quicktime, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
           onChange={handleFileChange}
           disabled={uploading || isPending}
-          className='text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-emerald-400 hover:file:bg-slate-700 file:transition-colors file:cursor-pointer disabled:opacity-50'
+          className='text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-emerald-500 file:px-4 file:py-2 file:font-semibold file:text-slate-950 file:transition-colors hover:file:bg-emerald-400 dark:text-slate-400 disabled:opacity-50'
         />
 
         {uploading && (
@@ -226,7 +230,7 @@ export default function BlogPostForm({ handler }) {
         )}
 
         {mediaUrl && (
-          <div className='mt-4 p-4 border border-slate-800 bg-slate-950/40 rounded-xl transition-all duration-300'>
+          <div className='mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-all duration-300 dark:border-slate-800 dark:bg-slate-950/40'>
             <p className='text-xs text-emerald-400 font-mono font-bold tracking-wider mb-2.5 uppercase'>
               Payload Preview:
             </p>

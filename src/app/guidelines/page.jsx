@@ -4,10 +4,10 @@ export default function GuidelinesPage() {
   return (
     <main className='max-w-3xl mx-auto py-16 px-6'>
       <BackLink />
-      <h1 className='text-4xl font-bold text-white mb-6'>
+      <h1 className='mb-6 text-4xl font-bold text-slate-900 dark:text-white'>
         Community Guidelines
       </h1>
-      <div className='text-slate-400 space-y-4'>
+      <div className='space-y-4 text-slate-700 dark:text-slate-400'>
         <ul className='list-disc pl-5 space-y-2'>
           <li>
             <strong>Respect Diversity:</strong> Everyone comes from different

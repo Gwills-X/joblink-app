@@ -38,15 +38,15 @@ export default function ChatRequestModal({
   };
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 backdrop-blur-sm'>
-      <div className='w-full max-w-lg rounded-2xl border border-slate-700 bg-[var(--color-surface)] shadow-2xl'>
-        <div className='flex items-center justify-between border-b border-slate-700 px-5 py-4'>
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-slate-950/10 px-4 backdrop-blur-sm dark:bg-slate-950/80'>
+      <div className='w-full max-w-lg rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-white'>
+        <div className='flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700'>
           <div className='flex items-center gap-3'>
             <div className='rounded-lg bg-emerald-500/10 p-2 text-emerald-400'>
               <MessageSquareText className='h-4 w-4' />
             </div>
             <div>
-              <h3 className='text-base font-semibold text-slate-100'>
+              <h3 className='text-base font-semibold text-slate-900 dark:text-slate-100'>
                 Chat request
               </h3>
               <p className='text-xs text-slate-500'>
@@ -58,7 +58,7 @@ export default function ChatRequestModal({
           <button
             type='button'
             onClick={onClose}
-            className='rounded-lg border border-slate-700 p-2 text-slate-400 hover:text-slate-100'>
+            className='rounded-lg border border-slate-200 p-2 text-slate-600 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:text-slate-100'>
             <X className='h-4 w-4' />
           </button>
         </div>
@@ -72,7 +72,7 @@ export default function ChatRequestModal({
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               rows={5}
-              className='w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-slate-200 outline-none ring-0 transition focus:border-emerald-500'
+              className='w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-3 text-sm text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:border-emerald-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:placeholder:text-slate-500'
               placeholder='I’d like to connect and learn more about your work.'
             />
           </div>
@@ -88,7 +88,7 @@ export default function ChatRequestModal({
             <button
               type='button'
               onClick={onClose}
-              className='rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300'>
+              className='rounded-lg border border-slate-300 px-4 py-2 text-sm text-slate-700 dark:border-slate-700 dark:text-slate-300'>
               Cancel
             </button>
             <button

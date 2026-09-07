@@ -11,7 +11,7 @@ export default function MobileMenu({ children }) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         type='button'
-        className='inline-flex items-center justify-center p-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 transition-all border border-transparent hover:border-slate-800'
+        className='inline-flex items-center justify-center rounded-xl border border-transparent p-2 text-slate-600 transition-all hover:border-slate-200 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:border-slate-800 dark:hover:bg-slate-900/60 dark:hover:text-slate-200'
         aria-controls='mobile-menu'
         aria-expanded={isOpen}>
         <span className='sr-only'>Open main menu</span>
@@ -48,7 +48,7 @@ export default function MobileMenu({ children }) {
       {isOpen && (
         <div
           id='mobile-menu'
-          className='absolute top-16 left-0 w-full bg-slate-950/95 backdrop-blur-lg border-b border-slate-900 p-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-150 z-50 flex flex-col shadow-2xl'>
+          className='absolute left-0 top-16 z-50 flex w-full flex-col space-y-4 border-b border-slate-200 bg-white/95 p-5 shadow-2xl backdrop-blur-lg animate-in fade-in slide-in-from-top-2 duration-150 dark:border-slate-900 dark:bg-slate-950/95'>
           <div className='flex flex-col gap-4' onClick={() => setIsOpen(false)}>
             {children}
           </div>

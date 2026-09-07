@@ -1,11 +1,84 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import OpportunityCard from "@/components/OpportunityCard";
 
-export default function JobsMarketplaceClient({ listings = [] }) {
-  const [typeFilter, setTypeFilter] = useState("ALL");
-  const [searchKeyword, setSearchKeyword] = useState("");
+const arrangementOptions = [
+  ["", "All arrangements"],
+  ["REMOTE", "Remote"],
+  ["ON_SITE", "On-site"],
+  ["HYBRID", "Hybrid"],
+];
+
+const categoryOptions = [
+  ["", "All categories"],
+  ["FULL_TIME", "Full-Time"],
+  ["CONTRACT", "Contract"],
+  ["PROJECT", "Project"],
+  ["PART_TIME", "Part-Time"],
+  ["PARTNERSHIP", "Partnership"],
+  ["COLLABORATION", "Collaboration"],
+];
+
+const locationOptions = [
+  ["", "All locations"],
+  ["BAUCHI", "Bauchi"],
+  ["ABUJA", "Abuja"],
+  ["INTERNATIONAL", "International / Worldwide"],
+];
+
+function matchesArrangement(item, arrangement) {
+  if (!arrangement) return true;
+  const text =
+    `${item.employment_type || ""} ${item.location || ""}`.toUpperCase();
+  if (arrangement === "REMOTE") return text.includes("REMOTE");
+  if (arrangement === "HYBRID") return text.includes("HYBRID");
+  return !text.includes("REMOTE") && !text.includes("HYBRID");
+}
+
+function FilterSelect({ label, value, options, onChange }) {
+  return (
+    <label className='flex min-w-0 flex-1 flex-col gap-1.5'>
+      <span className='font-mono text-[10px] font-semibold uppercase tracking-widest text-slate-500'>
+        {label}
+      </span>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className='w-full appearance-none rounded-xl border border-slate-300 bg-slate-50 px-3 py-2.5 text-xs font-medium text-slate-900 outline-none transition-colors hover:border-slate-400 focus:border-emerald-500/60 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:border-slate-600'>
+        {options.map(([optionValue, optionLabel]) => (
+          <option key={optionValue || "all"} value={optionValue}>
+            {optionLabel}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+export default function JobsMarketplaceClient({
+  listings = [],
+  currentUserId,
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchKeyword = searchParams.get("q") || "";
+  const arrangement = searchParams.get("arrangement") || "";
+  const category = searchParams.get("category") || "";
+  const location = searchParams.get("location") || "";
+
+  const updateFilters = (updates) => {
+    const nextParams = new URLSearchParams(searchParams.toString());
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) nextParams.set(key, value);
+      else nextParams.delete(key);
+    });
+    router.replace(nextParams.toString() ? `/jobs?${nextParams}` : "/jobs");
+  };
+
+  const resetFilters = () => router.replace("/jobs");
 
   // ---------------------------------------------------------
   // PREPARE LISTINGS
@@ -40,8 +113,24 @@ export default function JobsMarketplaceClient({ listings = [] }) {
 
     return preparedListings.filter((item) => {
       // Category filter
-      if (typeFilter !== "ALL" && item.listing_type !== typeFilter) {
+      if (
+        category &&
+        item.listing_type !== category &&
+        item.employment_type !== category
+      ) {
         return false;
+      }
+
+      if (!matchesArrangement(item, arrangement)) return false;
+
+      if (location) {
+        const itemLocation = String(item.location || "").toUpperCase();
+        if (location === "INTERNATIONAL") {
+          if (itemLocation.includes("BAUCHI") || itemLocation.includes("ABUJA"))
+            return false;
+        } else if (!itemLocation.includes(location)) {
+          return false;
+        }
       }
 
       // Search filter
@@ -65,33 +154,7 @@ export default function JobsMarketplaceClient({ listings = [] }) {
 
       return true;
     });
-  }, [preparedListings, typeFilter, searchKeyword]);
-
-  // ---------------------------------------------------------
-  // FILTER BUTTON
-  // ---------------------------------------------------------
-
-  const filterButtonClass = (type) => {
-    const active = typeFilter === type;
-
-    if (!active) {
-      return "rounded-xl px-4 py-2 text-xs font-semibold text-slate-400 transition-all hover:text-white";
-    }
-
-    if (type === "COLLABORATION") {
-      return "rounded-xl bg-purple-500 px-4 py-2 text-xs font-semibold text-white shadow-md";
-    }
-
-    if (type === "PROJECT") {
-      return "rounded-xl bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-md";
-    }
-
-    if (type === "PARTNERSHIP") {
-      return "rounded-xl bg-orange-500 px-4 py-2 text-xs font-semibold text-white shadow-md";
-    }
-
-    return "rounded-xl bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 shadow-md";
-  };
+  }, [preparedListings, category, arrangement, location, searchKeyword]);
 
   return (
     <div className='mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8'>
@@ -104,11 +167,11 @@ export default function JobsMarketplaceClient({ listings = [] }) {
           JOBLINK NETWORK
         </p>
 
-        <h1 className='text-3xl font-bold tracking-tight text-white'>
+        <h1 className='text-3xl font-bold tracking-tight text-slate-900 dark:text-white'>
           Jobs & Opportunities
         </h1>
 
-        <p className='max-w-2xl text-sm leading-relaxed text-slate-400'>
+        <p className='max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400'>
           Discover cutting-edge engineering opportunities, full-stack
           development gigs, projects, collaborations, and innovation
           partnerships.
@@ -125,64 +188,45 @@ export default function JobsMarketplaceClient({ listings = [] }) {
             <input
               type='search'
               value={searchKeyword}
-              onChange={(event) => setSearchKeyword(event.target.value)}
+              onChange={(event) => updateFilters({ q: event.target.value })}
               placeholder='Search jobs, projects, collaborations, companies...'
-              className='w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 outline-none transition-all focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20'
+              className='w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-600'
             />
           </div>
-
-          {searchKeyword && (
-            <button
-              type='button'
-              onClick={() => setSearchKeyword("")}
-              className='rounded-xl border border-slate-800 px-5 py-3 text-center text-sm font-medium text-slate-400 transition hover:border-slate-700 hover:text-white'>
-              Clear
-            </button>
-          )}
         </div>
       </div>
 
-      {/* ------------------------------------------------- */}
-      {/* FILTER BUTTONS */}
-      {/* ------------------------------------------------- */}
-
-      <div className='mb-8 overflow-x-auto'>
-        <div className='flex w-max items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900 p-1.5'>
-          <button
-            type='button'
-            onClick={() => setTypeFilter("ALL")}
-            className={filterButtonClass("ALL")}>
-            All Feed
-          </button>
-
-          <button
-            type='button'
-            onClick={() => setTypeFilter("JOB")}
-            className={filterButtonClass("JOB")}>
-            Jobs Only
-          </button>
-
-          <button
-            type='button'
-            onClick={() => setTypeFilter("COLLABORATION")}
-            className={filterButtonClass("COLLABORATION")}>
-            Collaborations
-          </button>
-
-          <button
-            type='button'
-            onClick={() => setTypeFilter("PROJECT")}
-            className={filterButtonClass("PROJECT")}>
-            Projects
-          </button>
-
-          <button
-            type='button'
-            onClick={() => setTypeFilter("PARTNERSHIP")}
-            className={filterButtonClass("PARTNERSHIP")}>
-            Partnerships
-          </button>
+      <div className='mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-md shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-black/10'>
+        <div className='grid gap-3 md:grid-cols-3'>
+          <FilterSelect
+            label='Work arrangement'
+            value={arrangement}
+            options={arrangementOptions}
+            onChange={(value) => updateFilters({ arrangement: value })}
+          />
+          <FilterSelect
+            label='Job category / type'
+            value={category}
+            options={categoryOptions}
+            onChange={(value) => updateFilters({ category: value })}
+          />
+          <FilterSelect
+            label='Location'
+            value={location}
+            options={locationOptions}
+            onChange={(value) => updateFilters({ location: value })}
+          />
         </div>
+        {(searchKeyword || arrangement || category || location) && (
+          <div className='mt-4 flex justify-end border-t border-slate-800 pt-3'>
+            <button
+              type='button'
+              onClick={resetFilters}
+              className='text-xs font-semibold text-emerald-400 transition-colors hover:text-emerald-300'>
+              Reset Filters
+            </button>
+          </div>
+        )}
       </div>
 
       {/* ------------------------------------------------- */}
@@ -212,97 +256,25 @@ export default function JobsMarketplaceClient({ listings = [] }) {
 
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
         {filteredListings.length === 0 ? (
-          <div className='col-span-full rounded-2xl border border-slate-800 bg-slate-900/60 p-16 text-center'>
-            <p className='text-sm text-slate-400'>
+          <div className='col-span-full rounded-2xl border border-slate-200 bg-white p-16 text-center dark:border-slate-800 dark:bg-slate-900/60'>
+            <p className='text-sm text-slate-600 dark:text-slate-400'>
               No available opportunities match your current search or filter.
             </p>
 
             <button
               type='button'
-              onClick={() => {
-                setTypeFilter("ALL");
-                setSearchKeyword("");
-              }}
+              onClick={resetFilters}
               className='mt-3 text-xs font-medium text-emerald-400 hover:underline'>
               Clear filters →
             </button>
           </div>
         ) : (
           filteredListings.map((item) => (
-            <div
+            <OpportunityCard
               key={item.id}
-              className='flex flex-col justify-between gap-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl backdrop-blur-md transition-all hover:border-slate-700 hover:shadow-2xl'>
-              <div className='space-y-4'>
-                {/* META */}
-
-                <div className='flex items-center justify-between'>
-                  <div className='flex flex-wrap items-center gap-2'>
-                    <span className='rounded-md border border-slate-800 bg-slate-950 px-2.5 py-1 font-mono text-xs uppercase text-slate-300'>
-                      {item.employment_type}
-                    </span>
-
-                    <span
-                      className={`rounded-md border px-2.5 py-1 font-mono text-xs ${
-                        item.listing_type === "COLLABORATION"
-                          ? "border-purple-500/20 bg-purple-500/10 text-purple-400"
-                          : item.listing_type === "PARTNERSHIP"
-                            ? "border-orange-500/20 bg-orange-500/10 text-orange-400"
-                            : item.listing_type === "PROJECT"
-                              ? "border-blue-500/20 bg-blue-500/10 text-blue-400"
-                              : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                      }`}>
-                      {item.listing_type}
-                    </span>
-                  </div>
-
-                  <span className='font-mono text-xs text-slate-500'>
-                    {new Date(item.created_at).toLocaleDateString()}
-                  </span>
-                </div>
-
-                {/* TITLE + COMPANY */}
-
-                <div>
-                  <h2 className='text-xl font-bold tracking-tight text-white transition-colors hover:text-emerald-400'>
-                    {item.title}
-                  </h2>
-
-                  <p className='mt-1 font-mono text-xs text-slate-400'>
-                    🏢 {item.company_name || "Independent listing"} • 📍{" "}
-                    {item.location || "Remote"}
-                  </p>
-                </div>
-
-                {/* DESCRIPTION */}
-
-                <p className='line-clamp-3 text-sm leading-relaxed text-slate-400'>
-                  {item.description}
-                </p>
-              </div>
-
-              {/* FOOTER */}
-
-              <div className='space-y-4 border-t border-slate-800/80 pt-4'>
-                <div className='flex items-center justify-between gap-4'>
-                  <span className='font-mono text-xs font-semibold text-emerald-400'>
-                    {item.salary
-                      ? `💰 ${item.salary}`
-                      : "💼 Competitive / Equity"}
-                  </span>
-
-                  <span className='rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 font-mono text-xs font-semibold text-emerald-400'>
-                    {item.remaining_slots}{" "}
-                    {item.remaining_slots === 1 ? "slot" : "slots"} remaining
-                  </span>
-                </div>
-
-                <Link
-                  href={`/jobs/${item.id}`}
-                  className='block rounded-xl bg-emerald-500 px-4 py-2.5 text-center text-xs font-semibold text-slate-950 shadow-md shadow-emerald-500/10 transition-all hover:bg-emerald-400'>
-                  View & Apply →
-                </Link>
-              </div>
-            </div>
+              opportunity={item}
+              currentUserId={currentUserId}
+            />
           ))
         )}
       </div>

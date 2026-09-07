@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className='w-full bg-slate-950 border-t border-slate-900/80 text-slate-400 mt-auto'>
+    <footer className='mt-auto w-full border-t border-slate-200 bg-white text-slate-600 dark:border-slate-900/80 dark:bg-slate-950 dark:text-slate-400'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14'>
         <div className='grid grid-cols-1 md:grid-cols-12 gap-10'>
           {/* Branding & Mission Section (5 cols) */}
@@ -12,7 +12,7 @@ const Footer = () => {
               <div className='w-7 h-7 rounded-lg bg-emerald-500 flex items-center justify-center font-mono font-bold text-slate-950 text-xs shadow-md shadow-emerald-500/20'>
                 J
               </div>
-              <span className='font-extrabold text-white text-lg tracking-tight'>
+              <span className='text-lg font-extrabold tracking-tight text-slate-900 dark:text-white'>
                 JobLink
               </span>
             </div>
@@ -32,7 +32,7 @@ const Footer = () => {
 
           {/* Workspace Links (3 cols) */}
           <div className='md:col-span-3 space-y-3'>
-            <h6 className='text-xs font-bold text-slate-200 uppercase tracking-widest font-mono'>
+            <h6 className='font-mono text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-200'>
               Workspace
             </h6>
             <ul className='space-y-2 text-xs font-mono'>
@@ -69,7 +69,7 @@ const Footer = () => {
 
           {/* Legal & Compliance (4 cols) */}
           <div className='md:col-span-4 space-y-3'>
-            <h6 className='text-xs font-bold text-slate-200 uppercase tracking-widest font-mono'>
+            <h6 className='font-mono text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-slate-200'>
               Trust & Compliance
             </h6>
             <ul className='space-y-2 text-xs font-mono'>

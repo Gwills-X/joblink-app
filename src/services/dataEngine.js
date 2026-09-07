@@ -114,6 +114,34 @@ export const dataEngine = {
     return rows[0];
   },
 
+  updatePost: async (postId, updateData) => {
+    if (DRIVER_TOKEN === "FIREBASE") {
+      const { doc, updateDoc } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      await updateDoc(doc(db, "posts", String(postId)), {
+        title: updateData.title,
+        content: updateData.content,
+        updatedAt: new Date(),
+      });
+      return { success: true };
+    }
+    return mysqlRepo.updateMysqlPost(postId, updateData);
+  },
+
+  updatePostMedia: async (postId, mediaUrl, publicId) => {
+    if (DRIVER_TOKEN === "FIREBASE") {
+      const { doc, updateDoc } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      await updateDoc(doc(db, "posts", String(postId)), {
+        mediaUrl,
+        publicId: publicId || null,
+        updatedAt: new Date(),
+      });
+      return { success: true };
+    }
+    return mysqlRepo.updateMysqlPostMedia(postId, mediaUrl, publicId);
+  },
+
   /**
    * 💬 FETCH COMMENTS AND SUB-REPLIES
    */

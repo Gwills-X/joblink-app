@@ -3,6 +3,7 @@ import { Poppins, JetBrains_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ToastProvider from "@/components/ToastProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const dynamic = "force-dynamic";
 
@@ -66,17 +67,14 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} ${jetbrainsMono.variable} h-full`}
       suppressHydrationWarning>
       <body className='min-h-screen flex flex-col bg-[var(--color-ink)] text-slate-100 font-sans antialiased selection:bg-emerald-500/20 selection:text-emerald-400'>
-        <ToastProvider>
-          <div className='sticky top-0 z-50'>
+        <ThemeProvider>
+          <ToastProvider>
             <NavBar />
-          </div>
-
-          <main className='grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
-            {children}
-          </main>
-
-          {/* <Footer /> */}
-        </ToastProvider>
+            <main className='grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+              {children}
+            </main>
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

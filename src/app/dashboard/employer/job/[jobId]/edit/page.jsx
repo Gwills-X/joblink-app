@@ -23,7 +23,7 @@ export default async function EmployerJobEditPage({ params }) {
           <span className='block font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Edit Listing
           </span>
-          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-100'>
+          <h1 className='mt-1 text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'>
             Update {job.title}
           </h1>
           <p className='mt-1 text-xs text-slate-500'>
@@ -34,28 +34,28 @@ export default async function EmployerJobEditPage({ params }) {
         <div className='flex items-center gap-2'>
           <Link
             href='/dashboard/employer'
-            className='inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-4 py-2 text-xs font-medium text-slate-300 transition-all duration-150 hover:border-slate-600 hover:bg-slate-800/50 hover:text-slate-100'>
+            className='inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-transparent px-4 py-2 text-xs font-medium text-slate-700 transition-all duration-150 hover:border-slate-400 hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800/50 dark:hover:text-slate-100'>
             Employer Dashboard
           </Link>
           <Link
             href={`/dashboard/employer/job/${jobId}/applicants`}
-            className='inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-xs font-medium text-slate-300 transition-all duration-150 hover:bg-slate-900/80 hover:text-white'>
+            className='inline-flex items-center gap-2 rounded-lg bg-slate-100 px-4 py-2 text-xs font-medium text-slate-700 transition-all duration-150 hover:bg-slate-200 hover:text-slate-900 dark:bg-slate-950 dark:text-slate-300 dark:hover:bg-slate-900/80 dark:hover:text-white'>
             View Applicants
           </Link>
         </div>
       </div>
 
-      <div className='rounded-xl border border-(--color-border) bg-(--color-surface) p-6 sm:p-8'>
+      <div className='rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none'>
         <form action={updateJobAction.bind(null, jobId)} className='space-y-6'>
           <div>
-            <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400'>
+            <label className='mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400'>
               Job Title
             </label>
             <input
               name='title'
               defaultValue={job.title}
               required
-              className='block w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2.5 text-sm text-slate-100 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all duration-150'
+              className='block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 transition-all duration-150 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100'
             />
           </div>
 

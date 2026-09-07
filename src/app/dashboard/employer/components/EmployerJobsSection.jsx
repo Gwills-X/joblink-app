@@ -6,7 +6,7 @@ export default function EmployerJobsSection({ jobs = [] }) {
   return (
     <section className='space-y-4'>
       {/* Section Header */}
-      <div className='flex items-center justify-between border-b border-slate-800 pb-3'>
+      <div className='flex items-center justify-between border-b border-slate-200 pb-3 dark:border-slate-800'>
         <div>
           <span className='font-mono text-[11px] font-medium uppercase tracking-widest text-slate-500'>
             Active Postings
@@ -24,12 +24,12 @@ export default function EmployerJobsSection({ jobs = [] }) {
 
       {/* No Jobs */}
       {jobs.length === 0 ? (
-        <div className='flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-800 px-6 py-16 text-center'>
-          <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-slate-950'>
+        <div className='flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 px-6 py-16 text-center dark:border-slate-800'>
+          <div className='flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950'>
             <Building2 className='h-4 w-4 text-slate-600' />
           </div>
 
-          <h3 className='mt-4 text-sm font-medium text-slate-300'>
+          <h3 className='mt-4 text-sm font-medium text-slate-900 dark:text-slate-300'>
             No listings yet
           </h3>
 
@@ -52,13 +52,13 @@ export default function EmployerJobsSection({ jobs = [] }) {
           {jobs.map((job) => (
             <div
               key={job.id}
-              className='group flex flex-col gap-4 rounded-lg border border-slate-800 bg-slate-900/40 p-5 transition-all duration-150 hover:border-slate-700 sm:flex-row sm:items-center sm:justify-between'>
+              className='group flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-all duration-150 hover:border-emerald-300 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-900/40 dark:shadow-none dark:hover:border-slate-700'>
               {/* Job Information */}
               <div className='min-w-0 space-y-2'>
                 <div className='flex flex-wrap items-center gap-2'>
                   {/* Employment Type */}
                   {job.employment_type && (
-                    <span className='rounded-md border border-slate-800 bg-slate-950 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-slate-400'>
+                    <span className='rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-emerald-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400'>
                       {job.employment_type}
                     </span>
                   )}
@@ -83,7 +83,7 @@ export default function EmployerJobsSection({ jobs = [] }) {
                 </div>
 
                 {/* Job Title */}
-                <h3 className='truncate text-sm font-semibold text-slate-200'>
+                <h3 className='truncate text-sm font-semibold text-slate-900 dark:text-slate-200'>
                   {job.title}
                 </h3>
 
