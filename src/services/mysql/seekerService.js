@@ -60,7 +60,7 @@ export async function insertMysqlApplication({
       job_id,
     ]);
 
-    if (!result?.affectedRows) {
+    if (!result?.[0]?.affectedRows) {
       throw new Error("This opportunity is no longer accepting applications.");
     }
 
@@ -87,6 +87,14 @@ export async function checkMysqlExistingApplication(jobId, userId) {
   `;
 
   const rows = await query(sql, [jobId, userId]);
+  return rows?.[0] || null;
+}
+
+export async function fetchMysqlJobOwner(jobId) {
+  const rows = await query(
+    "SELECT id, posted_by, title FROM jobs WHERE id = ? LIMIT 1",
+    [jobId],
+  );
   return rows?.[0] || null;
 }
 
@@ -139,6 +147,7 @@ export async function fetchMysqlSeekerApplicationDetails(
 
       j.title AS job_title,
       j.description AS job_description,
+      j.posted_by AS job_owner_id,
       j.employment_type,
       j.listing_type,
       j.location,
@@ -165,7 +174,8 @@ export async function fetchMysqlSeekerApplicationDetails(
 
 export async function removeMysqlApplication(applicationId, userId) {
   const sql = `
-    DELETE FROM job_applications
+    UPDATE job_applications
+    SET status = 'WITHDRAWN'
     WHERE id = ?
       AND applicant_id = ?
       AND status = 'PENDING'
@@ -173,7 +183,7 @@ export async function removeMysqlApplication(applicationId, userId) {
 
   const result = await query(sql, [applicationId, userId]);
 
-  if (!result?.affectedRows) {
+  if (!result?.[0]?.affectedRows) {
     throw new Error(
       "This application cannot be withdrawn because it is no longer pending.",
     );

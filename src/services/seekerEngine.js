@@ -28,6 +28,8 @@ export const seekerEngine = {
     return seekerRepo.checkMysqlExistingApplication(jobId, userId);
   },
 
+  getJobOwner: async (jobId) => seekerRepo.fetchMysqlJobOwner(jobId),
+
   checkExistingApplication: async (jobId, userId) => {
     return seekerRepo.checkMysqlExistingApplication(jobId, userId);
   },

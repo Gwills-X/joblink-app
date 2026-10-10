@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import getAuthUser from "@/lib/getAuthUser";
 import { seekerEngine } from "@/services/seekerEngine";
 import { uploadMedia } from "@/services/storageService";
+import { notificationEngine } from "@/services/notificationEngine";
 
 /* =========================
    APPLY FOR JOB
@@ -74,6 +75,14 @@ export async function applyToJobAction(prevState, formData) {
       };
     }
 
+    const job = await seekerEngine.getJobOwner(jobId);
+    if (!job) {
+      return {
+        success: false,
+        message: "This opportunity is no longer available.",
+      };
+    }
+
     /* Upload CV only when a new file exists. */
     if (
       cvFile &&
@@ -109,9 +118,25 @@ export async function applyToJobAction(prevState, formData) {
       cover_letter: coverLetter,
     });
 
+    try {
+      await notificationEngine.create({
+        userId: job.posted_by,
+        eventKey: `application:${result.insertId}:PENDING`,
+        type: "APPLICATION_SUBMITTED",
+        title: "New application received",
+        message: `${fullName} applied for ${job.title}. Application reference: ${result.insertId}`,
+      });
+    } catch (notificationError) {
+      console.error(
+        "Application notification could not be created:",
+        notificationError,
+      );
+    }
+
     revalidatePath("/jobs");
     revalidatePath(`/jobs/${jobId}`);
     revalidatePath("/dashboard/seeker/applications");
+    revalidatePath("/dashboard/notifications");
 
     return {
       success: true,
@@ -182,7 +207,23 @@ export async function withdrawApplicationAction(applicationId) {
 
     await seekerEngine.withdrawApplication(applicationId, userId);
 
+    try {
+      await notificationEngine.create({
+        userId: application.job_owner_id,
+        eventKey: `application:${applicationId}:WITHDRAWN`,
+        type: "APPLICATION_WITHDRAWN",
+        title: "Application withdrawn",
+        message: `${application.full_name || user.name} withdrew their application for ${application.job_title}. Application reference: ${applicationId}`,
+      });
+    } catch (notificationError) {
+      console.error(
+        "Withdrawal notification could not be created:",
+        notificationError,
+      );
+    }
+
     revalidatePath("/dashboard/seeker/applications");
+    revalidatePath("/dashboard/notifications");
     revalidatePath(`/dashboard/seeker/applications/${applicationId}`);
 
     if (application.job_id) {

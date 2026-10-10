@@ -5,6 +5,7 @@ import { seekerEngine } from "@/services/seekerEngine";
 import { opportunityCommentEngine } from "@/services/opportunityCommentEngine";
 import OpportunityComments from "@/components/OpportunityComments";
 import OpportunityEngagement from "@/components/OpportunityEngagement";
+import SaveOpportunityButton from "@/components/SaveOpportunityButton";
 
 export default async function JobDetailViewPage({ params }) {
   const authUser = await getAuthUser();
@@ -14,7 +15,10 @@ export default async function JobDetailViewPage({ params }) {
   let comments = [];
 
   try {
-    job = await seekerEngine.getJobListingById(jobId);
+    job = await seekerEngine.getJobListingById(
+      jobId,
+      authUser ? String(authUser.userId || authUser.id) : null,
+    );
 
     if (!job) {
       redirect("/jobs");
@@ -38,6 +42,10 @@ export default async function JobDetailViewPage({ params }) {
   const applicantCount = Number(job.applicant_count || 0);
 
   const remainingSlots = Math.max(maxApplicants - applicantCount, 0);
+  const currentUserId = authUser
+    ? String(authUser.userId || authUser.id)
+    : null;
+  const isAvailable = Boolean(Number(job.is_available));
 
   // ---------------------------------------------------------
   // LISTING TYPE
@@ -116,6 +124,13 @@ export default async function JobDetailViewPage({ params }) {
             <span className='mt-0.5 block font-mono text-base font-bold text-emerald-400'>
               {job.salary || "Competitive / Equity"}
             </span>
+            <div className='mt-3 flex justify-start md:justify-end'>
+              <SaveOpportunityButton
+                jobId={job.id}
+                currentUserId={currentUserId}
+                initiallySaved={Boolean(job.is_saved)}
+              />
+            </div>
           </div>
         </div>
 
@@ -175,13 +190,28 @@ export default async function JobDetailViewPage({ params }) {
       </div>
 
       {/* APPLICATION CTA */}
-      {remainingSlots <= 0 ? (
+      {job.my_application_id ? (
+        <div className='rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6 text-center'>
+          <p className='text-sm font-semibold text-slate-900 dark:text-slate-100'>
+            You already applied: {job.my_application_status}
+          </p>
+          <Link
+            href={`/dashboard/seeker/applications/${job.my_application_id}`}
+            className='mt-3 inline-block text-xs font-semibold text-blue-700 hover:underline dark:text-blue-400'>
+            View application
+          </Link>
+        </div>
+      ) : !isAvailable ? (
         <div className='rounded-3xl border border-rose-500/20 bg-rose-500/5 p-10 text-center'>
           <div className='mx-auto max-w-lg space-y-3'>
             <div className='text-3xl'>⛔</div>
 
             <h2 className='text-xl font-bold text-white'>
-              Applications Are Currently Full
+              {job.status !== "OPEN"
+                ? "This Listing Is Closed"
+                : Boolean(Number(job.is_expired))
+                  ? "The Application Deadline Has Passed"
+                  : "Applications Are Currently Full"}
             </h2>
 
             <p className='text-sm leading-relaxed text-slate-400'>

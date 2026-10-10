@@ -10,6 +10,8 @@ import {
   Users,
   MessageSquare,
   Settings,
+  Bookmark,
+  Bell,
 } from "lucide-react";
 
 export default function DashboardNav() {
@@ -22,6 +24,8 @@ export default function DashboardNav() {
       href: "/dashboard/seeker/applications",
       icon: FileText,
     },
+    { name: "Saved Jobs", href: "/dashboard/seeker/saved", icon: Bookmark },
+    { name: "Notifications", href: "/dashboard/notifications", icon: Bell },
     { name: "Employer Hub", href: "/dashboard/employer", icon: Briefcase },
     { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
     { name: "Network", href: "/dashboard/network", icon: Users },

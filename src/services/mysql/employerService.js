@@ -237,6 +237,10 @@ export async function updateMysqlApplicationReview(
         employer_feedback = ?,
         rejection_reason = ?
       WHERE id = ?
+        AND EXISTS (
+          SELECT 1 FROM jobs j
+          WHERE j.id = job_applications.job_id AND j.posted_by = ?
+        )
     `;
 
     const rejectionReason =
@@ -247,6 +251,7 @@ export async function updateMysqlApplicationReview(
       employerFeedback || null,
       rejectionReason,
       applicationId,
+      employerId,
     ]);
 
     return {

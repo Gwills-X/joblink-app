@@ -152,6 +152,10 @@ export async function updateMysqlApplicationRejection(
   rejectionFeedback,
 ) {
   try {
+    if (!rejectionFeedback?.trim()) {
+      throw new Error("Rejection feedback is required.");
+    }
+
     const checkSql = `
       SELECT ja.id
       FROM job_applications ja
@@ -175,11 +179,16 @@ export async function updateMysqlApplicationRejection(
     rejection_reason = ?,
     employer_feedback = NULL
   WHERE id = ?
+    AND EXISTS (
+      SELECT 1 FROM jobs j
+      WHERE j.id = job_applications.job_id AND j.posted_by = ?
+    )
 `;
 
     const result = await query(updateSql, [
       rejectionFeedback || null,
       applicationId,
+      employerId,
     ]);
 
     return {
@@ -230,11 +239,16 @@ export async function updateMysqlApplicationAcceptance(
         employer_feedback = ?,
         rejection_reason = NULL
       WHERE id = ?
+        AND EXISTS (
+          SELECT 1 FROM jobs j
+          WHERE j.id = job_applications.job_id AND j.posted_by = ?
+        )
     `;
 
     const result = await query(updateSql, [
       employerFeedback || null,
       applicationId,
+      employerId,
     ]);
 
     return {

@@ -6,6 +6,7 @@ import getAuthUser from "@/lib/getAuthUser";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { employerEngine } from "@/services/employerEngine";
+import { notificationEngine } from "@/services/notificationEngine";
 
 /**
  * Server Action to handle creating new job and collaboration postings.
@@ -227,7 +228,26 @@ export async function reviewApplicationAction(formData) {
     };
   }
 
+  if (status === "REJECTED" && !employerFeedback) {
+    return {
+      success: false,
+      errors: { server: ["Rejection feedback is required."] },
+    };
+  }
+
   try {
+    const application = await employerEngine.getApplicationDetailsForReview(
+      applicationId,
+      employerId,
+    );
+
+    if (!application) {
+      return {
+        success: false,
+        errors: { server: ["Unauthorized or application not found."] },
+      };
+    }
+
     if (status === "REJECTED") {
       await employerEngine.rejectApplication({
         applicationId,
@@ -255,6 +275,39 @@ export async function reviewApplicationAction(formData) {
         },
       };
     }
+
+    const notificationDetails = {
+      SHORTLISTED: {
+        type: "APPLICATION_SHORTLISTED",
+        title: "Your application was shortlisted",
+        message: `Your application for ${application.job_title} was shortlisted. Application reference: ${applicationId}`,
+      },
+      ACCEPTED: {
+        type: "APPLICATION_ACCEPTED",
+        title: "Your application was accepted",
+        message: `Your application for ${application.job_title} was accepted. Application reference: ${applicationId}`,
+      },
+      REJECTED: {
+        type: "APPLICATION_REJECTED",
+        title: "Application decision update",
+        message: `A decision was made on your application for ${application.job_title}. Application reference: ${applicationId}`,
+      },
+    }[status];
+
+    if (notificationDetails) {
+      try {
+        await notificationEngine.create({
+          userId: application.applicant_id,
+          eventKey: `application:${applicationId}:${status}`,
+          ...notificationDetails,
+        });
+      } catch (notificationError) {
+        console.error(
+          "Application notification could not be created:",
+          notificationError,
+        );
+      }
+    }
   } catch (error) {
     console.error("Application Review Error:", error);
 
@@ -267,6 +320,7 @@ export async function reviewApplicationAction(formData) {
   }
 
   revalidatePath("/dashboard/employer/applications");
+  revalidatePath("/dashboard/notifications");
 
   revalidatePath(`/dashboard/employer/applications/${applicationId}`);
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CreatorActions from "@/components/CreatorActions";
+import SaveOpportunityButton from "@/components/SaveOpportunityButton";
 
 const typeStyles = {
   JOB: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400",
@@ -26,11 +27,18 @@ export default function OpportunityCard({ opportunity, currentUserId }) {
               {listingType}
             </span>
           </div>
-          <span className='shrink-0 font-mono text-[10px] text-slate-500'>
-            {opportunity.created_at
-              ? new Date(opportunity.created_at).toLocaleDateString()
-              : "Recently"}
-          </span>
+          <div className='flex shrink-0 items-center gap-2'>
+            <span className='font-mono text-[10px] text-slate-500'>
+              {opportunity.created_at
+                ? new Date(opportunity.created_at).toLocaleDateString()
+                : "Recently"}
+            </span>
+            <SaveOpportunityButton
+              jobId={opportunity.id}
+              currentUserId={currentUserId}
+              initiallySaved={Boolean(opportunity.is_saved)}
+            />
+          </div>
         </div>
 
         <div className='flex min-w-0 items-start gap-3'>

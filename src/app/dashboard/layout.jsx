@@ -3,6 +3,8 @@ import WorkspaceSwitcher from "@/components/WorkspaceSwitcher";
 import getAuthUser from "@/lib/getAuthUser";
 import { seekerEngine } from "@/services/seekerEngine";
 import { employerEngine } from "@/services/employerEngine";
+import { notificationEngine } from "@/services/notificationEngine";
+import NotificationBell from "@/components/NotificationBell";
 
 export const dynamic = "force-dynamic";
 
@@ -12,13 +14,19 @@ export default async function DashboardLayout({ children }) {
 
   let hasSeekerProfile = false;
   let hasEmployerProfile = false;
+  let notifications = [];
+  let unreadCount = 0;
+  let notificationLoadError = false;
 
   if (userId) {
     try {
       hasSeekerProfile = await seekerEngine.hasSeekerProfile(userId);
       hasEmployerProfile = await employerEngine.hasCompanyProfile(userId);
+      notifications = await notificationEngine.recent(userId);
+      unreadCount = await notificationEngine.unreadCount(userId);
     } catch (err) {
       console.error("Layout Profile Check Error:", err.message);
+      notificationLoadError = true;
     }
   }
 
@@ -36,7 +44,18 @@ export default async function DashboardLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className='min-w-0 flex-1'>{children}</main>
+      <main className='min-w-0 flex-1'>
+        {userId && (
+          <div className='mb-3 flex justify-end'>
+            <NotificationBell
+              notifications={notifications}
+              unreadCount={unreadCount}
+              loadError={notificationLoadError}
+            />
+          </div>
+        )}
+        {children}
+      </main>
     </div>
   );
 }

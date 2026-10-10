@@ -36,7 +36,11 @@ export async function fetchMysqlMarketplaceListings(
         END
       ) AS already_applied,
       MAX(myapp.id) AS my_application_id,
-      MAX(myapp.status) AS my_application_status
+      MAX(myapp.status) AS my_application_status,
+      MAX(EXISTS(
+        SELECT 1 FROM saved_jobs sj
+        WHERE sj.user_id = ? AND sj.job_id = j.id
+      )) AS is_saved
     `;
   }
 
@@ -64,7 +68,7 @@ export async function fetchMysqlMarketplaceListings(
   const params = [];
 
   if (userId) {
-    params.push(userId, userId);
+    params.push(userId, userId, userId);
   }
 
   if (typeFilter && typeFilter !== "ALL") {
@@ -111,14 +115,26 @@ export async function fetchMysqlJobListingById(jobId, userId = null) {
       j.*,
       c.id AS company_id,
       c.name AS company_name,
-      c.logo_url AS company_logo
+      c.logo_url AS company_logo,
+      (SELECT COUNT(*) FROM job_applications ja_count WHERE ja_count.job_id = j.id) AS applicant_count,
+      CASE
+        WHEN j.status = 'OPEN'
+         AND (j.deadline IS NULL OR j.deadline >= CURDATE())
+         AND (SELECT COUNT(*) FROM job_applications ja_count WHERE ja_count.job_id = j.id) < j.max_applicants
+        THEN 1 ELSE 0
+      END AS is_available,
+      CASE WHEN j.deadline IS NOT NULL AND j.deadline < CURDATE() THEN 1 ELSE 0 END AS is_expired
   `;
 
   if (userId) {
     sql += `,
       ja.id AS my_application_id,
       ja.status AS my_application_status,
-      ja.applied_at AS my_application_date
+      ja.applied_at AS my_application_date,
+      EXISTS(
+        SELECT 1 FROM saved_jobs sj
+        WHERE sj.user_id = ? AND sj.job_id = j.id
+      ) AS is_saved
     `;
   }
 
@@ -141,7 +157,7 @@ export async function fetchMysqlJobListingById(jobId, userId = null) {
     LIMIT 1
   `;
 
-  const params = userId ? [userId, jobId] : [jobId];
+  const params = userId ? [userId, userId, jobId] : [jobId];
   const rows = await query(sql, params);
 
   return rows?.[0] || null;
